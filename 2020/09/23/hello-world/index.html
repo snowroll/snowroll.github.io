@@ -63,7 +63,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/source/img/head.jpg" class="js-avatar">
+			<img src="/img/head.png" class="js-avatar">
 		</a>
 		<hgroup>
 			<h1 class="header-author"><a href="/">chaihj15</a></h1>
@@ -99,11 +99,13 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" href="#" title="GitHub" target="_blank"><i class="icon-github"></i></a>
+					<a class="github" href="https://github.com/snowroll" title="GitHub" target="_blank"><i class="icon-github"></i></a>
 				
-					<a class="jianshu" href="#" title="简书" target="_blank"><i class="icon-jianshu"></i></a>
+					<a class="jianshu" href=" https://www.jianshu.com/u/48230d0defcc" title="简书" target="_blank"><i class="icon-jianshu"></i></a>
 				
-					<a class="csdn" href="#" title="CSDN" target="_blank"><i class="icon-csdn"></i></a>
+					<a class="csdn" href="https://blog.csdn.net/qq_33883462" title="CSDN" target="_blank"><i class="icon-csdn"></i></a>
+				
+					<a class="mail" href="mailto:chaihj15@163.com" title="NULL" target="_blank"><i class="icon-mail"></i></a>
 				
 			</div>
 		
@@ -115,6 +117,12 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
       
+      <a class="forkMe" style="position:absolute;z-index:999;top:0;right:0.5em;" 
+        href="https://github.com/snowroll" target="_blank">
+        <img src="/img/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+      
+      
 <nav id="mobile-nav">
   	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
 	<div class="btnctn js-mobile-btnctn">
@@ -124,7 +132,7 @@
 		<header id="header" class="inner">
 			<div class="profilepic">
 				<a href="/">
-					<img src="/source/img/head.jpg" class="js-avatar">
+					<img src="/img/head.png" class="js-avatar">
 				</a>
 			</div>
 			<hgroup>
@@ -144,11 +152,13 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="GitHub"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/snowroll" title="GitHub"><i class="icon-github"></i></a>
 			        
-						<a class="jianshu" target="_blank" href="#" title="简书"><i class="icon-jianshu"></i></a>
+						<a class="jianshu" target="_blank" href=" https://www.jianshu.com/u/48230d0defcc" title="简书"><i class="icon-jianshu"></i></a>
 			        
-						<a class="csdn" target="_blank" href="#" title="CSDN"><i class="icon-csdn"></i></a>
+						<a class="csdn" target="_blank" href="https://blog.csdn.net/qq_33883462" title="CSDN"><i class="icon-csdn"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:chaihj15@163.com" title="NULL"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -259,7 +269,7 @@
                 <div class="reward-box">
                   
                   <div class="reward-box-item">
-                    <img class="reward-img" src="/source/img/alipay.jpg">
+                    <img class="reward-img" src="/img/alipay.jpg">
                     <span class="reward-type">支付宝</span>
                   </div>
                   
@@ -408,6 +418,28 @@
 
 
 
+  
+  <div id="gitment-ctn"></div>
+  
+    <link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+    <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  
+  <script>
+    <!-- id: "Hello World" -->
+    var gitment = new Gitment({
+      id: "20200923100238",
+      owner: 'snowroll',
+      repo: 'snowblog',
+      oauth: {
+        client_id: 'e11108842e9125f5c06a',
+        client_secret: '17ebc1d565af41a2e5147b4ba36f79207d8564c0',
+      },
+    })
+    gitment.render('gitment-ctn')
+  </script>
+
+
+  
 
 
 
@@ -705,6 +737,35 @@
   </div>
 
   
+<script type="text/javascript" src="/plugins/TweenMax/TweenMax.min.js"></script>
+<script type="text/javascript" src="/plugins/TweenMax/HoverImg.js"></script>
+
+<script>
+
+
+  var hoverEffect = {
+    "subNav": ".left-col .social a"
+  }
+
+
+  for (var x in hoverEffect) {
+    // 初始化data-img属性值
+    let $em = document.querySelectorAll(hoverEffect[x]);
+    $em.forEach(($a) => {
+      //console.log($a.href);
+      if (isImageType($a.href)) {
+        $a.setAttribute("data-img", $a.href)
+      }
+    })
+    // 实现悬停元素预览图片效果
+    let $a = document.querySelectorAll(hoverEffect[x] + "[data-img]");
+    $a.forEach(($em) => {
+      new HoverImgFx1($em)
+    })
+  }
+
+</script>
+
   
 <script type="text/javascript" src="/plugins/activate-power-mode/activate-power-mode.js"></script>
 <script>
