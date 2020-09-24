@@ -1,7 +1,7 @@
 ---
 title: GitHub Page 个人博客配置记录
 tags: github page
-date: 2020/09/24
+date: 2020-09-24 17:06:25
 updated: 
 categories: Github
 ---
@@ -61,77 +61,77 @@ categories: Github
 
   登录github，创建一个新的repository，名字为 `username.github.io`，例如我的github账户名为snowroll，所以repository的名字为`snowroll.github.io`
 
-  <img src="gitpage.assets/repository_name.jpg" alt="repository_name" style="zoom:40%;" />
+  {% asset_img repository_name.jpg %}
 
   生成ssh，添加到github中
-  
+
   打开git bash（如没有，请自行查询下载）
-  
+
   ~~~sh
   git config --global user.name "yourname"  # yourname为你的github用户名
   git config --global user.email "youremail"  # youremail为你的github对应的邮箱
   ssh-keygen -t rsa -C "youremail"  # -t 指定密钥类型，-C 公钥备注，一般写自己的邮箱 生成ssh，一路回车即可
   ~~~
-  
+
   找到生成的`.ssh`文件夹，打开
-  
+
   ~~~conf
   id_rsa  # 私钥
   id_rsa.pub  # 公钥
   known_hosts  # 记录服务器端的Host，IP及rsa文件，作缓存用
   ~~~
-  
+
   复制`id_rsa`内的内容到剪切板，直接打开复制也可以
-  
+
   ~~~sh
   pbcopy < ./id_rsa.pub  # mac 系统下的命令行操作
   ~~~
-  
+
   打开github的个人设置中的SSH and GPG keys，点击New SSH key，将复制的内容粘贴进去即可
-  
+
   测试是否成功
-  
+
   ~~~sh
   ssh -T git@github.com
   ~~~
-  
+
   出现 You've successfully authenticated, but GitHub does not provide shell access. 提示即意味成功
-  
+
   生成ssh key的参考博客，https://blog.csdn.net/qq_36761831/article/details/88725670
+
   
-  
-  
+
   将hexo与GitHub关联，修改`blog/`下的`_config.yml`
-  
+
   ~~~yml
   deploy:
   	type: git
   	repo: https://github.com/yourgithubname/yourgithubname.github.io.git
   	branch: master
   ~~~
-  
+
   注意在`:`后要添加空格，github貌似要改master分支为main，到时候可能需要更改配置
-  
+
   安装deploy-git，以便将博客部署到GitHub
-  
+
   ~~~sh
   npm install hexo-deployer-git --save
   ~~~
-  
+
   开始部署，更多命令请参考https://hexo.io/zh-cn/docs/commands
-  
+
   ~~~sh
   hexo clean
   hexo d -g  # d 部署 -g 部署之前预先生成静态文件
   ~~~
-  
+
   成功之后，过一会就可以在https://yourname.github.io 看到你的博客
 
 - 更改主题，撰写文章
 
   可以在https://hexo.io/themes/ 下选择自己喜欢的主题，下载到`themes/`目录下
 
-  <img src="gitpage.assets/image-20200924105959852.jpg" alt="image-20200924105959852" style="zoom:40%;" />
+  {% asset_img themes-folder.jpg %}
 
   `landscape`是默认主题，`yilia-plus`是我下载添加的主题，项目地址https://github.com/JoeyBling/hexo-theme-yilia-plus 
 
@@ -176,7 +176,7 @@ categories: Github
 
   为了让域名生效，还得在`yourname.github.io`仓库的setting中，设置自定义的Custom domain，示例如下
 
-  <img src="gitpage.assets/image-20200924134932320.jpg" alt="image-20200924134932320" style="zoom:40%;" />
+  {% asset_img custom-domain.jpg %}
 
   未添加https保护时，图中的Enforce HTTPS无法选中，也只能通过http访问自定义域名
 
