@@ -219,12 +219,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>###内容目录</p>
-<ul>
+    <h3 id="内容目录"><a href="#内容目录" class="headerlink" title="内容目录"></a>内容目录</h3><ul>
 <li>使用hexo搭建自己的Github Page博客</li>
 <li>设置自定义域名，并添加https保护</li>
 </ul>
-<p>&lt;—more—&gt;</p>
+<!---more--->
+
 <h3 id="1-使用hexo搭建Github-Page-博客"><a href="#1-使用hexo搭建Github-Page-博客" class="headerlink" title="1. 使用hexo搭建Github Page 博客"></a>1. 使用hexo搭建Github Page 博客</h3><p>这部分工作主要参考的是zjufangzh的博客，链接地址为<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_37781304/article/details/82729029">https://blog.csdn.net/sinat_37781304/article/details/82729029</a></p>
 <ul>
 <li><p>首先下载hexo</p>
@@ -244,7 +244,7 @@
 </li>
 <li><p>博客部署到Github Page上</p>
 <p>登录github，创建一个新的repository，名字为 <code>username.github.io</code>，例如我的github账户名为snowroll，所以repository的名字为<code>snowroll.github.io</code></p>
-<img src="gitpage.assets/repository_name.png" alt="repository_name" style="zoom:40%;" />
+<img src="gitpage.assets/repository_name.jpg" alt="repository_name" style="zoom:40%;" />
 
 <p>生成ssh，添加到github中</p>
 <p>打开git bash（如没有，请自行查询下载）</p>
@@ -278,7 +278,7 @@
 <ul>
 <li><p>更改主题，撰写文章</p>
 <p>可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a> 下选择自己喜欢的主题，下载到<code>themes/</code>目录下</p>
-<img src="gitpage.assets/image-20200924105959852.png" alt="image-20200924105959852" style="zoom:40%;" />
+<img src="gitpage.assets/image-20200924105959852.jpg" alt="image-20200924105959852" style="zoom:40%;" />
 
 <p><code>landscape</code>是默认主题，<code>yilia-plus</code>是我下载添加的主题，项目地址<a target="_blank" rel="noopener" href="https://github.com/JoeyBling/hexo-theme-yilia-plus">https://github.com/JoeyBling/hexo-theme-yilia-plus</a> </p>
 <p>更改<code>blog/</code>下的<code>_config.yml</code></p>
@@ -292,6 +292,7 @@
   <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new paper</span><br></pre></td></tr></table></figure>
 
 <p>  更多详细操作参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">https://hexo.io/zh-cn/docs/writing</a> 和 <a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_37781304/article/details/82729029">https://blog.csdn.net/sinat_37781304/article/details/82729029</a></p>
+<p>  <em>Tips:  yilia-plus配置search功能，在博客根目录下执行 <code>npm i hexo-generator-json-content --save</code>， 在<code>_config.yml</code>中添加相关配置</em></p>
 <h3 id="2-设置自定义域名，添加https保护"><a href="#2-设置自定义域名，添加https保护" class="headerlink" title="2.  设置自定义域名，添加https保护"></a>2.  设置自定义域名，添加https保护</h3><ul>
 <li><p>设置自定义域名</p>
 <p>在阿里云上购买一个域名，看个人需求，我购买了snowroll.top域名，主要是便宜 hhhhh。阿里云域名购买及解析教程链接<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/767435">https://developer.aliyun.com/article/767435</a></p>
@@ -300,7 +301,7 @@
 
 <p>这条解析记录应该是将你申请的域名解析关联到yourname.github.io，再通过github自己的dns服务器进行解析（个人理解，没有实际抓包看过）</p>
 <p>为了让域名生效，还得在<code>yourname.github.io</code>仓库的setting中，设置自定义的Custom domain，示例如下</p>
-<img src="gitpage.assets/image-20200924134932320.png" alt="image-20200924134932320" style="zoom:40%;" />
+<img src="gitpage.assets/image-20200924134932320.jpg" alt="image-20200924134932320" style="zoom:40%;" />
 
 <p>未添加https保护时，图中的Enforce HTTPS无法选中，也只能通过http访问自定义域名</p>
 <p>为了防止自定义域名失效，在<code>blog</code>的<code>source/</code>下新建<code>CNAME</code>文件，里面填上你的自定义域名即可</p>
