@@ -2,7 +2,8 @@
 menu:
   主页: /
   # 技术笔记: /
-  随笔: /tags/随笔/
+  随笔: /categories/essay
+  阅读: /categories/read
 
 # subNav-子导航
 subNav:
@@ -72,7 +73,7 @@ baidu_analytics: ''
 google_analytics: ''
 
 # 网站图标
-favicon: /favicon.ico
+favicon: /img/favicon.ico
 
 # 你的头像url
 avatar: /img/head.png
