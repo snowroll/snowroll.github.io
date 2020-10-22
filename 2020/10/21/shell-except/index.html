@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://snowroll.top">
-  <title>Spring Boot中心跳机制的实现 | SnowRoll Blog</title>
+  <title>shell-except | SnowRoll Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="内容摘要 基于netty的心跳机制实现 基于定时器的心跳机制demo实现">
+  <meta name="description" content="内容摘要 except简介 利用except，向服务器传输文件&amp;ssh登录服务器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot中心跳机制的实现">
-<meta property="og:url" content="https://snowroll.top/2020/09/28/heartbeat/index.html">
+<meta property="og:title" content="shell-except">
+<meta property="og:url" content="https://snowroll.top/2020/10/21/shell-except/index.html">
 <meta property="og:site_name" content="SnowRoll Blog">
-<meta property="og:description" content="内容摘要 基于netty的心跳机制实现 基于定时器的心跳机制demo实现">
+<meta property="og:description" content="内容摘要 except简介 利用except，向服务器传输文件&amp;ssh登录服务器">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-28T12:09:11.000Z">
-<meta property="article:modified_time" content="2020-09-28T13:14:09.559Z">
+<meta property="article:published_time" content="2020-10-21T14:57:55.000Z">
+<meta property="article:modified_time" content="2020-10-21T15:55:29.960Z">
 <meta property="article:author" content="chaihj15">
-<meta property="article:tag" content="heartbeat">
+<meta property="article:tag" content="except">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="SnowRoll Blog" type="application/atom+xml">
@@ -192,14 +192,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-heartbeat" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-shell-except" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Spring Boot中心跳机制的实现
+      shell-except
     </h1>
   
 
@@ -211,8 +211,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/09/28/heartbeat/" class="archive-article-date">
-        <time datetime="2020-09-28T12:09:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-28</time>
+<a href="/2020/10/21/shell-except/" class="archive-article-date">
+        <time datetime="2020-10-21T14:57:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-21</time>
 </a>
 
   
@@ -225,7 +225,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1k字</span>
+      <span class="post-count">546字</span>
     </span>
   </span>
 
@@ -234,7 +234,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -246,77 +246,81 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h3 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h3><ul>
-<li>基于netty的心跳机制实现</li>
-<li>基于定时器的心跳机制demo实现</li>
+<li>except简介</li>
+<li>利用except，向服务器传输文件&amp;ssh登录服务器</li>
 </ul>
 <a id="more"></a>
 
-<h3 id="1-基于netty心跳机制的实现"><a href="#1-基于netty心跳机制的实现" class="headerlink" title="1. 基于netty心跳机制的实现"></a>1. 基于netty心跳机制的实现</h3><p>这部分的主要工作是参考crossoverjie的博客，博客地址为 <a target="_blank" rel="noopener" href="https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/">https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/</a></p>
-<p>有兴趣的同学可以移步他的博客进行阅读，我在这里只总结一些我在复现过程中遇到的一些问题及解决方案</p>
+<p>####1. except简介</p>
 <ul>
-<li><p>在<code>EchoClienthandle</code>函数中的<code>SpringBeanFactory</code>找不到相关包，下面的语句执行出错</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一行语句出错</span></span><br><span class="line">CustomProtocol heartBeat = SpringBeanFactory.getBean(<span class="string">&quot;heartBeat&quot;</span>, CustomProtocol.class);</span><br><span class="line">ctx.writeAndFlush(heartBeat).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;</span><br></pre></td></tr></table></figure>
+<li><p>except的安装</p>
+<p>Mac:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
 
-<p>解决：</p>
-<p>查找关于<code>ChannelHandlerContext.writeAndFlush()</code>定义，如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">writeAndFlush</span><span class="params">(Object msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.writeAndFlush(msg, <span class="keyword">this</span>.newPromise());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Linux:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install expect</span><br></pre></td></tr></table></figure>
 
-<p>知<code>heartBeat</code>应为一个对象，所以考虑直接<code>new</code>，修改如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CustomProtocol customProtocol = <span class="keyword">new</span> CustomProtocol(<span class="number">1234L</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">ctx.writeAndFlush(customProtocol);</span><br></pre></td></tr></table></figure>
-
-<p>测试可以使用，具体内容可以自行修改</p>
+<p>压缩包安装</p>
+<p>参考博客： <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/942b801757de">https://www.jianshu.com/p/942b801757de</a></p>
 </li>
-<li><p>关于编解码的使用</p>
-<p>crossoverjie的博客提供自定义的编解码器，这个可以根据个人需求进行修改</p>
-<p>无论是客户端的<code>EchoClientHandle</code>还是服务器端的<code>HeartBeatSimpleHandle</code>都继承自<code>SimpleChannelInboundHandler&lt;I&gt;</code>抽象类，可以对不同的数据类型做处理，官方文档<a target="_blank" rel="noopener" href="https://netty.io/4.0/api/io/netty/channel/SimpleChannelInboundHandler.html">https://netty.io/4.0/api/io/netty/channel/SimpleChannelInboundHandler.html</a></p>
-<p>对比博客中的定义及对应的编解码方法</p>
+<li><p>简介</p>
+<p>shell脚本功能非常强大，可以帮助我们自动完成很多繁琐的工作。但是对于登录服务器这种需要自动交互的过程，shell就有些力不从心，except可以完美解决这一需求。</p>
+<p>参考博客： Linux expect用法 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/0xcafedaddy/p/7147051.html">https://www.cnblogs.com/0xcafedaddy/p/7147051.html</a></p>
+<p>expect脚本使用 <a target="_blank" rel="noopener" href="http://einverne.github.io/post/2019/01/expect-command.html#%E5%85%B3%E9%94%AE%E5%91%BD%E4%BB%A4">http://einverne.github.io/post/2019/01/expect-command.html#%E5%85%B3%E9%94%AE%E5%91%BD%E4%BB%A4</a></p>
+<p>expect-自动交互脚本 <a target="_blank" rel="noopener" href="http://xstarcd.github.io/wiki/shell/expect.html">http://xstarcd.github.io/wiki/shell/expect.html</a></p>
 <ul>
-<li>服务器端</li>
+<li><p>四个重要的命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>spawn</td>
+<td>启动新的进程，输出可以被expect所捕获</td>
+</tr>
+<tr>
+<td>expect</td>
+<td>从进程接收字符串，期望获得字符串</td>
+</tr>
+<tr>
+<td>send</td>
+<td>向进程发送字符串，模拟用户输入，注意添加<code>\r</code>回车</td>
+</tr>
+<tr>
+<td>interact</td>
+<td>允许用户与进程交互</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>简单示例 <code>demo.sh</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/except</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> timeout 10;  <span class="comment"># 设置程序超时时间</span></span><br><span class="line">spawn ssh root@10.10.10.11  <span class="comment"># ssh连接服务器</span></span><br><span class="line">expect <span class="string">&quot;password&quot;</span>  <span class="comment"># 判断进程输出中是否有&quot;password&quot;</span></span><br><span class="line">send <span class="string">&quot;your_password\r&quot;</span>  <span class="comment"># 将密码输入 \r是回车 </span></span><br><span class="line">interact  <span class="comment"># 保持与服务器端的连接</span></span><br></pre></td></tr></table></figure>
+
+<p>运行方法: <code>except demo.sh</code></p>
+<p>\r \n的区别： <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/23804b0b03c8">https://www.jianshu.com/p/23804b0b03c8</a></p>
+</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartBeatSimpleHandle</span> <span class="keyword">extends</span> <span class="title">SimpleChannelInboundHandler</span>&lt;<span class="title">CustomProtocol</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//...  略去不重要的内容</span></span><br><span class="line">    <span class="comment">// 服务器端使用ByteBuf进行内容发送</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ByteBuf HEART_BEAT =  Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(<span class="keyword">new</span> CustomProtocol(<span class="number">123456L</span>,<span class="string">&quot;pong&quot;</span>).toString(),CharsetUtil.UTF_8));  </span><br><span class="line">    </span><br><span class="line">  	<span class="comment">//...</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">userEventTriggered</span><span class="params">(ChannelHandlerContext ctx, Object evt)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="comment">// 这里向客户端发送ByteBuf类型的数据，所以客户端必须解析ByteBuf</span></span><br><span class="line">       	ctx.writeAndFlush(HEART_BEAT).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;</span><br><span class="line">  </span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">super</span>.userEventTriggered(ctx, evt);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, CustomProtocol customProtocol)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      	<span class="comment">// 定义了处理CustomProtocol，复现channelRead0</span></span><br><span class="line">        LOGGER.info(<span class="string">&quot;收到customProtocol=&#123;&#125;&quot;</span>, customProtocol);</span><br><span class="line">        <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这段代码应该是在客户端，因为客户端收到的是ByteBuf的内容，所以需要解码为CustomProtocol</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartbeatDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同理不再赘述客户端的内容</p>
-</li>
-<li><p>netty心跳机制的问题</p>
-<p>netty底层相当于是基于socket连接实现的，所以需要服务器和客户端进行长连接，耦合严重。倘若，甲方不想心跳机制两端的机器保持socket的连接，只是简单的定时传送数据该如何实现？这就要用到我接下来提到的方法</p>
 </li>
 </ul>
-<h3 id="2-基于定时器的心跳机制demo实现"><a href="#2-基于定时器的心跳机制demo实现" class="headerlink" title="2.  基于定时器的心跳机制demo实现"></a>2.  基于定时器的心跳机制demo实现</h3><ul>
-<li><p>代码逻辑</p>
-<p>A 定时请求数据  ==&gt; 发送请求给B的接口 ==&gt; B的接口接收信息，返回对应的信息 ==&gt; A处理返回的信息</p>
-<p>这个过程不需要A、B两者用socket连接，实现了解耦</p>
-</li>
-<li><p>定时</p>
-<p>参考博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/u010963948/article/details/52946268">https://blog.csdn.net/u010963948/article/details/52946268</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartBeat</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * description: 定时器的回调函数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          System.out.println(<span class="string">&quot;hello world!&quot;</span>);  <span class="comment">// 自定义你需要的操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * description: 定时发送心跳， scheduleAtFixedRate param1： 回调函数 param1： 首次执行滞后时间 param1： 间隔时间 param1： 单位时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostConstruct</span>  <span class="comment">// 依赖注入完成之后，方法就要被执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">        service.scheduleAtFixedRate(runnable, <span class="number">1</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>####2. 向服务器传输文件&amp;ssh登录服务器自动化脚本</p>
+<ul>
+<li><p>except与shell脚本结合</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="meta">#!/usr/bin/expect</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自动上传文件到服务器</span></span><br><span class="line"><span class="function"><span class="title">auto_scp</span></span>()&#123;</span><br><span class="line">		<span class="comment"># -c: 执行脚本前先执行的命令</span></span><br><span class="line">    expect -c <span class="string">&quot;set timeout -1; </span></span><br><span class="line"><span class="string">            spawn scp yourfile root@10.10.10.10:/target_dir/</span></span><br><span class="line"><span class="string">            expect &#123;</span></span><br><span class="line"><span class="string">                \&quot;yes/no\&quot; &#123; send \&quot;yes\n\&quot;; exp_continue&#125;</span></span><br><span class="line"><span class="string">                \&quot;password\&quot; &#123; send \&quot;yourpasswd\n\&quot; &#125;  # \n 和 \r 均可以</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            interact</span></span><br><span class="line"><span class="string">            &quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ssh登录服务器</span></span><br><span class="line"><span class="function"><span class="title">auto_ssh_restart</span></span>() &#123;</span><br><span class="line">    expect -c <span class="string">&quot;set timeout -1;</span></span><br><span class="line"><span class="string">            spawn ssh root@10.10.10.10</span></span><br><span class="line"><span class="string">            expect \&quot;password\&quot; </span></span><br><span class="line"><span class="string">            send \&quot;yourpassword\r\&quot;</span></span><br><span class="line"><span class="string">            expect \&quot;]#\&quot; &#123; send \&quot;pwd\n\&quot; &#125; </span></span><br><span class="line"><span class="string">            interact&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">auto_scp</span><br><span class="line">auto_ssh_restart</span><br></pre></td></tr></table></figure>
 
-<p><code>PostConstruct</code>这个注释非常重要，注释对应的方法会在程序的依赖加载完成之后执行，这样就可以不用直接写在<code>main</code>函数中</p>
-<p>回调函数中的可能需要对JSON数据进行分析，可以直接使用Gson处理，参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/xingfei_work/article/details/76572550">https://blog.csdn.net/xingfei_work/article/details/76572550</a></p>
+
+
+
+
+
+
 </li>
 </ul>
-<center>侠客行
-</center>
+<center>点绛唇·途中逢管倅
 
-<center>唐·李白
-
-<center>赵客缦胡缨，吴钩霜雪明。
-银鞍照白马，飒沓如流星。
-
-<center>十步杀一人，千里不留行。
-事了拂衣去，深藏身与名。
-
-<center>闲过信陵饮，脱剑膝前横。将炙啖朱亥，持觞劝侯嬴。
-
-<center>三杯吐然诺，五岳倒为轻。
-眼花耳热后，意气素霓生。
-
-<center>救赵挥金槌，邯郸先震惊。
-千秋二壮士，烜赫大梁城。
-
-<center>纵死侠骨香，不惭世上英。
-谁能书阁下，白首太玄经。
+<center> 憔悴天涯，故人相遇情如故。别离何遽，忍唱阳关句！</center>
+<center>我是行人，更送行人去。愁无据。寒蝉鸣处，回首斜阳暮。</center>
 
 
     
@@ -364,7 +368,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://snowroll.top/2020/09/28/heartbeat/" title="Spring Boot中心跳机制的实现" target="_blank">https://snowroll.top/2020/09/28/heartbeat/</a>
+          <a href="https://snowroll.top/2020/10/21/shell-except/" title="shell-except" target="_blank">https://snowroll.top/2020/10/21/shell-except/</a>
         </li>
         
         <li>
@@ -386,7 +390,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">heartbeat</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">except</a>
         		</li>
       		
 		</ul>
@@ -398,7 +402,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/spring-boot//" class="article-tag-list-link color2">spring boot</a>
+        			<a href="/categories/shell//" class="article-tag-list-link color1">shell</a>
         		</li>
       		
 		</ul>
@@ -453,7 +457,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://snowroll.top/2020/09/28/heartbeat/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://snowroll.top/2020/10/21/shell-except/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -468,18 +472,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/09/29/iptables/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/09/25/eassy-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">随笔测试0</div>
+    <a href="/2020/10/18/security-mail/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">邮件安全之spf协议</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -520,9 +515,9 @@
     <script src="/lib/gitment.js"></script>
   
   <script>
-    <!-- id: "Spring Boot中心跳机制的实现" -->
+    <!-- id: "shell-except" -->
     var gitment = new Gitment({
-      id: "20200928200911",
+      id: "20201021225755",
       owner: 'snowroll',
       repo: 'snowblog',
       oauth: {
@@ -673,6 +668,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">邮件安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">except</a>
               </li>
             
             <div class="clearfix"></div>

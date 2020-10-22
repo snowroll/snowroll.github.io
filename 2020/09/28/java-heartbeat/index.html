@@ -6,26 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://snowroll.top">
-  <title>GitHub Page 个人博客配置记录 | SnowRoll Blog</title>
+  <title>Spring Boot中心跳机制的实现 | SnowRoll Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="内容目录 使用hexo搭建自己的Github Page博客 设置自定义域名，并添加https保护">
+  <meta name="description" content="内容摘要 基于netty的心跳机制实现 基于定时器的心跳机制demo实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GitHub Page 个人博客配置记录">
-<meta property="og:url" content="https://snowroll.top/2020/09/24/githubpage/index.html">
+<meta property="og:title" content="Spring Boot中心跳机制的实现">
+<meta property="og:url" content="https://snowroll.top/2020/09/28/java-heartbeat/index.html">
 <meta property="og:site_name" content="SnowRoll Blog">
-<meta property="og:description" content="内容目录 使用hexo搭建自己的Github Page博客 设置自定义域名，并添加https保护">
+<meta property="og:description" content="内容摘要 基于netty的心跳机制实现 基于定时器的心跳机制demo实现">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://snowroll.top/2020/09/24/githubpage/repository_name.jpg">
-<meta property="og:image" content="https://snowroll.top/2020/09/24/githubpage/themes-folder.jpg">
-<meta property="og:image" content="https://snowroll.top/2020/09/24/githubpage/custom-domain.jpg">
-<meta property="article:published_time" content="2020-09-24T09:06:25.000Z">
-<meta property="article:modified_time" content="2020-09-25T13:24:47.320Z">
+<meta property="article:published_time" content="2020-09-28T12:09:11.000Z">
+<meta property="article:modified_time" content="2020-10-22T03:00:43.664Z">
 <meta property="article:author" content="chaihj15">
-<meta property="article:tag" content="github page">
+<meta property="article:tag" content="heartbeat">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://snowroll.top/2020/09/24/githubpage/repository_name.jpg">
   
     <link rel="alternative" href="/atom.xml" title="SnowRoll Blog" type="application/atom+xml">
   
@@ -196,14 +192,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-githubpage" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java-heartbeat" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      GitHub Page 个人博客配置记录
+      Spring Boot中心跳机制的实现
     </h1>
   
 
@@ -215,8 +211,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/09/24/githubpage/" class="archive-article-date">
-        <time datetime="2020-09-24T09:06:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
+<a href="/2020/09/28/java-heartbeat/" class="archive-article-date">
+        <time datetime="2020-09-28T12:09:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-28</time>
 </a>
 
   
@@ -229,7 +225,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.4k字</span>
+      <span class="post-count">1k字</span>
     </span>
   </span>
 
@@ -238,7 +234,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -249,121 +245,80 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="内容目录"><a href="#内容目录" class="headerlink" title="内容目录"></a>内容目录</h3><ul>
-<li>使用hexo搭建自己的Github Page博客</li>
-<li>设置自定义域名，并添加https保护</li>
+    <h3 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h3><ul>
+<li>基于netty的心跳机制实现</li>
+<li>基于定时器的心跳机制demo实现</li>
 </ul>
 <a id="more"></a>
 
-<h3 id="1-使用hexo搭建Github-Page-博客"><a href="#1-使用hexo搭建Github-Page-博客" class="headerlink" title="1. 使用hexo搭建Github Page 博客"></a>1. 使用hexo搭建Github Page 博客</h3><p>这部分工作主要参考的是zjufangzh的博客，链接地址为<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_37781304/article/details/82729029">https://blog.csdn.net/sinat_37781304/article/details/82729029</a></p>
+<h3 id="1-基于netty心跳机制的实现"><a href="#1-基于netty心跳机制的实现" class="headerlink" title="1. 基于netty心跳机制的实现"></a>1. 基于netty心跳机制的实现</h3><p>这部分的主要工作是参考crossoverjie的博客，博客地址为 <a target="_blank" rel="noopener" href="https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/">https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/</a></p>
+<p>有兴趣的同学可以移步他的博客进行阅读，我在这里只总结一些我在复现过程中遇到的一些问题及解决方案</p>
 <ul>
-<li><p>首先下载hexo</p>
-<p>hexo官方网站<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="comment"># Linux npm 安装（如果没有）</span></span><br><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<li><p>在<code>EchoClienthandle</code>函数中的<code>SpringBeanFactory</code>找不到相关包，下面的语句执行出错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一行语句出错</span></span><br><span class="line">CustomProtocol heartBeat = SpringBeanFactory.getBean(<span class="string">&quot;heartBeat&quot;</span>, CustomProtocol.class);</span><br><span class="line">ctx.writeAndFlush(heartBeat).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;</span><br></pre></td></tr></table></figure>
 
-<p>在合适的目录开始创建自己的博客</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog  <span class="comment"># 初始化名字为blog的博客</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install  </span><br></pre></td></tr></table></figure>
+<p>解决：</p>
+<p>查找关于<code>ChannelHandlerContext.writeAndFlush()</code>定义，如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">writeAndFlush</span><span class="params">(Object msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.writeAndFlush(msg, <span class="keyword">this</span>.newPromise());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>下载完成之后的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node_modules&#x2F;  依赖包</span><br><span class="line">scaffolds&#x2F;  生成文章的模板</span><br><span class="line">source&#x2F;  博客内容，主要为md文件</span><br><span class="line">themes&#x2F;  博客主题</span><br><span class="line">public&#x2F;  博客的发布页面</span><br><span class="line">_config.yml  博客网站的配置文件</span><br></pre></td></tr></table></figure>
+<p>知<code>heartBeat</code>应为一个对象，所以考虑直接<code>new</code>，修改如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CustomProtocol customProtocol = <span class="keyword">new</span> CustomProtocol(<span class="number">1234L</span>, <span class="string">&quot;test&quot;</span>);</span><br><span class="line">ctx.writeAndFlush(customProtocol);</span><br></pre></td></tr></table></figure>
 
-<p>运行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  <span class="comment"># 清理之前的发布内容</span></span><br><span class="line">hexo generate  <span class="comment"># 生成新的发布页面，命令可简写为hexo g</span></span><br><span class="line">hexo server  <span class="comment"># 部署到本地localhost:4000，命令可简写为hexo s </span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 即可看到效果</p>
+<p>测试可以使用，具体内容可以自行修改</p>
 </li>
-<li><p>博客部署到Github Page上</p>
-<p>登录github，创建一个新的repository，名字为 <code>username.github.io</code>，例如我的github账户名为snowroll，所以repository的名字为<code>snowroll.github.io</code></p>
-<img src="/2020/09/24/githubpage/repository_name.jpg" class="">
-
-<p>生成ssh，添加到github中</p>
-<p>打开git bash（如没有，请自行查询下载）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span>  <span class="comment"># yourname为你的github用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;youremail&quot;</span>  <span class="comment"># youremail为你的github对应的邮箱</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail&quot;</span>  <span class="comment"># -t 指定密钥类型，-C 公钥备注，一般写自己的邮箱 生成ssh，一路回车即可</span></span><br></pre></td></tr></table></figure>
-
-<p>找到生成的<code>.ssh</code>文件夹，打开</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id_rsa  # 私钥</span><br><span class="line">id_rsa.pub  # 公钥</span><br><span class="line">known_hosts  # 记录服务器端的Host，IP及rsa文件，作缓存用</span><br></pre></td></tr></table></figure>
-
-<p>复制<code>id_rsa</code>内的内容到剪切板，直接打开复制也可以</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ./id_rsa.pub  <span class="comment"># mac 系统下的命令行操作</span></span><br></pre></td></tr></table></figure>
-
-<p>打开github的个人设置中的SSH and GPG keys，点击New SSH key，将复制的内容粘贴进去即可</p>
-<p>测试是否成功</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>出现 You’ve successfully authenticated, but GitHub does not provide shell access. 提示即意味成功</p>
-<p>生成ssh key的参考博客，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36761831/article/details/88725670">https://blog.csdn.net/qq_36761831/article/details/88725670</a></p>
-</li>
-</ul>
-<p>  将hexo与GitHub关联，修改<code>blog/</code>下的<code>_config.yml</code></p>
-  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repo:</span> <span class="string">https://github.com/yourgithubname/yourgithubname.github.io.git</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
-<p>  注意在<code>:</code>后要添加空格，github貌似要改master分支为main，到时候可能需要更改配置</p>
-<p>  安装deploy-git，以便将博客部署到GitHub</p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>  开始部署，更多命令请参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">https://hexo.io/zh-cn/docs/commands</a></p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d -g  <span class="comment"># d 部署 -g 部署之前预先生成静态文件</span></span><br></pre></td></tr></table></figure>
-
-<p>  成功之后，过一会就可以在<a target="_blank" rel="noopener" href="https://yourname.github.io/">https://yourname.github.io</a> 看到你的博客</p>
+<li><p>关于编解码的使用</p>
+<p>crossoverjie的博客提供自定义的编解码器，这个可以根据个人需求进行修改</p>
+<p>无论是客户端的<code>EchoClientHandle</code>还是服务器端的<code>HeartBeatSimpleHandle</code>都继承自<code>SimpleChannelInboundHandler&lt;I&gt;</code>抽象类，可以对不同的数据类型做处理，官方文档<a target="_blank" rel="noopener" href="https://netty.io/4.0/api/io/netty/channel/SimpleChannelInboundHandler.html">https://netty.io/4.0/api/io/netty/channel/SimpleChannelInboundHandler.html</a></p>
+<p>对比博客中的定义及对应的编解码方法</p>
 <ul>
-<li><p>更改主题，撰写文章</p>
-<p>可以在<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a> 下选择自己喜欢的主题，下载到<code>themes/</code>目录下</p>
-<img src="/2020/09/24/githubpage/themes-folder.jpg" class="">
+<li>服务器端</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartBeatSimpleHandle</span> <span class="keyword">extends</span> <span class="title">SimpleChannelInboundHandler</span>&lt;<span class="title">CustomProtocol</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//...  略去不重要的内容</span></span><br><span class="line">    <span class="comment">// 服务器端使用ByteBuf进行内容发送</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ByteBuf HEART_BEAT =  Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(<span class="keyword">new</span> CustomProtocol(<span class="number">123456L</span>,<span class="string">&quot;pong&quot;</span>).toString(),CharsetUtil.UTF_8));  </span><br><span class="line">    </span><br><span class="line">  	<span class="comment">//...</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">userEventTriggered</span><span class="params">(ChannelHandlerContext ctx, Object evt)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="comment">// 这里向客户端发送ByteBuf类型的数据，所以客户端必须解析ByteBuf</span></span><br><span class="line">       	ctx.writeAndFlush(HEART_BEAT).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;</span><br><span class="line">  </span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">super</span>.userEventTriggered(ctx, evt);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">channelRead0</span><span class="params">(ChannelHandlerContext ctx, CustomProtocol customProtocol)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">      	<span class="comment">// 定义了处理CustomProtocol，复现channelRead0</span></span><br><span class="line">        LOGGER.info(<span class="string">&quot;收到customProtocol=&#123;&#125;&quot;</span>, customProtocol);</span><br><span class="line">        <span class="comment">// ... </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>landscape</code>是默认主题，<code>yilia-plus</code>是我下载添加的主题，项目地址<a target="_blank" rel="noopener" href="https://github.com/JoeyBling/hexo-theme-yilia-plus">https://github.com/JoeyBling/hexo-theme-yilia-plus</a> </p>
-<p>更改<code>blog/</code>下的<code>_config.yml</code></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">yilia-plus</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这段代码应该是在客户端，因为客户端收到的是ByteBuf的内容，所以需要解码为CustomProtocol</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartbeatDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>重新部署即可生效，具体关于主题的各项设置，请参考各个主题的github项目说明文档</p>
+<p>同理不再赘述客户端的内容</p>
+</li>
+<li><p>netty心跳机制的问题</p>
+<p>netty底层相当于是基于socket连接实现的，所以需要服务器和客户端进行长连接，耦合严重。倘若，甲方不想心跳机制两端的机器保持socket的连接，只是简单的定时传送数据该如何实现？这就要用到我接下来提到的方法</p>
 </li>
 </ul>
-<p>  开始写文章</p>
-<p>  在<code>source/post</code>下的添加.md文件即可，或者</p>
-  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new paper</span><br></pre></td></tr></table></figure>
-
-<p>  更多详细操作参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">https://hexo.io/zh-cn/docs/writing</a> 和 <a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_37781304/article/details/82729029">https://blog.csdn.net/sinat_37781304/article/details/82729029</a></p>
-<p>  <em>Tips:  yilia-plus配置search功能，在博客根目录下执行 <code>npm i hexo-generator-json-content --save</code>， 在<code>_config.yml</code>中添加相关配置</em></p>
-<h3 id="2-设置自定义域名，添加https保护"><a href="#2-设置自定义域名，添加https保护" class="headerlink" title="2.  设置自定义域名，添加https保护"></a>2.  设置自定义域名，添加https保护</h3><ul>
-<li><p>设置自定义域名</p>
-<p>在阿里云上购买一个域名，看个人需求，我购买了snowroll.top域名，主要是便宜 hhhhh。阿里云域名购买及解析教程链接<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/767435">https://developer.aliyun.com/article/767435</a></p>
-<p>上面链接的域名操作的“解析设置”里，添加一条记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">记录类型： CNAME  </span><br><span class="line">主机记录： @  </span><br><span class="line">解析线路：默认</span><br><span class="line">记录值： yourname.github.io</span><br></pre></td></tr></table></figure>
-
-<p>这条解析记录应该是将你申请的域名解析关联到yourname.github.io，再通过github自己的dns服务器进行解析（个人理解，没有实际抓包看过）</p>
-<p>为了让域名生效，还得在<code>yourname.github.io</code>仓库的setting中，设置自定义的Custom domain，示例如下</p>
-<img src="/2020/09/24/githubpage/custom-domain.jpg" class="">
-
-<p>未添加https保护时，图中的Enforce HTTPS无法选中，也只能通过http访问自定义域名</p>
-<p>为了防止自定义域名失效，在<code>blog</code>的<code>source/</code>下新建<code>CNAME</code>文件，里面填上你的自定义域名即可</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snowroll.top</span><br></pre></td></tr></table></figure>
-
-<p>可以重新部署，查看一下自己的域名是否生效（重新部署后，可能需要1-2分钟页面才能更新）</p>
+<h3 id="2-基于定时器的心跳机制demo实现"><a href="#2-基于定时器的心跳机制demo实现" class="headerlink" title="2.  基于定时器的心跳机制demo实现"></a>2.  基于定时器的心跳机制demo实现</h3><ul>
+<li><p>代码逻辑</p>
+<p>A 定时请求数据  ==&gt; 发送请求给B的接口 ==&gt; B的接口接收信息，返回对应的信息 ==&gt; A处理返回的信息</p>
+<p>这个过程不需要A、B两者用socket连接，实现了解耦</p>
 </li>
-<li><p>添加https保护</p>
-<p>为了给自定义的域名，也添加https保护。我们在阿里云上申请一个免费的证书，教程链接<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/715576">https://developer.aliyun.com/article/715576</a></p>
-<p>签发完成并进行完相关的设置后，可能需要1-2小时https保护才能生效，所以不用过于着急。</p>
-<p>至此，就可以开始愉快的写博客了。</p>
+<li><p>定时</p>
+<p>参考博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/u010963948/article/details/52946268">https://blog.csdn.net/u010963948/article/details/52946268</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeartBeat</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * description: 定时器的回调函数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          System.out.println(<span class="string">&quot;hello world!&quot;</span>);  <span class="comment">// 自定义你需要的操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * description: 定时发送心跳， scheduleAtFixedRate param1： 回调函数 param1： 首次执行滞后时间 param1： 间隔时间 param1： 单位时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostConstruct</span>  <span class="comment">// 依赖注入完成之后，方法就要被执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">        service.scheduleAtFixedRate(runnable, <span class="number">1</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>PostConstruct</code>这个注释非常重要，注释对应的方法会在程序的依赖加载完成之后执行，这样就可以不用直接写在<code>main</code>函数中</p>
+<p>回调函数中的可能需要对JSON数据进行分析，可以直接使用Gson处理，参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/xingfei_work/article/details/76572550">https://blog.csdn.net/xingfei_work/article/details/76572550</a></p>
 </li>
 </ul>
-<h3 id="3-问题汇总及解决"><a href="#3-问题汇总及解决" class="headerlink" title="3. 问题汇总及解决"></a>3. 问题汇总及解决</h3><ul>
-<li><p>撰写文章，上传到github会导致图片丢失，不可见</p>
-<p>解决： 进行文件资源引用，官方文档<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders">https://hexo.io/zh-cn/docs/asset-folders</a></p>
-</li>
-<li><p>如何新建文件夹，不止是在<code>source/_post/</code>下</p>
-<p>解决：<code>hexo new page test</code> 会生成<code>source/test/</code>文件夹，但这个无法再<code>test</code>下加其他md文件，无法识别</p>
-</li>
-<li><p>如何让点击完之后的网页直接在当前网页跳转，而不是打开多个网页？</p>
-</li>
-</ul>
-<center>鹊桥仙·纤云弄巧
-
+<center>侠客行
 </center>
 
-<center>宋·秦观
+<center>唐·李白
 
-<center>纤云弄巧，飞星传恨，银汉迢迢暗度。金风玉露一相逢，便胜却人间无数。
+<center>赵客缦胡缨，吴钩霜雪明。
+银鞍照白马，飒沓如流星。
 
-<center>柔情似水，佳期如梦，忍顾鹊桥归路。两情若是久长时，又岂在朝朝暮暮。
+<center>十步杀一人，千里不留行。
+事了拂衣去，深藏身与名。
+
+<center>闲过信陵饮，脱剑膝前横。将炙啖朱亥，持觞劝侯嬴。
+
+<center>三杯吐然诺，五岳倒为轻。
+眼花耳热后，意气素霓生。
+
+<center>救赵挥金槌，邯郸先震惊。
+千秋二壮士，烜赫大梁城。
+
+<center>纵死侠骨香，不惭世上英。
+谁能书阁下，白首太玄经。
+
+
     
 
     
@@ -409,7 +364,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://snowroll.top/2020/09/24/githubpage/" title="GitHub Page 个人博客配置记录" target="_blank">https://snowroll.top/2020/09/24/githubpage/</a>
+          <a href="https://snowroll.top/2020/09/28/java-heartbeat/" title="Spring Boot中心跳机制的实现" target="_blank">https://snowroll.top/2020/09/28/java-heartbeat/</a>
         </li>
         
         <li>
@@ -431,7 +386,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github page</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">heartbeat</a>
         		</li>
       		
 		</ul>
@@ -443,7 +398,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Github//" class="article-tag-list-link color2">Github</a>
+        			<a href="/categories/java//" class="article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -498,7 +453,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://snowroll.top/2020/09/24/githubpage/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://snowroll.top/2020/09/28/java-heartbeat/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -513,18 +468,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/09/25/longdark/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/29/iptables/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          长夜难明
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2020/09/23/first-blog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">first-blog</div>
+    <a href="/2020/09/25/book-longdark/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">长夜难明</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -565,9 +520,9 @@
     <script src="/lib/gitment.js"></script>
   
   <script>
-    <!-- id: "GitHub Page 个人博客配置记录" -->
+    <!-- id: "Spring Boot中心跳机制的实现" -->
     var gitment = new Gitment({
-      id: "20200924170625",
+      id: "20200928200911",
       owner: 'snowroll',
       repo: 'snowblog',
       oauth: {
@@ -718,6 +673,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">邮件安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">except</a>
               </li>
             
             <div class="clearfix"></div>
