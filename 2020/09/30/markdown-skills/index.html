@@ -451,54 +451,31 @@
 
 
 
-
-
-
-<body>
-    <div id="gitalk-container"></div>
-</body>
-
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-    clientID: '10a9d6ce1fabe96959ff',
-    clientSecret: 'c2a6db6965d26ec354d6d4bbdd7d2d25d6be9a91',
-    repo: '',
-    owner: 'snowroll',
-    admin: ['snowroll'],
-    id: decodeURI(location.pathname),
-    distractionFreeMode: 'true'
+  
+  <div id="gitment-ctn"></div>
+  
+    <!-- 中文 -->
+    <link rel="stylesheet" href="/lib/gitment.css">
+    <script src="/lib/gitment.js"></script>
+  
+  <script>
+    <!-- id: "markdown-skills" -->
+    var gitment = new Gitment({
+      id: "20200930102904",
+      owner: 'snowroll',
+      repo: 'blog_comments',
+      oauth: {
+        client_id: '10a9d6ce1fabe96959ff',
+        client_secret: 'c2a6db6965d26ec354d6d4bbdd7d2d25d6be9a91',
+      },
     })
-    gitalk.render('gitalk-container')           
-</script>
+    gitment.render('gitment-ctn')
+  </script>
 
 
-<!-- var gitalk = new Gitalk({
-    clientID: 'Client ID',
-    clientSecret: 'Client Secret',
-    repo: 'blogcomment',
-    owner: 'MisakaMikoto128',
-    admin: ['MisakaMikoto128'],
-    id: decodeURI(location.pathname),
-    distractionFreeMode: true
-});
-gitalk.render('gitalk-container');
+  
 
-var language = navigator.language || navigator.userLanguage;
-var intro = document.getElementsByClassName('hero-intro')[0];
-var beginBtn = document.getElementsByClassName('btn-begin')[0];
-var demo = document.getElementsByClassName('demo')[0];
-if (language === 'zh-TW') {
-    intro.innerText = '一個基於 Github Issue 和 Preact 開發的評論插件';
-    beginBtn.innerText = '開始使用';
-} else if (!~language.indexOf('zh')) {
-    intro.innerText = 'A modern comment component based on Github Issue and Preact';
-    beginBtn.innerText = 'GET STARTED';
-    demo.innerText = 'Demo';
-} -->
+
 
           </div>
         </div>
