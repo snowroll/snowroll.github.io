@@ -1,9 +1,10 @@
 ﻿# Header-菜单
 menu:
   主页: /
-  # 技术笔记: /
-  随笔: /categories/essay
-  阅读: /categories/read
+  归档: /archives
+  # 随笔: /categories/essay
+  阅读: /books
+  观影: /movies
 
 # subNav-子导航
 subNav:
@@ -42,9 +43,9 @@ mathjax: false
 
 # Open link in a new tab | 是否在新窗口打开链接
 open_in_new:
-  article: true  # 文章链接
-  menu: true   # 导航菜单
-  subNav: true  # 子菜单
+  article: false  # 文章链接
+  menu: false   # 导航菜单
+  subNav: false  # 子菜单
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
@@ -92,32 +93,13 @@ changyan_conf: false
 # 2、Disqus 在hexo根目录的config里也有disqus_shortname字段，优先使用yilia-plus的
 disqus: false
 
-# 3、Gitment----基于GitHub的评论系统(关闭请设置gitment_owner为false)
-# 关于如何集成:https://www.jianshu.com/p/ac7658cc912f
-gitment_owner: snowroll      #你的 GitHub ID
-# 是否使用官方js(false可以提升访问速度，本地修改过一部分的js，官方js可能会出现服务器不稳定，不太建议使用)
-gitment_remote: false
-gitment_repo: 'snowblog'          #存储评论的 repo name(需要在Github创建)
-gitment_oauth:
-  client_id: 'e11108842e9125f5c06a'           #client ID
-  client_secret: '17ebc1d565af41a2e5147b4ba36f79207d8564c0'       #client secret
-
-# 4、Giteement----【国内用户建议使用这个，相对比较快】
-# 关于如何集成:https://www.jianshu.com/p/f5c4633524c7
-# 基于码云的评论系统(https://gitee.com/zhousiwei/giteement)
-giteement:
-  enable: false  # 是否启用码云评论系统
-  # 是否使用官方js(false可以提升访问速度)
-  remote: false
-  redirect_uri: ''   # 应用回调地址(请和配置的第三方应用保持一致)
-  # 不能更改(网上开源项目`https://github.com/Rob--W/cors-anywhere`作者提供的专门用来跨域服务器的配置)
-  oauth_uri: https://cors-anywhere.herokuapp.com/https://gitee.com/oauth/token
-  giteeID: ''  # 你的码云账号英文名
-  # 存储评论的 repo name(需要在码云仓库创建公开仓库)
-  repo: ''
-  gitment_oauth:
-    client_id: ''           #client ID
-    client_secret: ''       #client secret
+valine: 
+ appid:  OETKeqh5V5Lg8yFWHTyrNq6E-gzGzoHsz
+ appkey:  EyG2IvhhCK26821F6QNDEnwx
+ verify: false #验证码
+ notify: false #评论回复提醒
+ avatar: mm #评论列表头像样式：''/mm/identicon/monsterid/wavatar/retro/hide
+ placeholder: Just go go #评论框占位符
 
 # 访问量统计功能(不蒜子)
 busuanzi:

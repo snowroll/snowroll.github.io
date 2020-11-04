@@ -9,6 +9,10 @@ hexo.extend.helper.register('yilia_plus_vendors', function (url) {
   return this.url_for(`${url}`);
 });
 
+// hexo.extend.helper.register('yilia_plus_full_url', function(path){
+//   return path.replace(/\/|\'|\s/g, '-');
+// });
+
 /** 自定义网站链接生成 */
 hexo.extend.helper.register('yilia_plus_full_url', function (url) {
   yilia_plus_log("params url ===> " + url);
@@ -26,3 +30,4 @@ hexo.extend.helper.register('yilia_plus_full_url', function (url) {
   yilia_plus_log("yilia_plus_full_url finish ===> " + fullUrl);
   return fullUrl;
 });
+

@@ -1,5 +1,6 @@
 ---
 title: first-blog
+abbrlink: b4f55dd8
 date: 2020-09-23 11:07:54
 tags:
 ---

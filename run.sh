@@ -16,10 +16,13 @@ do
     "-c")
       hexo clean
       ;;
+    "-do")  # douban
+      hexo douban -bm
+      ;;
     "-d")
       if [ "$2" == 'd' ]
       then
-        hexo d -g
+        hexo deploy -g 
       else
         hexo s -g
       fi
