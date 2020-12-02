@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://snowroll.top">
-  <title>SnowRoll Blog</title>
+  <title>iptables 简介 | SnowRoll Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="iptables   一、 iptables相关概念介绍 参考的博客链接https:&#x2F;&#x2F;aimuke.github.io&#x2F;linux&#x2F;2019&#x2F;05&#x2F;28&#x2F;iptables&#x2F;  功能简介 根据管理员定义的规则rules对数据包进行过滤，在rules中可以指定数据包的源地址、目标地址、协议类型等，过滤操作包括ACCEPT、REJECT、DROP和LOG等等。  Chain 针对数据包的不同流向">
+  <meta name="description" content="内容摘要 iptables相关概念介绍 iptables相关命令 常用命令解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SnowRoll Blog">
+<meta property="og:title" content="iptables 简介">
 <meta property="og:url" content="https://snowroll.top/archives/0.html">
 <meta property="og:site_name" content="SnowRoll Blog">
-<meta property="og:description" content="iptables   一、 iptables相关概念介绍 参考的博客链接https:&#x2F;&#x2F;aimuke.github.io&#x2F;linux&#x2F;2019&#x2F;05&#x2F;28&#x2F;iptables&#x2F;  功能简介 根据管理员定义的规则rules对数据包进行过滤，在rules中可以指定数据包的源地址、目标地址、协议类型等，过滤操作包括ACCEPT、REJECT、DROP和LOG等等。  Chain 针对数据包的不同流向">
+<meta property="og:description" content="内容摘要 iptables相关概念介绍 iptables相关命令 常用命令解析">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_2.png">
 <meta property="og:image" content="http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_6.png">
-<meta property="article:published_time" content="2020-09-29T07:07:37.233Z">
-<meta property="article:modified_time" content="2020-11-04T11:01:51.124Z">
+<meta property="article:published_time" content="2020-10-08T12:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-02T06:52:05.103Z">
 <meta property="article:author" content="chaihj15">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_2.png">
   
@@ -218,11 +219,63 @@
             <article id="post-iptables" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+  
+  
+    <h1 class="article-title" itemprop="name">
+      iptables 简介
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/archives/0.html" class="archive-article-date">
+        <time datetime="2020-10-08T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-08</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">867字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
   <div class="article-entry" itemprop="articleBody">
     
-    <center>
-  iptables
-</center>
+    <h3 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h3><ul>
+<li>iptables相关概念介绍</li>
+<li>iptables相关命令</li>
+<li>常用命令解析</li>
+</ul>
+<a id="more"></a>
+
 
 <h3 id="一、-iptables相关概念介绍"><a href="#一、-iptables相关概念介绍" class="headerlink" title="一、 iptables相关概念介绍"></a>一、 iptables相关概念介绍</h3><ul>
 <li><p>参考的博客链接<a target="_blank" rel="noopener" href="https://aimuke.github.io/linux/2019/05/28/iptables/">https://aimuke.github.io/linux/2019/05/28/iptables/</a></p>
@@ -294,6 +347,10 @@
 <li><p>持久化保存规则 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/kaishirenshi/p/11227663.html">https://www.cnblogs.com/kaishirenshi/p/11227663.html</a></p>
 </li>
 </ul>
+<blockquote>
+<p>&emsp;&emsp;我们的问题不在于电视为我们展示具有娱乐性的内容，而在于所有的内容都以娱乐的方式表现出来，这就完全是另外一回事了。</p>
+<p align="right">——《娱乐至死》
+</blockquote>
 
     
 
@@ -345,7 +402,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://snowroll.top/archives/0.html" title="" target="_blank">https://snowroll.top/archives/0.html</a>
+          <a href="https://snowroll.top/archives/0.html" title="iptables 简介" target="_blank">https://snowroll.top/archives/0.html</a>
         </li>
         
         <li>
@@ -362,6 +419,17 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
@@ -427,18 +495,18 @@
 
 <nav id="article-nav">
   
-    <a href="/archives/a08212c3.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/archives/3511a293.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          markdown-skills
+          邮件安全之spf协议
         
       </div>
     </a>
   
   
-    <a href="/archives/94599211.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring Boot中心跳机制的实现</div>
+    <a href="/archives/a08212c3.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">markdown-skills</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -654,6 +722,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">except</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
             
             <div class="clearfix"></div>
