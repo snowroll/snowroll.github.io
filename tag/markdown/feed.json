@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "SnowRoll Blog • All posts by \"markdown\" tag",
+    "description": "分享经验，记录生活",
+    "home_page_url": "https://snowroll.github.io",
+    "items": [
+        {
+            "id": "https://snowroll.github.io/markdown-skills/",
+            "url": "https://snowroll.github.io/markdown-skills/",
+            "title": "markdown-skills",
+            "date_published": "2020-09-30T02:29:04.000Z",
+            "content_html": "<h3 id=\"内容摘要\"><a class=\"markdownIt-Anchor\" href=\"#内容摘要\">#</a> 内容摘要</h3>\n<ul>\n<li>绘制伪时间轴</li>\n<li>任务列表的正确使用姿势</li>\n</ul>\n<a id=\"more\"></a>\n<ul>\n<li>\n<p><strong>绘制时间轴</strong></p>\n<p>使用 Typora 中的 mermaid 的旅程图，官网链接 https://mermaid-js.github.io/mermaid/</p>\n<p>示例：</p>\n<p>使用 <code>~~~mermaid</code>  建立一个代码块</p>\n<p>简单 demo 如下：</p>\n<figure class=\"highlight txt\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br><span class=\"line\">6</span><br><span class=\"line\">7</span><br><span class=\"line\">8</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">journey</span><br><span class=\"line\">    title 简单时间轴</span><br><span class=\"line\">    section 一月</span><br><span class=\"line\">      test1: 2</span><br><span class=\"line\">    section 二月</span><br><span class=\"line\">    \ttest2: 5</span><br><span class=\"line\">    section 三月</span><br><span class=\"line\">    \ttest3: 0</span><br></pre></td></tr></table></figure>\n<p>实际效果：</p>\n<figure class=\"highlight plain\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br><span class=\"line\">6</span><br><span class=\"line\">7</span><br><span class=\"line\">8</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">journey</span><br><span class=\"line\">    title 简单时间轴</span><br><span class=\"line\">    section 一月</span><br><span class=\"line\">      test1: 2</span><br><span class=\"line\">    section 二月</span><br><span class=\"line\">    \ttest2: 5</span><br><span class=\"line\">    section 三月</span><br><span class=\"line\">    \ttest3: 0</span><br></pre></td></tr></table></figure>\n</li>\n<li>\n<p>任务列表</p>\n<p>格式  <code>- [ ] </code> ，非常简单，之前用的时候有一个疑问， <code>-</code>  加空格会自动变为无序列表的点，后来发现只需要在 <code>[ ]</code>  之后再添加一个空格，就可以变为待选框了</p>\n<ul class=\"task-list\">\n<li class=\"task-list-item\">\n<p><input type=\"checkbox\" id=\"cbx_0\" disabled=\"true\"><label for=\"cbx_0\">  成功示例，不要忘记加空格</label></p>\n</li>\n<li>\n<p>[ ] 未加空格，失败案例</p>\n</li>\n</ul>\n</li>\n</ul>\n",
+            "tags": [
+                "markdown"
+            ]
+        }
+    ]
+}
