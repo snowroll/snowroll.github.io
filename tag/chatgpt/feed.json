@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "SnowRoll Blog • All posts by \"chatgpt\" tag",
+    "description": "分享经验，记录生活",
+    "home_page_url": "https://snowroll.github.io",
+    "items": [
+        {
+            "id": "https://snowroll.github.io/chatgpt_plus/",
+            "url": "https://snowroll.github.io/chatgpt_plus/",
+            "title": "申请chatgpt-plus会员",
+            "date_published": "2024-01-01T12:00:00.000Z",
+            "content_html": "<p>chatgpt plus 申请流程</p>\n<p>通过苹果 APP Store 里面的礼品卡充值，避免要使用国外货币</p>\n<p>前提：</p>\n<ul>\n<li>有一台 iphone 或者 ipad</li>\n<li>已经拥有 chatgpt 的普通账号</li>\n</ul>\n<h2 id=\"1-申请美区苹果账号\"><a class=\"markdownIt-Anchor\" href=\"#1-申请美区苹果账号\">#</a> 1. 申请美区苹果账号</h2>\n<p>通过<span class=\"exturl\" data-url=\"aHR0cHM6Ly9hcHBsZWRpLmNvbS8=\">苹果帝</span>来购买一个美区的 ios 账号，按照里面的教程操作即可。</p>\n<h2 id=\"2-获取科学工具\"><a class=\"markdownIt-Anchor\" href=\"#2-获取科学工具\">#</a> 2. 获取科学工具</h2>\n<p>我找到的一个网站<span class=\"exturl\" data-url=\"aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA=\"> v2sx</span>，可以正常使用。</p>\n<p><img data-src=\"/Users/chaihj15/Desktop/Master/Study/Two-Autumn/white/blog/hexo-blog/source/_posts/chatgpt_plus/vpn.png\" alt=\"image-20231216175123361\"></p>\n<p>在产品购买里，购买一个基本款就可以。具体的使用可以查看他们的帮助文档，例如 windows 下的<span class=\"exturl\" data-url=\"aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA/cnA9L2tub3dsZWRnZWJhc2UvNC8tV2luZG93cy0tVjJSYXktLmh0bWw=\">帮助文档</span>。</p>\n<p>IPad 和 IPhone 的所有应用都只能通过应用商店获取，而国内的应用商店无法下载这些科学工具。就需要我们上一步拿到的美区苹果账号。</p>\n<ol>\n<li>打开 App Store，点击右上角的头像，退出当前用户登陆</li>\n<li>用美区账号的用户名和密码登录</li>\n<li>下载 Shadowrocks</li>\n<li>按照<span class=\"exturl\" data-url=\"aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA/cnA9L2tub3dsZWRnZWJhc2UvNS8taU9TLS1WMlJheS0uaHRtbA==\">教程</span>，实现科学上网</li>\n</ol>\n<h2 id=\"3-购买礼品卡充值\"><a class=\"markdownIt-Anchor\" href=\"#3-购买礼品卡充值\">#</a> 3. 购买礼品卡充值</h2>\n<ul>\n<li>打开支付宝，搜索 PockyShop，点击进入对应小程序</li>\n<li>找到礼品卡列表里的， APP Store &amp; iTunes USA</li>\n<li>充值购买，得到一个兑换码</li>\n<li>返回 IPad 或 IPhone，点击 App Store 右上角头像，选择兑换充值卡</li>\n<li>APP Store 中下载 ChatGPT，然后在应用中升级 Chat GPT plus 即可</li>\n</ul>\n",
+            "tags": [
+                "chatgpt"
+            ]
+        }
+    ]
+}

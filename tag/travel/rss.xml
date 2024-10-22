@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;travel&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 06 Apr 2024 04:00:00 +0000</pubDate>
+        <lastBuildDate>Sat, 06 Apr 2024 04:00:00 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/visa/</guid>
+            <title>赴美签证</title>
+            <link>https://snowroll.github.io/visa/</link>
+            <category>travel</category>
+            <pubDate>Sat, 06 Apr 2024 04:00:00 +0000</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;签证&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#签证&#34;&gt;#&lt;/a&gt; 签证&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;申请美签，首先要填写 DS160&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;签证网站： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jZWFjLnN0YXRlLmdvdi9nZW5uaXYv&#34;&gt;https://ceac.state.gov/genniv/&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DS160 填写说明： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWVpbHZ0b25nLmNvbS92aWV3dGhyZWFkLnBocD90aWQ9MTkjY29udGFjdA==&#34;&gt;https://www.meilvtong.com/viewthread.php?tid=19#contact&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;填完 DS160，需要申请所在城市的面签，网址如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;签证预约网站： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9wb3J0YWwudXN0cmF2ZWxkb2NzLmNvbS8/Y291bnRyeT1DaGluYSZhbXA7bGFuZ3VhZ2U9RW5nbGlzaA==&#34;&gt;https://portal.ustraveldocs.com/?country=China&amp;amp;language=English&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;准备材料： 护照（passport），面谈预约单（Appointment），DS160 确认页（Recipt Number） ，50mm*50mm 白底签证照片。其余都非必需，建议以自己的时间情况准备&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;江苏省签证服务指导建议： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovLzIyMS4yMjYuNjcuODYvMDE2LzIwMjMwMjAyLzBlMTdkN2VmLWExODktNGY3Mi05MGY0LWY3Mjk4ZjM1MDNiYi5odG1s&#34;&gt;http://221.226.67.86/016/20230202/0e17d7ef-a189-4f72-90f4-f7298f3503bb.html&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;面签预约人很多，需要提前 1-2 个月。&lt;strong&gt;有 DS160 编号，即可开始申请面签&lt;/strong&gt;，面签之前把表填完就行&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;面签说中英文均可，一般的问题如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么去美国？&lt;/li&gt;
+&lt;li&gt;去多久？&lt;/li&gt;
+&lt;li&gt;是否是第一次出国？&lt;/li&gt;
+&lt;li&gt;是否有邀请信？&lt;/li&gt;
+&lt;li&gt;问一下个人相关信息，毕业院校，学位，专业等等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;签证面签之后，可以通过下面网址查看自己的签证状况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;签证查询网址： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jZWFjLnN0YXRlLmdvdi9DRUFDU3RhdFRyYWNrZXIvU3RhdHVzLmFzcHg=&#34;&gt;https://ceac.state.gov/CEACStatTracker/Status.aspx&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;出发&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#出发&#34;&gt;#&lt;/a&gt; 出发&lt;/h2&gt;
+&lt;p&gt;准备：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一张 mastercard 或者 visa 的信用卡，美国基本都刷信用卡  pay with credit card&lt;/li&gt;
+&lt;li&gt;少量现金 pay with cash&lt;/li&gt;
+&lt;li&gt;护照 passport&lt;/li&gt;
+&lt;li&gt;一张美国电话卡，淘宝买&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;乘机：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 常用英文汇总
+ - https://zhuanlan.zhihu.com/p/431899803
+ - https://www.hjenglish.com/new/p1350746/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;入境检查：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;常问问题
+&lt;ul&gt;
+&lt;li&gt;What’s your purpose of visiting U.S? Why are you coming to U.S?  What do you come to U.S for?&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWlmdWJhYnkuY29tL2JhaWtlU2hvdy5hc3A/aWQ9NTI0&#34;&gt;https://www.mifubaby.com/baikeShow.asp?id=524&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;到达&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#到达&#34;&gt;#&lt;/a&gt; 到达&lt;/h2&gt;
+&lt;p&gt;用蹩脚英文交流起来吧 hhh，大家还是很宽容的😂&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
