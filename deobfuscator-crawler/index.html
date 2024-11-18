@@ -1,0 +1,651 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="crawler" />
+
+
+<link rel="canonical" href="https://snowroll.github.io/deobfuscator-crawler/">
+
+
+
+  <title>
+Github爬虫 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Github爬虫
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2020-11-13 10:01:41">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2020-11-13T10:01:41+08:00">2020-11-13</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>10k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>10 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/deobfuscator-crawler/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <blockquote>
+<p><strong>任务需求：</strong></p>
+<p>下载 100 个 Github 上的 powershell 脚本作为数据库，用于之后的研究分析</p>
+</blockquote>
+<h1 id="解析github搜索页面获取页面上的仓库名称"><a class="markdownIt-Anchor" href="#解析github搜索页面获取页面上的仓库名称">#</a> 解析 Github 搜索页面，获取页面上的仓库名称</h1>
+<h2 id="分析github搜索请求"><a class="markdownIt-Anchor" href="#分析github搜索请求">#</a> 分析 Github 搜索请求</h2>
+<p>在 Github 上进行 powershell 搜索，选定语言为 <code>PowerShell</code> ，结果如下图</p>
+<img data-src="/deobfuscator-crawler/github-search.png" class="">
+<p>观察链接地址 <code>https://github.com/search?l=PowerShell&amp;p=2&amp;q=powershell&amp;type=Repositories</code>  可知，有 4 个搜索参数：  <code>l</code>   编程语言、  <code>p</code>  当前页数、 <code>q</code>  搜索内容、  <code>type</code>  搜索类型</p>
+<h2 id="python-获取指定url的html并进行解析"><a class="markdownIt-Anchor" href="#python-获取指定url的html并进行解析">#</a> python 获取指定 url 的 html 并进行解析</h2>
+<p>参考博客： <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2J1bGw1MjEvYXJ0aWNsZS9kZXRhaWxzLzgzNDQ4Nzgx">https://blog.csdn.net/bull521/article/details/83448781</span></p>
+<p>第三方库： requests 文档 <span class="exturl" data-url="aHR0cHM6Ly9yZXF1ZXN0cy5yZWFkdGhlZG9jcy5pby96aF9DTi9sYXRlc3Qv">https://requests.readthedocs.io/zh_CN/latest/</span></p>
+<p>pyquery 文档 <span class="exturl" data-url="aHR0cHM6Ly9weXF1ZXJ5LnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9hcGkuaHRtbA==">https://pyquery.readthedocs.io/en/latest/api.html</span></p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  <span class="comment"># 发送请求，获取响应</span></span><br><span class="line"><span class="keyword">from</span> pyquery <span class="keyword">import</span> PyQuery <span class="keyword">as</span> pq  <span class="comment"># 解析html</span></span><br><span class="line"></span><br><span class="line">base_url = <span class="string">&quot;https://github.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">从url中获取html文本，解析并返回列表</span></span><br><span class="line"><span class="string">@param url 要解析的链接</span></span><br><span class="line"><span class="string">@return list [&#x27;仓库名1&#x27;, &#x27;仓库名2&#x27;, ...]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_repos</span>(<span class="params">url</span>):</span></span><br><span class="line">    headers = &#123;  <span class="comment"># 设置访问头，Host - 请求服务器域名， User-Agent - 设置用户代理为浏览器，避免反爬</span></span><br><span class="line">        <span class="string">&#x27;Host&#x27;</span> : <span class="string">&#x27;github.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span> : <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.get(url=url, headers=headers)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> r.status_code != <span class="number">200</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;网页加载错误&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#开始解析标签</span></span><br><span class="line">    doc = pq(r.text)</span><br><span class="line">    repos = []</span><br><span class="line">    items = doc(<span class="string">&#x27;a&#x27;</span>).<span class="built_in">filter</span>(<span class="string">&#x27;.v-align-middle&#x27;</span>).items()  </span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        repos.append(item.text())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> repos</span><br><span class="line">    </span><br><span class="line">url = <span class="string">&quot;https://github.com/search?l=PowerShell&amp;q=powershell&amp;type=Repositories&amp;p=1&quot;</span></span><br><span class="line">repo_list = get_repos(url)</span><br><span class="line"><span class="built_in">print</span>(repo_list)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;lazywinadmin/PowerShell&#x27;</span>, <span class="string">&#x27;clymb3r/PowerShell&#x27;</span>, <span class="string">&#x27;danielbohannon/Invoke-Obfuscation&#x27;</span>, <span class="string">&#x27;RamblingCookieMonster/PowerShell&#x27;</span>, <span class="string">&#x27;PowerShellMafia/PowerSploit&#x27;</span>, <span class="string">&#x27;MicrosoftDocs/PowerShell-Docs&#x27;</span>, <span class="string">&#x27;FuzzySecurity/PowerShell-Suite&#x27;</span>, <span class="string">&#x27;dahlbyk/posh-git&#x27;</span>, <span class="string">&#x27;janikvonrotz/awesome-powershell&#x27;</span>, <span class="string">&#x27;dracula/powershell&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="代码解析"><a class="markdownIt-Anchor" href="#代码解析">#</a> 代码解析：</h2>
+<p>使用 <code>requests</code>  获取 Github 响应</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&quot;https://github.com/search?l=PowerShell&amp;q=powershell&amp;type=Repositories&amp;p=1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(r.text)  <span class="comment"># 获取Github响应的html</span></span><br></pre></td></tr></table></figure>
+<div style="width:100%;margin:auto"><img data-src="/deobfuscator-crawler/github-reponse.png" class=""></div>
+<p>分析返回的 html 文本，其中关于仓库的信息如下所示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;f4 text-normal&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;v-align-middle&quot;</span> <span class="attr">data-hydro-click</span>=<span class="string">&quot;&#123;<span class="symbol">&amp;quot;</span>event_type<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>search_result.click<span class="symbol">&amp;quot;</span>,<span class="symbol">&amp;quot;</span>payload<span class="symbol">&amp;quot;</span>:&#123;<span class="symbol">&amp;quot;</span>page_number<span class="symbol">&amp;quot;</span>:1,<span class="symbol">&amp;quot;</span>per_page<span class="symbol">&amp;quot;</span>:10,<span class="symbol">&amp;quot;</span>query<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>powershell<span class="symbol">&amp;quot;</span>,<span class="symbol">&amp;quot;</span>result_position<span class="symbol">&amp;quot;</span>:2,<span class="symbol">&amp;quot;</span>click_id<span class="symbol">&amp;quot;</span>:9093330,<span class="symbol">&amp;quot;</span>result<span class="symbol">&amp;quot;</span>:&#123;<span class="symbol">&amp;quot;</span>id<span class="symbol">&amp;quot;</span>:9093330,<span class="symbol">&amp;quot;</span>global_relay_id<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>MDEwOlJlcG9zaXRvcnk5MDkzMzMw<span class="symbol">&amp;quot;</span>,<span class="symbol">&amp;quot;</span>model_name<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>Repository<span class="symbol">&amp;quot;</span>,<span class="symbol">&amp;quot;</span>url<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>https://github.com/clymb3r/PowerShell<span class="symbol">&amp;quot;</span>&#125;,<span class="symbol">&amp;quot;</span>originating_url<span class="symbol">&amp;quot;</span>:<span class="symbol">&amp;quot;</span>https://github.com/search?l=PowerShell<span class="symbol">&amp;amp;</span>q=powershell<span class="symbol">&amp;amp;</span>type=Repositories<span class="symbol">&amp;amp;</span>p=1<span class="symbol">&amp;quot;</span>,<span class="symbol">&amp;quot;</span>user_id<span class="symbol">&amp;quot;</span>:24938068&#125;&#125;&quot;</span> <span class="attr">data-hydro-click-hmac</span>=<span class="string">&quot;309d4f59b977bc66a4a930b1805d5bbc5cd5d76519a9d1f421fb14f094e253c8&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/clymb3r/PowerShell&quot;</span>&gt;</span>clymb3r/<span class="tag">&lt;<span class="name">em</span>&gt;</span>PowerShell<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以只需获取类  <code>v-align-middle</code>  对应的文本值即可，此时就需要用到另一个第三方库  <code>pyquery</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> pyquery <span class="keyword">import</span> PyQuery <span class="keyword">as</span> pq </span><br><span class="line"></span><br><span class="line">r = requests.get(<span class="string">&quot;https://github.com/search?l=PowerShell&amp;q=powershell&amp;type=Repositories&amp;p=1&quot;</span>)</span><br><span class="line">doc = pq(r.text)  </span><br><span class="line"><span class="comment"># 找到所有标签为`a`, 类别为&#x27;v-align-middle&#x27;的项 类名前要加&#x27;.&#x27;</span></span><br><span class="line">items = doc(<span class="string">&#x27;a&#x27;</span>).<span class="built_in">filter</span>(<span class="string">&#x27;.v-align-middle&#x27;</span>).items()  </span><br><span class="line"><span class="comment"># items是一个生成器，通过 for 遍历</span></span><br><span class="line">repos = []</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">    repos.append(item.text())</span><br><span class="line"><span class="built_in">print</span>(repos)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;adbertram/Random-PowerShell-Work&#x27;</span>, <span class="string">&#x27;BornToBeRoot/PowerShell&#x27;</span>, <span class="string">&#x27;specterops/at-ps&#x27;</span>, <span class="string">&#x27;EmpireProject/Empire&#x27;</span>, <span class="string">&#x27;nullbind/Powershellery&#x27;</span>, <span class="string">&#x27;microsoftgraph/powershell-intune-samples&#x27;</span>, <span class="string">&#x27;SublimeText/PowerShell&#x27;</span>, <span class="string">&#x27;ZHacker13/ReverseTCPShell&#x27;</span>, <span class="string">&#x27;MicrosoftDocs/windows-powershell-docs&#x27;</span>, <span class="string">&#x27;MicksITBlogs/PowerShell&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>成功拿到搜索页面的仓库名</p>
+<h1 id="在github仓库中遍历找到所有的powershell文件"><a class="markdownIt-Anchor" href="#在github仓库中遍历找到所有的powershell文件">#</a> 在 Github 仓库中遍历，找到所有的 powershell 文件</h1>
+<h2 id="分析单个仓库的html文本信息"><a class="markdownIt-Anchor" href="#分析单个仓库的html文本信息">#</a> 分析单个仓库的 html 文本信息</h2>
+<p>此时 url 设置为 “<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RyYWN1bGEvcG93ZXJzaGVsbA==">https://github.com/dracula/powershell</span>”，仓库目录如下所示</p>
+<div style="width:100%;margin:auto"><img data-src="/deobfuscator-crawler/dracula-repo.png" class=""></div>
+<p>分析 html 文本，找到文件链接，如下所示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件超链接</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;js-navigation-open link-gray-dark&quot;</span> <span class="attr">title</span>=<span class="string">&quot;INSTALL.md&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/dracula/powershell/blob/master/INSTALL.md&quot;</span>&gt;</span>INSTALL.md<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">目录超链接</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;js-navigation-open link-gray-dark&quot;</span> <span class="attr">title</span>=<span class="string">&quot;theme&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/dracula/powershell/tree/master/theme&quot;</span>&gt;</span>theme<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>文件和目录链接的区别来源于 Git 的四种 object， <code>tree</code>  |   <code>blob</code>  |  <code>commit</code>  |  <code>tag</code>   分别代表  <code>目录</code>  ｜ <code> 文件</code>  ｜  <code>提交信息</code>  ｜  <code>标签，commit别名</code></p>
+<h2 id="使用pyquery解析"><a class="markdownIt-Anchor" href="#使用pyquery解析">#</a> 使用 pyquery 解析</h2>
+<p><strong>outer_html</strong>(<em>method=‘html’</em>)</p>
+<p>获得第一个选中元素的 html 表示</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = PyQuery(<span class="string">&#x27;&lt;div&gt;&lt;span class=&quot;red&quot;&gt;toto&lt;/span&gt; rocks&lt;/div&gt;&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(d(<span class="string">&#x27;span&#x27;</span>).outer_html())</span><br><span class="line">&lt;span class=<span class="string">&quot;red&quot;</span>&gt;toto&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> pyquery <span class="keyword">import</span> PyQuery <span class="keyword">as</span> pq</span><br><span class="line"></span><br><span class="line">base_url = <span class="string">&quot;https://github.com&quot;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">找到Github当前页面下的ps文件，并将目录返回</span></span><br><span class="line"><span class="string">@param path 相对路径 /dracula/powershell</span></span><br><span class="line"><span class="string">@return list list [psfile0, psfile1, ...] [dir0, dir1, ...]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_ps</span>(<span class="params">path</span>):</span></span><br><span class="line">    headers = &#123;  </span><br><span class="line">        <span class="string">&#x27;Host&#x27;</span> : <span class="string">&#x27;github.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span> : <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    full_url = base_url + path</span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        r = requests.get(full_url, headers=headers, timeout=(<span class="number">7</span>, <span class="number">10</span>))  </span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">return</span> [], []</span><br><span class="line">    </span><br><span class="line">    ps, dirs = [], []  <span class="comment"># 检测到的.ps1文件 和 目录</span></span><br><span class="line">    doc = pq(r.text)</span><br><span class="line">    items = doc(<span class="string">&#x27;a&#x27;</span>).<span class="built_in">filter</span>(<span class="string">&#x27;.js-navigation-open&#x27;</span>).items()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;/tree/&quot;</span> <span class="keyword">in</span> item.outer_html():  <span class="comment"># 检查html中是否包含 &#x27;/tree/&#x27;，是则认定节点为目录信息</span></span><br><span class="line">            dirs.append(item.text())</span><br><span class="line">        <span class="keyword">elif</span> <span class="string">&quot;.ps1&quot;</span> == item.text():</span><br><span class="line">            ps.append(item.text())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> ps, dirs</span><br><span class="line"></span><br><span class="line">path = <span class="string">&quot;/dracula/powershell&quot;</span></span><br><span class="line">ps, dirs = find_ps(path)</span><br><span class="line"><span class="built_in">print</span>(ps, dirs)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] [<span class="string">&#x27;.github&#x27;</span>, <span class="string">&#x27;dist&#x27;</span>, <span class="string">&#x27;images&#x27;</span>, <span class="string">&#x27;theme&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>从上面结果可知，程序正确地返回了目录名。但由于一个仓库中有多个子目录，所以更希望程序能够返回  <code>href=&quot;/dracula/powershell/tree/master/theme&quot;</code>  中的链接地址。但是 pyquery 功能有限，只针对 html 中的标签做了解析，所以需要需要更强有力的工具  <code>BeautifulSoup</code></p>
+<h2 id="使用beautifulsoup解析"><a class="markdownIt-Anchor" href="#使用beautifulsoup解析">#</a> 使用 BeautifulSoup 解析</h2>
+<p>文档： <span class="exturl" data-url="aHR0cHM6Ly9iZWF1dGlmdWxzb3VwLnJlYWR0aGVkb2NzLmlvL3poX0NOL3Y0LjQuMC8=">https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/</span></p>
+<p>部分文档内容粘贴如下：</p>
+<p>一段 html 文本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">html_doc = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&#x27;s story&lt;/title&gt;&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&#x27;s story&lt;/b&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</span></span><br><span class="line"><span class="string">&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,</span></span><br><span class="line"><span class="string">&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and</span></span><br><span class="line"><span class="string">&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;</span></span><br><span class="line"><span class="string">and they lived at the bottom of a well.&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>使用 Beautiful Soup 找到所有 &lt;a&gt; 标签中的链接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(html_doc, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> soup.find_all(<span class="string">&#x27;a&#x27;</span>):</span><br><span class="line">    <span class="built_in">print</span>(link[<span class="string">&#x27;href&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/elsie</span><br><span class="line">http://example.com/lacie</span><br><span class="line">http://example.com/tillie</span><br></pre></td></tr></table></figure>
+<p>搜索 ps 文件函数修改如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  <span class="comment"># 添加BeautifulSoup 头文件</span></span><br><span class="line"></span><br><span class="line">base_url = <span class="string">&quot;https://github.com&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_ps</span>(<span class="params">path</span>):</span></span><br><span class="line">    headers = &#123;  </span><br><span class="line">        <span class="string">&#x27;Host&#x27;</span> : <span class="string">&#x27;github.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span> : <span class="string">&#x27;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    full_url = base_url + <span class="string">&quot;/&quot;</span> + path</span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        r = requests.get(full_url, headers=headers, timeout=(<span class="number">7</span>, <span class="number">10</span>))  </span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        <span class="keyword">return</span> [], []</span><br><span class="line">    </span><br><span class="line">    ps, dirs = [], []  <span class="comment"># 检测到的.ps1文件 和 目录</span></span><br><span class="line">    soup = BeautifulSoup(r.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> link <span class="keyword">in</span> soup.find_all(<span class="string">&quot;a&quot;</span>, class_=<span class="string">&quot;js-navigation-open&quot;</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;/tree&quot;</span> <span class="keyword">in</span> link[<span class="string">&#x27;href&#x27;</span>]:</span><br><span class="line">            dirs.append(link[<span class="string">&#x27;href&#x27;</span>])</span><br><span class="line">        <span class="keyword">elif</span> <span class="string">&quot;.ps1&quot;</span> == link[<span class="string">&#x27;href&#x27;</span>][-<span class="number">4</span>:]:</span><br><span class="line">            ps.append(link[<span class="string">&#x27;href&#x27;</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">          </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ps)):  <span class="comment"># 删除链接中的&quot;/blob&quot;，方便后续的下载过程</span></span><br><span class="line">        ps[i] = ps[i].replace(<span class="string">&quot;/blob/&quot;</span>, <span class="string">&quot;/&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> ps, dirs</span><br><span class="line"></span><br><span class="line">path = <span class="string">&quot;/dracula/powershell&quot;</span></span><br><span class="line">ps, dirs = find_ps(path)</span><br><span class="line"><span class="built_in">print</span>(ps, dirs)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[] [<span class="string">&#x27;/dracula/powershell/tree/master/.github&#x27;</span>, <span class="string">&#x27;/dracula/powershell/tree/master/dist&#x27;</span>, <span class="string">&#x27;/dracula/powershell/tree/master/images&#x27;</span>, <span class="string">&#x27;/dracula/powershell/tree/master/theme&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>由于 python 递归过慢，所以采用伪队列的形式对 Github 的仓库目录进行遍历</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ps_in_repo</span>(<span class="params">path</span>):</span>  </span><br><span class="line">    ps, dirs = [], [<span class="string">&quot;/&quot;</span> + path]  <span class="comment"># path - 仓库根目录链接 eg: dracula/powershell</span></span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(dirs) != <span class="number">0</span>:</span><br><span class="line">        cur_ps, cur_dirs = find_ps(dirs[<span class="number">0</span>])</span><br><span class="line">        dirs.remove(dirs[<span class="number">0</span>])  <span class="comment"># 移除已访问过的目录链接</span></span><br><span class="line">        dirs += cur_dirs</span><br><span class="line">        ps += cur_ps</span><br><span class="line">    <span class="keyword">return</span> ps</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(get_ps_in_repo(<span class="string">&quot;/dracula/powershell&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;/dracula/powershell/master/theme/dracula-prompt-configuration.ps1&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>只有一个 ps1 文件，与仓库实际情况相同相同</p>
+<p>由于我们需要下载 100 个以上的脚本文件，所以需要遍历多个仓库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">traverse_repos</span>(<span class="params">ps_num</span>):</span></span><br><span class="line">    page = <span class="number">1</span></span><br><span class="line">    ps = []</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        search_url = <span class="string">&#x27;https://github.com/search?l=PowerShell&amp;q=powershell&amp;type=Repositories&amp;p=&#x27;</span> + <span class="built_in">str</span>(page)</span><br><span class="line">        repos = get_repos(search_url)</span><br><span class="line">        <span class="keyword">for</span> repo <span class="keyword">in</span> repos:</span><br><span class="line">            cur_ps = get_ps_in_repo(repo)</span><br><span class="line">            ps += cur_ps</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;ps.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:  <span class="comment"># 这个过程比较漫长，加个存档</span></span><br><span class="line">                f.write(<span class="built_in">str</span>(ps))</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(ps) &gt; ps_num:</span><br><span class="line">                <span class="keyword">return</span> ps</span><br><span class="line">        page += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">ps = traverse_repos(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p>至此，我们就拿到了 100 个.ps1 文件的链接。这个访问的时间非常长，暂时不知道怎么优化，有解决方案的小伙伴可以留言交流一下。</p>
+<h1 id="多线程下载github文件"><a class="markdownIt-Anchor" href="#多线程下载github文件">#</a> 多线程下载 Github 文件</h1>
+<h2 id="下载单个github文件"><a class="markdownIt-Anchor" href="#下载单个github文件">#</a> 下载单个 github 文件</h2>
+<p>可以通过 <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29t">https://raw.githubusercontent.com</span> 来下载单个 github 文件</p>
+<div style="width:100%;margin:auto"><img data-src="/deobfuscator-crawler/raw-github.png" class=""></div>
+<p>上述文件的链接地址为 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pY2tzSVRCbG9ncy9Qb3dlclNoZWxsL3Jhdy9tYXN0ZXIvMjAxM1Jldml0QnVpbGRpbmdQcmVtaXVtVW5pbnN0YWxsZXIucHMx">https://github.com/MicksITBlogs/PowerShell/raw/master/2013RevitBuildingPremiumUninstaller.ps1</span></p>
+<p>使用  <code>wget</code>  测试能否正常下载</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget  https://github.com/dracula/powershell/raw/master/README.md</span><br></pre></td></tr></table></figure>
+<p>显示跳转到 <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2RyYWN1bGEvcG93ZXJzaGVsbC9tYXN0ZXIvUkVBRE1FLm1k">https://raw.githubusercontent.com/dracula/powershell/master/README.md</span> 进行下载</p>
+<p>所以直接将下载前缀改为 <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29t">https://raw.githubusercontent.com</span></p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span>(<span class="params">url</span>):</span></span><br><span class="line">    raw_base_url = <span class="string">&quot;https://raw.githubusercontent.com&quot;</span></span><br><span class="line">    file_url = raw_base_url + url</span><br><span class="line"></span><br><span class="line">    file_name = file_url.split(<span class="string">&quot;/&quot;</span>)[-<span class="number">1</span>] </span><br><span class="line">    parent_dir = <span class="string">&quot;./&quot;</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(parent_dir + file_name):  <span class="comment"># 重名的话就随机生成字符串</span></span><br><span class="line">        file_name = randomstr(<span class="number">4</span>) + <span class="string">&quot;_&quot;</span> + file_name</span><br><span class="line">    file_name = parent_dir + file_name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = requests.get(file_url)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_name, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:  <span class="comment"># r.content 为二进制信息</span></span><br><span class="line">            f.write(r.content)</span><br><span class="line">    <span class="keyword">except</span> requests.ConnectionError:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">download(<span class="string">&quot;/dracula/powershell/master/screenshot.png&quot;</span>) </span><br></pre></td></tr></table></figure>
+<h2 id="多线程下载"><a class="markdownIt-Anchor" href="#多线程下载">#</a> 多线程下载</h2>
+<p>不复杂，直接上代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool  <span class="comment"># 多线程</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi_process</span>(<span class="params">ps_files</span>):</span></span><br><span class="line">    process_pool = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ps_files:  <span class="comment"># 并发，异步非阻塞模式</span></span><br><span class="line">        process_pool.apply_async(download, args=(i,))  </span><br><span class="line">    process_pool.close()</span><br><span class="line">    process_pool.join()  <span class="comment"># 等待所有结果执行完毕</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>
+  <center>《或者所谓春天》（节选）
+</p>
+<p>
+  <center><i>余光中</i>
+</p><p>
+  <center>所谓童年</center>
+  <center>所谓抗战</center>
+  <center>所谓高二</center>
+  <center>所谓大三</center>
+  <center>所谓蜜月，并非不月蚀</center>
+  <center>所谓贫穷，并非不美丽</center>
+  <center>所谓妻，曾是新娘</center>
+  <center>所谓新娘，曾是女友</center>
+  <center>所谓女友，曾非常害羞</center>
+  <center>所谓不成名以及成名</center>
+  <center>所谓朽以及不朽</center>
+  <center>或者所谓春天</center>
+</p>
+</blockquote>
+
+      <div class="tags">
+          <a href="/tags/crawler/" rel="tag"><i class="ic i-tag"></i> crawler</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="deobfuscator-crawler/" class="item leancloud_visitors" data-flag-title="Github爬虫" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/deobfuscator-crawler/" title="Github爬虫">https://snowroll.github.io/deobfuscator-crawler/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/shell-except/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="shell-except">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>shell-except</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/springboot-skill/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="springboot 零敲碎打">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>springboot 零敲碎打</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90github%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E4%B8%8A%E7%9A%84%E4%BB%93%E5%BA%93%E5%90%8D%E7%A7%B0"><span class="toc-number">1.</span> <span class="toc-text"> 解析 Github 搜索页面，获取页面上的仓库名称</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90github%E6%90%9C%E7%B4%A2%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text"> 分析 Github 搜索请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python-%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9Aurl%E7%9A%84html%E5%B9%B6%E8%BF%9B%E8%A1%8C%E8%A7%A3%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text"> python 获取指定 url 的 html 并进行解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text"> 代码解析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8github%E4%BB%93%E5%BA%93%E4%B8%AD%E9%81%8D%E5%8E%86%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E7%9A%84powershell%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text"> 在 Github 仓库中遍历，找到所有的 powershell 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E5%8D%95%E4%B8%AA%E4%BB%93%E5%BA%93%E7%9A%84html%E6%96%87%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">2.1.</span> <span class="toc-text"> 分析单个仓库的 html 文本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8pyquery%E8%A7%A3%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text"> 使用 pyquery 解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8beautifulsoup%E8%A7%A3%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text"> 使用 BeautifulSoup 解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BDgithub%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text"> 多线程下载 Github 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%8D%95%E4%B8%AAgithub%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text"> 下载单个 github 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.2.</span> <span class="toc-text"> 多线程下载</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li class="active"><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/shell-except/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/springboot-skill/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/codeql/" title="codeql">codeql</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/gitlab/" title="gitlab服务器搭建">gitlab服务器搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-2/" title="powershell多线程超时">powershell多线程超时</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Diary/" title="分类于 Diary">Diary</a>
+</div>
+
+    <span><a href="/book-longdark/" title="长夜难明">长夜难明</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/chatgpt_plus/" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/lambda/" title="lambda">lambda</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/deobfuscator-crawler/" title="Github爬虫">Github爬虫</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/Line-By-Line-2-md/" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Basketball/" title="分类于 Basketball">Basketball</a>
+</div>
+
+    <span><a href="/pick-and-roll/" title="篮球常见配合">篮球常见配合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/codeql-query/" title="CodeQL 查询">CodeQL 查询</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'deobfuscator-crawler/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,756 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="crypto" />
+
+
+<link rel="canonical" href="https://snowroll.github.io/DES/">
+
+
+
+  <title>
+DES加密算法 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">DES加密算法
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-11-17 18:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-11-17T18:00:00+08:00">2024-11-17</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>3.6k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>3 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/DES/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="data-encryption-standard-des"><a class="markdownIt-Anchor" href="#data-encryption-standard-des">#</a> DATA ENCRYPTION STANDARD (DES)</h1>
+<p>DES 是经典的对称加密算法，今天我们结合 DES 的<span class="exturl" data-url="aHR0cHM6Ly9jc3JjLm5pc3QuZ292L2ZpbGVzL3B1YnMvZmlwcy80Ni0zL2ZpbmFsL2RvY3MvZmlwczQ2LTMucGRm">官方设计文档</span>，使用 java 来实现 DES 加密算法。</p>
+<p>DES 算法设计的目标是使用 64 位的控制密钥 Key 来加解密 64 位的块数据。解密实际上为加密的逆过程，两者需使用相同的 Key。</p>
+<h1 id="des加密流程"><a class="markdownIt-Anchor" href="#des加密流程">#</a> DES 加密流程</h1>
+<p>对于一个块数据，首先 1）使用初始置换<strong> IP</strong> 更改块中数据的位置。之后 2）经过一系列基于 key 的复杂运算<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span>，最终 3）使用初始置换的逆<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><msup><mi>P</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">IP^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 来还原块中数据位置。</p>
+<p>解密流程与加密流程相同，利用异或操作的自反性，即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>⊕</mo><mi>f</mi><mo>⊕</mo><mi>f</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x \oplus f \oplus f = x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> 来完成数据块的还原。</p>
+<p>具体流程图如下所示：</p>
+<img data-src="/DES/DES.png" class="">
+<p>具体加密过程中，数据块会被分为左右两部分，即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">L_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">R_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。共进行 16 轮加密变化，每轮只处理<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">L_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的数据，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">R_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 直接作为下一轮的左半边输入<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>R</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">L_{n+1} = R_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。</p>
+<p>从上图我们可以看到 16 轮，共有 16 个不同的密钥<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">K_{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>。这些密钥都是从最初的密钥 key，通过密钥调度算法（key schedule， KS）计算得到的。</p>
+<h1 id="des算法细节及相关代码"><a class="markdownIt-Anchor" href="#des算法细节及相关代码">#</a> DES 算法细节及相关代码</h1>
+<h2 id="初始置换ip"><a class="markdownIt-Anchor" href="#初始置换ip">#</a> 初始置换 IP</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] IP = &#123;</span><br><span class="line">    <span class="number">58</span>, <span class="number">50</span>, <span class="number">42</span>, <span class="number">34</span>, <span class="number">26</span>, <span class="number">18</span>, <span class="number">10</span>, <span class="number">2</span>,</span><br><span class="line">    <span class="number">60</span>, <span class="number">52</span>, <span class="number">44</span>, <span class="number">36</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">12</span>, <span class="number">4</span>,</span><br><span class="line">    <span class="number">62</span>, <span class="number">54</span>, <span class="number">46</span>, <span class="number">38</span>, <span class="number">30</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">6</span>,</span><br><span class="line">    <span class="number">64</span>, <span class="number">56</span>, <span class="number">48</span>, <span class="number">40</span>, <span class="number">32</span>, <span class="number">24</span>, <span class="number">16</span>, <span class="number">8</span>,</span><br><span class="line">    <span class="number">57</span>, <span class="number">49</span>, <span class="number">41</span>, <span class="number">33</span>, <span class="number">25</span>, <span class="number">17</span>,  <span class="number">9</span>, <span class="number">1</span>,</span><br><span class="line">    <span class="number">59</span>, <span class="number">51</span>, <span class="number">43</span>, <span class="number">35</span>, <span class="number">27</span>, <span class="number">19</span>, <span class="number">11</span>, <span class="number">3</span>,</span><br><span class="line">    <span class="number">61</span>, <span class="number">53</span>, <span class="number">45</span>, <span class="number">37</span>, <span class="number">29</span>, <span class="number">21</span>, <span class="number">13</span>, <span class="number">5</span>,</span><br><span class="line">    <span class="number">63</span>, <span class="number">55</span>, <span class="number">47</span>, <span class="number">39</span>, <span class="number">31</span>, <span class="number">23</span>, <span class="number">15</span>, <span class="number">7</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>58，意味着将块数据中第 58 位的数据移到第 1 位。</p>
+<h2 -1="" id="初始置换的逆ip"><a class="markdownIt-Anchor" href="#初始置换的逆ip">#</a> 初始置换的逆IP^</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] FP = &#123;</span><br><span class="line">    <span class="number">40</span>, <span class="number">8</span>, <span class="number">48</span>, <span class="number">16</span>, <span class="number">56</span>, <span class="number">24</span>, <span class="number">64</span>, <span class="number">32</span>,</span><br><span class="line">    <span class="number">39</span>, <span class="number">7</span>, <span class="number">47</span>, <span class="number">15</span>, <span class="number">55</span>, <span class="number">23</span>, <span class="number">63</span>, <span class="number">31</span>,</span><br><span class="line">    <span class="number">38</span>, <span class="number">6</span>, <span class="number">46</span>, <span class="number">14</span>, <span class="number">54</span>, <span class="number">22</span>, <span class="number">62</span>, <span class="number">30</span>,</span><br><span class="line">    <span class="number">37</span>, <span class="number">5</span>, <span class="number">45</span>, <span class="number">13</span>, <span class="number">53</span>, <span class="number">21</span>, <span class="number">61</span>, <span class="number">29</span>,</span><br><span class="line">    <span class="number">36</span>, <span class="number">4</span>, <span class="number">44</span>, <span class="number">12</span>, <span class="number">52</span>, <span class="number">20</span>, <span class="number">60</span>, <span class="number">28</span>,</span><br><span class="line">    <span class="number">35</span>, <span class="number">3</span>, <span class="number">43</span>, <span class="number">11</span>, <span class="number">51</span>, <span class="number">19</span>, <span class="number">59</span>, <span class="number">27</span>,</span><br><span class="line">    <span class="number">34</span>, <span class="number">2</span>, <span class="number">42</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">18</span>, <span class="number">58</span>, <span class="number">26</span>,</span><br><span class="line">    <span class="number">33</span>, <span class="number">1</span>, <span class="number">41</span>,  <span class="number">9</span>, <span class="number">49</span>, <span class="number">17</span>, <span class="number">57</span>, <span class="number">25</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个逆置换中，我们可以看到第 58 个数字为 1，即将第 1 位的数据还原回第 58 位。</p>
+<h2 id="加密计算"><a class="markdownIt-Anchor" href="#加密计算">#</a> 加密计算</h2>
+<p>我们将 64 位的输入分为左右两个连续的 32 位块数据，即<strong> L</strong> 和<strong> R</strong>。输入可表示为<strong> LR</strong>。</p>
+<p>每一轮的迭代输出 L’R’由下面计算过程获得：</p>
+<p><strong>L’ = R</strong></p>
+<p><strong>R’ = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><mi>R</mi><mo separator="true">,</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L \oplus f(R, K)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mclose">)</span></span></span></span></strong></p>
+<p>其中<strong> K</strong> 是一个由 64 位原始 key 选择得到的 48 位块。<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⊕</mo></mrow><annotation encoding="application/x-tex">\oplus</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">⊕</span></span></span></span> 操作指位与位的异或。</p>
+<p>密钥调度算法我们稍后再详细介绍，目前先将整体的加密流程完整顺一遍。</p>
+<h3 id="加密函数fr-k"><a class="markdownIt-Anchor" href="#加密函数fr-k">#</a> 加密函数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>R</mi><mo separator="true">,</mo><mi>K</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(R, K)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mclose">)</span></span></span></span></h3>
+<p>先看完整流程图</p>
+<img data-src="/DES/function.png" class="">
+<ol>
+<li><strong>E</strong> 为扩展变化，将 32 位的<strong> R</strong> 扩展为 48 位，其中多出的 16 位为重复数据。扩展表如下所示</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] E = &#123;</span><br><span class="line">    <span class="number">32</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>, </span><br><span class="line">     <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, </span><br><span class="line">     <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, </span><br><span class="line">    <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>,</span><br><span class="line">    <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, </span><br><span class="line">    <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, </span><br><span class="line">    <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span>, </span><br><span class="line">    <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">32</span>,  <span class="number">1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p><strong>R</strong> 扩展之后与 48 位的轮密钥<strong> K</strong> 做异或操作，得到 48 位的输出。</p>
+</li>
+<li>
+<p>48 位输出，经过 8 个选择函数（select functions），获得 32 位的结果。我们称这些选择函数为 S 盒（Substitution Box）。</p>
+<p><strong>S 盒替换</strong><br>
+用于非线性替换，同时使得输入输出映射更加复杂化，使得加密过程更加复杂和安全。</p>
+<ul>
+<li>输入： 6 位二进制</li>
+<li>输出： 4 位二进制</li>
+<li>S 盒示例，S1</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>行 / 列</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>14</td>
+<td>4</td>
+<td>13</td>
+<td>1</td>
+<td>2</td>
+<td>15</td>
+<td>11</td>
+<td>8</td>
+<td>3</td>
+<td>10</td>
+<td>6</td>
+<td>12</td>
+<td>5</td>
+<td>9</td>
+<td>0</td>
+<td>7</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>0</td>
+<td>15</td>
+<td>7</td>
+<td>4</td>
+<td>14</td>
+<td>2</td>
+<td>13</td>
+<td>1</td>
+<td>10</td>
+<td>6</td>
+<td>12</td>
+<td>11</td>
+<td>9</td>
+<td>5</td>
+<td>3</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>4</td>
+<td>1</td>
+<td>14</td>
+<td>8</td>
+<td>13</td>
+<td>6</td>
+<td>2</td>
+<td>11</td>
+<td>15</td>
+<td>12</td>
+<td>9</td>
+<td>7</td>
+<td>5</td>
+<td>10</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>15</td>
+<td>12</td>
+<td>8</td>
+<td>2</td>
+<td>4</td>
+<td>9</td>
+<td>1</td>
+<td>7</td>
+<td>5</td>
+<td>11</td>
+<td>3</td>
+<td>14</td>
+<td>10</td>
+<td>0</td>
+<td>6</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>替换过程示例：</p>
+<p>假设输入为 6 位二进制串 011011</p>
+<ul>
+<li>
+<p>输入第 1 位和第 6 位，作为行索引 01（即第一行）</p>
+</li>
+<li>
+<p>输入第 2-5 位，作为列索引 1101（即第 13 列）</p>
+</li>
+<li>
+<p>查找 S1 盒，得到<strong> 5</strong>，将其转换为 4 位二进制 0101</p>
+</li>
+<li>
+<p>结果：011011 =&gt; 0101</p>
+</li>
+</ul>
+<p>完整的 S 盒可见<span class="exturl" data-url="aHR0cHM6Ly9jc3JjLm5pc3QuZ292L2ZpbGVzL3B1YnMvZmlwcy80Ni0zL2ZpbmFsL2RvY3MvZmlwczQ2LTMucGRm">官方文档</span>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>P 置换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] P = &#123;</span><br><span class="line">    <span class="number">16</span>,  <span class="number">7</span>, <span class="number">20</span>, <span class="number">21</span>, </span><br><span class="line">    <span class="number">29</span>, <span class="number">12</span>, <span class="number">28</span>, <span class="number">17</span>,</span><br><span class="line">     <span class="number">1</span>, <span class="number">15</span>, <span class="number">23</span>, <span class="number">26</span>, </span><br><span class="line">     <span class="number">5</span>, <span class="number">18</span>, <span class="number">31</span>, <span class="number">10</span>,</span><br><span class="line">     <span class="number">2</span>,  <span class="number">8</span>, <span class="number">24</span>, <span class="number">14</span>, </span><br><span class="line">    <span class="number">32</span>, <span class="number">27</span>,  <span class="number">3</span>,  <span class="number">9</span>,</span><br><span class="line">    <span class="number">19</span>, <span class="number">13</span>, <span class="number">30</span>,  <span class="number">6</span>, </span><br><span class="line">    <span class="number">22</span>, <span class="number">11</span>,  <span class="number">4</span>, <span class="number">25</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>至此，我们可以获得<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo>=</mo><msub><mi>L</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>R</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>K</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_{n} = L_{n-1} \oplus f(R_{n-1}, K_{n})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="密钥调度算法"><a class="markdownIt-Anchor" href="#密钥调度算法">#</a> 密钥调度算法</h3>
+<p>现在，整个算法中我们还缺轮密钥的生成过程。首先，我们先看一下密钥调度算法的整体流程。</p>
+<img data-src="/DES/key-schedule.png" class="">
+<ol>
+<li>
+<p>初始 64 位密钥 KEY 先经过置换选择（PERMUTED CHOICE 1，PC-1）得到 56 位的输出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] PC1 = &#123;</span><br><span class="line">		<span class="number">57</span>, <span class="number">49</span>, <span class="number">41</span>, <span class="number">33</span>, <span class="number">25</span>, <span class="number">17</span>,  <span class="number">9</span>,</span><br><span class="line">		 <span class="number">1</span>, <span class="number">58</span>, <span class="number">50</span>, <span class="number">42</span>, <span class="number">34</span>, <span class="number">26</span>, <span class="number">18</span>,</span><br><span class="line">		<span class="number">10</span>,  <span class="number">2</span>, <span class="number">59</span>, <span class="number">51</span>, <span class="number">43</span>, <span class="number">35</span>, <span class="number">27</span>,</span><br><span class="line">		<span class="number">19</span>, <span class="number">11</span>,  <span class="number">3</span>, <span class="number">60</span>, <span class="number">52</span>, <span class="number">44</span>, <span class="number">36</span>,</span><br><span class="line">		<span class="number">63</span>, <span class="number">55</span>, <span class="number">47</span>, <span class="number">39</span>, <span class="number">31</span>, <span class="number">23</span>, <span class="number">15</span>,</span><br><span class="line">		 <span class="number">7</span>, <span class="number">62</span>, <span class="number">54</span>, <span class="number">46</span>, <span class="number">38</span>, <span class="number">30</span>, <span class="number">22</span>,</span><br><span class="line">		<span class="number">14</span>,  <span class="number">6</span>, <span class="number">61</span>, <span class="number">53</span>, <span class="number">45</span>, <span class="number">37</span>, <span class="number">29</span>,</span><br><span class="line">		<span class="number">21</span>, <span class="number">13</span>,  <span class="number">5</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">12</span>,  <span class="number">4</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li 0="">
+<p>输出分为左右两个 28 位的块<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">C_{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和D_</p>
+</li>
+<li>
+<p 1=""><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">C_{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">D_{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 经过循环左移特定位数后，得到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">C_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和D_</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] SHIFTS = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">C_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">D_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 再经过置换选择（PERMUTED CHOICE 2，PC-2）得到 48 位输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>[] PC2 = &#123;</span><br><span class="line">		<span class="number">14</span>, <span class="number">17</span>, <span class="number">11</span>, <span class="number">24</span>,  <span class="number">1</span>,  <span class="number">5</span>,</span><br><span class="line">		 <span class="number">3</span>, <span class="number">28</span>, <span class="number">15</span>,  <span class="number">6</span>, <span class="number">21</span>, <span class="number">10</span>,</span><br><span class="line">		<span class="number">23</span>, <span class="number">19</span>, <span class="number">12</span>,  <span class="number">4</span>, <span class="number">26</span>,  <span class="number">8</span>,</span><br><span class="line">		<span class="number">16</span>,  <span class="number">7</span>, <span class="number">27</span>, <span class="number">20</span>, <span class="number">13</span>,  <span class="number">2</span>,</span><br><span class="line">		<span class="number">41</span>, <span class="number">52</span>, <span class="number">31</span>, <span class="number">37</span>, <span class="number">47</span>, <span class="number">55</span>,</span><br><span class="line">		<span class="number">30</span>, <span class="number">40</span>, <span class="number">51</span>, <span class="number">45</span>, <span class="number">33</span>, <span class="number">48</span>,</span><br><span class="line">		<span class="number">44</span>, <span class="number">49</span>, <span class="number">39</span>, <span class="number">56</span>, <span class="number">34</span>, <span class="number">53</span>,</span><br><span class="line">		<span class="number">46</span>, <span class="number">42</span>, <span class="number">50</span>, <span class="number">36</span>, <span class="number">29</span>, <span class="number">32</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>循环 16 轮，得到 16 个轮密钥。</p>
+</li>
+</ol>
+<p>至此我们就完成了完整的 DES 加密。</p>
+<h3 id="des解密浅析"><a class="markdownIt-Anchor" href="#des解密浅析">#</a> DES 解密浅析</h3>
+<p>分析加密过程的最后一轮，如下图所示。</p>
+<img data-src="/DES/lastround.png" class="">
+<p><strong>Q: 当我们得到输出 R’L’，我们如何还原回<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>16</mn></msub><msub><mi>L</mi><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">R_{16}L_{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>?</strong></p>
+<p>A：是做<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><msup><mi>C</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">PC^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 的逆变换，也就是做<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">PC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span>。所以解密第一步和加密完全相同。</p>
+<p><strong>Q: 得到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>16</mn></msub><msub><mi>L</mi><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">R_{16}L_{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 后，我们如何还原得到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>15</mn></msub><msub><mi>L</mi><mn>15</mn></msub></mrow><annotation encoding="application/x-tex">R_{15}L_{15}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 呢？</strong></p>
+<p>A: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>15</mn></msub><mo>=</mo><msub><mi>L</mi><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">R_{15} = L_{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>， 所以目前只需要知道<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>15</mn></msub></mrow><annotation encoding="application/x-tex">L_{15}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 即可。由前面介绍的异或自反性，我们可知</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>15</mn></msub><mo>=</mo><msub><mi>L</mi><mn>15</mn></msub><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>R</mi><mn>15</mn></msub><mo separator="true">,</mo><msub><mi>K</mi><mn>16</mn></msub><mo stretchy="false">)</mo><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>R</mi><mn>15</mn></msub><mo separator="true">,</mo><msub><mi>K</mi><mn>16</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L_{15} = L_{15} \oplus f(R_{15}, K_{16}) \oplus f(R_{15}, K_{16})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<p>分析上面式子，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>15</mn></msub><mo>=</mo><msub><mi>L</mi><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">R_{15} = L_{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mn>16</mn></msub></mrow><annotation encoding="application/x-tex">K_{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 这两个部分已知，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>16</mn></msub><mo>=</mo><msub><mi>L</mi><mn>15</mn></msub><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>R</mi><mn>15</mn></msub><mo separator="true">,</mo><msub><mi>K</mi><mn>16</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">R_{16} = L_{15} \oplus f(R_{15}, K_{16})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<p>所以，我们替换一下可得 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mn>15</mn></msub><mo>=</mo><msub><mi>R</mi><mn>16</mn></msub><mo>⊕</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>L</mi><mn>16</mn></msub><mo separator="true">,</mo><msub><mi>K</mi><mn>16</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L_{15} = R_{16} \oplus f(L_{16}, K_{16})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。形式上与加密过程完全一样，只需替换其中 L 和 R。所以我们可以很容易得到解密过程。</p>
+<h2 id="java源代码实现"><a class="markdownIt-Anchor" href="#java源代码实现">#</a> java 源代码实现</h2>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xsL2NyeXB0by9ibG9iL21haW4vc3JjL0RFU0tleUdlbmVyYXRvci5qYXZh">https://github.com/snowroll/crypto/blob/main/src/DESKeyGenerator.java</span></p>
+<p>待开源</p>
+<blockquote>
+<p><strong>心生，种种魔生；心灭，种种魔灭。</strong></p>
+<p>——《西游记》</p>
+</blockquote>
+
+      <div class="tags">
+          <a href="/tags/crypto/" rel="tag"><i class="ic i-tag"></i> crypto</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="DES/" class="item leancloud_visitors" data-flag-title="DES加密算法" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/DES/" title="DES加密算法">https://snowroll.github.io/DES/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/docker-timeout/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="dockerhub连接超时怎么办？">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>dockerhub连接超时怎么办？</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#data-encryption-standard-des"><span class="toc-number">1.</span> <span class="toc-text"> DATA ENCRYPTION STANDARD (DES)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#des%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text"> DES 加密流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#des%E7%AE%97%E6%B3%95%E7%BB%86%E8%8A%82%E5%8F%8A%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text"> DES 算法细节及相关代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E7%BD%AE%E6%8D%A2ip"><span class="toc-number">3.1.</span> <span class="toc-text"> 初始置换 IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E7%BD%AE%E6%8D%A2%E7%9A%84%E9%80%86ip"><span class="toc-number">3.2.</span> <span class="toc-text"> 初始置换的逆IP^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E8%AE%A1%E7%AE%97"><span class="toc-number">3.3.</span> <span class="toc-text"> 加密计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E5%87%BD%E6%95%B0fr-k"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 加密函数f(R,K)f(R, K)f(R,K)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">3.3.2.</span> <span class="toc-text"> 密钥调度算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#des%E8%A7%A3%E5%AF%86%E6%B5%85%E6%9E%90"><span class="toc-number">3.3.3.</span> <span class="toc-text"> DES 解密浅析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E6%BA%90%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.4.</span> <span class="toc-text"> java 源代码实现</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li class="active"><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/gitlab/" title="gitlab服务器搭建">gitlab服务器搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/springboot-skill/" title="springboot 零敲碎打">springboot 零敲碎打</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/security-mail/" title="邮件安全之spf协议">邮件安全之spf协议</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/Line-By-Line-5/" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/lambda/" title="lambda">lambda</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/CodeQL-synatx/" title="CodeQL 语法">CodeQL 语法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/iptables/" title="iptables 简介">iptables 简介</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/linux-commands/" title="linux常用命令汇总">linux常用命令汇总</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/latex_skill/" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/chatgpt_plus/" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'DES/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

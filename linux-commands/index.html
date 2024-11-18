@@ -1,0 +1,732 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="linux,shell" />
+
+
+<link rel="canonical" href="https://snowroll.github.io/linux-commands/">
+
+
+
+  <title>
+linux常用命令汇总 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">linux常用命令汇总
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2022-07-28 10:35:04">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-07-28T10:35:04+08:00">2022-07-28</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>2.4k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>2 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/linux-commands/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <ol>
+<li><strong>强制命令模式执行： <code>:w !sudo tee %</code> </strong></li>
+</ol>
+  <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">w： 表示保存文件</span><br><span class="line">！： 表示执行外部命令</span><br><span class="line">tee： linux命令，这个有点复杂，可以查看linux命令帮助</span><br><span class="line">%： 在执行外部命令时，%会扩展成当前文件名；这个%区别于替换时的%，替换时%的意义是代表整个文件，而不是文件名</span><br><span class="line"></span><br><span class="line"># 只读文件，不修改强制退出</span><br><span class="line">q!</span><br></pre></td></tr></table></figure>
+<p>上述方式非常完美的解决了不能保存只读文件的问题，但毕竟命令还是有些长，为了避免每次输入一长串的命令，可以将它映射为一个简单的命令加到 .vimrc 中：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot; Allow saving of files as sudo when I forgot to start vim using sudo.</span><br><span class="line"> cmap w!! w !sudo tee &gt; /dev/null %</span><br></pre></td></tr></table></figure>
+<p>这样，简单的运行:w!! 即可。命令后半部分 &gt; /dev/null 作用为显式的丢掉标准输出的内容。</p>
+<ol start="2">
+<li><strong>删除大量文件</strong></li>
+</ol>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNjQ3Mjkw">Linux 下删除大量文件效率对比，看谁删的快！</span></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先建立空文件夹blanktest</span></span><br><span class="line">$ time rsync -a --delete blanktest/ <span class="built_in">test</span>/</span><br><span class="line">rsync -a --delete blanktest/ <span class="built_in">test</span>/  0.59s user 7.86s system 51% cpu 16.418 total</span><br><span class="line">16s，很好很强大。</span><br></pre></td></tr></table></figure>
+<ol>
+<li>查看磁盘可用空间</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h  <span class="comment"># 查看磁盘可用空间</span></span><br><span class="line">du -h --max-depth=1  ./  <span class="comment"># 查看当前目录及其目录的文件大小</span></span><br><span class="line">du -sh ./  <span class="comment"># 查看当前目录总大小</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>apt-get 下载失败 <strong><span class="exturl" data-url="aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy8zNjMyMDAvZS11bmFibGUtdG8tY29ycmVjdC1wcm9ibGVtcy15b3UtaGF2ZS1oZWxkLWJyb2tlbi1wYWNrYWdlcw==">E: Unable to correct problems, you have held broken packages</span></strong></li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 改用aptitude，更加方便智能</span></span><br><span class="line">sudo apt-get install aptitude</span><br><span class="line">aptitude get install yourpkg</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>查看进程</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 特定用户的特定进程</span></span><br><span class="line">ps -u root -ef | grep consume </span><br><span class="line"><span class="comment"># kill特定用户的所有进程</span></span><br><span class="line"><span class="comment"># 1. 打印出所有pid，再kill</span></span><br><span class="line">ps -ef | grep ttlsa | awk <span class="string">&#x27;&#123; print $2 &#125;&#x27;</span> | sudo xargs <span class="built_in">kill</span> -9</span><br><span class="line"><span class="comment"># 2. -v --invert-match 显示不包含匹配文本的所有行</span></span><br><span class="line">ps -ef | grep dynamic.sh | grep -v grep | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line"><span class="comment"># 3. pgrep -u参数查出用户的所有pid，然后依次kill</span></span><br><span class="line">pgrep -u ttlsa | sudo xargs <span class="built_in">kill</span> -9</span><br><span class="line"><span class="comment"># 查看进程 -e 显示系统内所有进程信息 -l long 长格式显示 -f full 完整显示</span></span><br><span class="line">ps -elf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>ps -aux 解释</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#   user     pid  cpu mem  vsz   rss  tty  stat start time command</span></span><br><span class="line">&gt;&gt; chaihua+ 26879 0.0 0.0 112820 968 pts/47 S+  15:49 0:00 grep --color=auto chaihuajun</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USER</td>
+<td>进程的拥有者用户名</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>进程的 ID</td>
+</tr>
+<tr>
+<td>%CPU</td>
+<td>该进程使用 CPU 资源的百分比</td>
+</tr>
+<tr>
+<td>%MEM</td>
+<td>该进程使用内存资源的百分比</td>
+</tr>
+<tr>
+<td>VSZ</td>
+<td>进程使用的虚拟内存大小</td>
+</tr>
+<tr>
+<td>RSS</td>
+<td>进程使用的实际内存大小</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>进程所绑定的终端</td>
+</tr>
+<tr>
+<td>STAT</td>
+<td>进程的状态</td>
+</tr>
+<tr>
+<td>START</td>
+<td>进程的启动时间</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>该进程占用 CPU 时间的累计值</td>
+</tr>
+<tr>
+<td>COMMAND</td>
+<td>进程所对应的命令</td>
+</tr>
+</tbody>
+</table>
+<p>其中， <code>-u</code>  参数指定了只显示与当前用户相关的进程，而  <code>x</code>  参数指定了显示所有进程，包括没有控制终端的进程。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>查看内存</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">   </span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>更改文件夹权限及用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -R 递归 修改文件所有者</span></span><br><span class="line">chown [-R] username dirname/filename</span><br><span class="line"><span class="comment"># 修改文件所在群组</span></span><br><span class="line">chgrp [-R] groupname dirname/filename</span><br><span class="line"><span class="comment"># 查看用户组</span></span><br><span class="line">cat /etc/group</span><br><span class="line"><span class="comment"># 创建群组</span></span><br><span class="line">groupadd groupName</span><br><span class="line"><span class="comment"># 将用户添加到指定组 -a append -G 将一个用户添加到多个群组</span></span><br><span class="line">usermod -a -G groupA user</span><br><span class="line"><span class="comment"># 修改访问权限</span></span><br><span class="line"><span class="comment"># ll 查看文件属性</span></span><br></pre></td></tr></table></figure>
+<p>drwxrw-r–</p>
+<ul>
+<li>d 属性</li>
+<li>rwx 所有者权限</li>
+<li>rw- 群组用户权限</li>
+<li>r-- 其他用户权限</li>
+</ul>
+<p><code>chmod</code>  用数字修改文件访问权限，绝对权限</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>数字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>4</td>
+</tr>
+<tr>
+<td>w</td>
+<td>2</td>
+</tr>
+<tr>
+<td>x</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><code>chmod</code>  用字母分配权限，相对权限</p>
+<table>
+<thead>
+<tr>
+<th>字母</th>
+<th>含义</th>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>所有者</td>
+<td>+</td>
+<td>添加权限</td>
+</tr>
+<tr>
+<td>g</td>
+<td>群组用户</td>
+<td>-</td>
+<td>移除权限</td>
+</tr>
+<tr>
+<td>o</td>
+<td>其他用户</td>
+<td>=</td>
+<td>分配权限</td>
+</tr>
+<tr>
+<td>a</td>
+<td>所有用户</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>chmod g+rx file</code>   给群组用户添加可读、可执行权限</p>
+</li>
+<li>
+<p>ssh 配置公私钥</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9seHcxODQ0OTEyNTE0LzI5NDA3Mjc=">参考链接：公私钥配置</span></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成公私钥对 -t 密钥类型 -c 注释文字</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;chaihj15@163.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .ssh下找到id_rsa.pub 上传到服务器</span></span><br><span class="line"><span class="comment"># 追加到服务器ssh认证文件中</span></span><br><span class="line">cat /xxx/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有authorized_keys，创建&amp;赋予600权限</span></span><br><span class="line">touch authorized_keys</span><br><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
+<p>本机创建～/.ssh/config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host            alias            #自定义别名</span><br><span class="line">HostName        114.11.11.110         #替换为你的ssh服务器ip或domain</span><br><span class="line">Port            22             #ssh服务器端口，默认为22</span><br><span class="line">User            root             #ssh服务器用户名</span><br><span class="line">IdentityFile    ~&#x2F;.ssh&#x2F;id_rsa    #第一个步骤生成的公钥文件对应的私钥文件</span><br></pre></td></tr></table></figure>
+<p>更改权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 config</span><br></pre></td></tr></table></figure>
+<p>运行，愉快登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh alias</span><br></pre></td></tr></table></figure>
+<p>有些服务器默认不支持密钥登陆，需要修改 <code>/etc/ssh/sshd_config</code>  配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">去掉<span class="comment">#</span></span><br><span class="line"><span class="comment">#PubkeyAuthentication yes</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>发现本机 ip</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      <div class="tags">
+          <a href="/tags/linux/" rel="tag"><i class="ic i-tag"></i> linux</a>
+          <a href="/tags/shell/" rel="tag"><i class="ic i-tag"></i> shell</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="linux-commands/" class="item leancloud_visitors" data-flag-title="linux常用命令汇总" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/linux-commands/" title="linux常用命令汇总">https://snowroll.github.io/linux-commands/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/gitlab/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="gitlab服务器搭建">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>gitlab服务器搭建</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/reverse-shell/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="反向shell">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>反向shell</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li class="active"><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/gitlab/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/reverse-shell/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/Line-By-Line-1/" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-1/" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/lambda/" title="lambda">lambda</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/DES/" title="DES加密算法">DES加密算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/java-heartbeat/" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/gitlab/" title="gitlab服务器搭建">gitlab服务器搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Diary/" title="分类于 Diary">Diary</a>
+</div>
+
+    <span><a href="/Diary/first-blog/" title="first-blog">first-blog</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/python_ast/" title="Python代码AST解析">Python代码AST解析</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-amsi-trace/" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Diary/" title="分类于 Diary">Diary</a>
+</div>
+
+    <span><a href="/book-longdark/" title="长夜难明">长夜难明</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'linux-commands/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

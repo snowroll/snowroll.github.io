@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://snowroll.github.io</id>
+    <title>SnowRoll Blog • Posts by &#34;diary&#34; category</title>
+    <link href="https://snowroll.github.io" />
+    <updated>2020-09-25T12:30:38.000Z</updated>
+    <category term="python" />
+    <category term="codeql" />
+    <category term="crypto" />
+    <category term="Line By Line" />
+    <category term="paper" />
+    <category term="basketball" />
+    <category term="read" />
+    <category term="chatgpt" />
+    <category term="crawler" />
+    <category term="dockerß" />
+    <category term="email" />
+    <category term="github page" />
+    <category term="gitlab" />
+    <category term="linux" />
+    <category term="heartbeat, java" />
+    <category term="latex" />
+    <category term="shell" />
+    <category term="markdown" />
+    <category term="mongodb" />
+    <category term="photograph" />
+    <category term="powershell" />
+    <category term="reverse-shell" />
+    <category term="mail" />
+    <category term="except" />
+    <category term="java" />
+    <category term="travel" />
+    <entry>
+        <id>https://snowroll.github.io/book-longdark/</id>
+        <title>长夜难明</title>
+        <link rel="alternate" href="https://snowroll.github.io/book-longdark/"/>
+        <content type="html">&lt;p&gt;不定期分享个人的读书书评和一张图书海报。&lt;/p&gt;
+&lt;p&gt;第一期书评： 紫金陈 - 《长夜难明》&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/longdark.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;漫长的等待，以为能等来破晓，却是更深的黑暗。和《黑洞》有些相似，直击社会制度存在的问题，权力集中制虽然办大事上调度更加容易，但不受约束监督的权力总会让部分人走上歧途，带给这个社会深深的伤害。&lt;/p&gt;
+&lt;p&gt;人们总在为未来可能的收益进行投资，巨大的空中楼阁让人们不惜跨越雷池，可笑地在人前谄谀献媚，但最终可能一无所获，甚至身败名裂。&lt;/p&gt;
+&lt;p&gt;黑暗不会自己过去，微弱烛光的不断传递才能让光明逐渐撕开黑暗的大幕。致敬黑暗中不断坚持的人。&lt;/p&gt;
+</content>
+        <category term="read" />
+        <updated>2020-09-25T12:30:38.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://snowroll.github.io/Diary/first-blog/</id>
+        <title>first-blog</title>
+        <link rel="alternate" href="https://snowroll.github.io/Diary/first-blog/"/>
+        <content type="html">&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;自我介绍&lt;/p&gt;
+&lt;p&gt;码农一枚，不定期分享最近做的项目内容，记录点滴。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;abbrlink: b4f55dd8&lt;/p&gt;
+</content>
+        <updated>2020-09-23T03:07:54.000Z</updated>
+    </entry>
+</feed>

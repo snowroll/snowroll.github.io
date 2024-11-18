@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://snowroll.github.io</id>
+    <title>SnowRoll Blog • Posts by &#34;photograph&#34; tag</title>
+    <link href="https://snowroll.github.io" />
+    <updated>2023-07-01T09:06:25.000Z</updated>
+    <category term="python" />
+    <category term="codeql" />
+    <category term="crypto" />
+    <category term="Line By Line" />
+    <category term="paper" />
+    <category term="basketball" />
+    <category term="read" />
+    <category term="chatgpt" />
+    <category term="crawler" />
+    <category term="dockerß" />
+    <category term="email" />
+    <category term="github page" />
+    <category term="gitlab" />
+    <category term="linux" />
+    <category term="heartbeat, java" />
+    <category term="latex" />
+    <category term="shell" />
+    <category term="markdown" />
+    <category term="mongodb" />
+    <category term="photograph" />
+    <category term="powershell" />
+    <category term="reverse-shell" />
+    <category term="mail" />
+    <category term="except" />
+    <category term="java" />
+    <category term="travel" />
+    <entry>
+        <id>https://snowroll.github.io/photo-basic-skill/</id>
+        <title>摄影基础知识 - 光圈</title>
+        <link rel="alternate" href="https://snowroll.github.io/photo-basic-skill/"/>
+        <content type="html">&lt;p&gt;当我们接触摄影时，经常会听到光圈，景深等等专业词汇，这些词汇具体指的是什么呢？让我们一起来学习一下。&lt;/p&gt;
+&lt;h1 id=&#34;什么是光圈&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是光圈&#34;&gt;#&lt;/a&gt; 什么是光圈？&lt;/h1&gt;
+&lt;p&gt;光圈就是用于控制镜头进光多少的装置，如下所示。&lt;/p&gt;
+&lt;img data-src=&#34;aperture.png&#34; style=&#34;width:30%;&#34;&gt;
+&lt;p&gt;从上图我们可以看到目前中间的孔非常小，自然进光量也很少。通过调节光圈，我们就可以控制最终进入镜头的光线数量。&lt;/p&gt;
+&lt;h2 id=&#34;光圈的大小如何衡量&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#光圈的大小如何衡量&#34;&gt;#&lt;/a&gt; 光圈的大小如何衡量？&lt;/h2&gt;
+&lt;p&gt;光圈的大小使用一个 F 值来衡量。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;光圈F值 = 镜头焦距 / 镜头有效口径直径&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当焦距一定时，直径越大，这个比值自然也就越小。也就是我们所说的 F 值越小。如下所示&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;ratio.png&#34; alt=&#34;aperture&#34;&gt;&lt;/p&gt;
+&lt;p&gt;f2.8 代表的光圈比 f4 大。&lt;/p&gt;
+&lt;p&gt;那为什么相临两档光圈之间的的比值是 4/2.8 = 1.42？&lt;/p&gt;
+&lt;p&gt;人的直观想法，相邻两档的光圈进光量应该差一倍。事实也确实如此，那为什么这个 f 值的比值不是 2，而是 1.42 呢？这个就需要重新回看 F 值的公式。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;光圈F值 = 镜头焦距 / 镜头有效口径直径&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其是使用直径计算的，两个圆的面积相差一半，其直径比正好是根号 2，也就是 1.42。&lt;/p&gt;
+&lt;h1 id=&#34;什么是景深&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是景深&#34;&gt;#&lt;/a&gt; 什么是景深？&lt;/h1&gt;
+&lt;p&gt;简而言之，就是能够在相机上清晰成像的景物深度。当你面前 1m-10m 内的物体都可以在相机中清晰成像，1m-10m 这个区间我们就可以认为是景深。&lt;/p&gt;
+&lt;p&gt;想要了解景深，我们首先需要了解一个概念，弥散圆。&lt;/p&gt;
+&lt;img data-src=&#34;Circles_of_confusion_lens_diagram.svg.png&#34; style=&#34;width:50%;&#34;&gt;
+&lt;p&gt;上图镜头的左边是一个点光源，右边是一个成像的平面。当点光源左右移动时，它在右边的像平面上所成的像是不同大小的圆。当这个圆的直径足够小，相片对于我们人眼而言依然清晰。当这个圆再大些，相片就会显得模糊，我们称这个临界的点光源图像为模糊圆。&lt;/p&gt;
+&lt;p&gt;再结合景深的概念，这个点光源在某个范围内移动时，其在右边所成的像对于人眼而言都是清晰的。这个范围我们就可以称为景深。&lt;/p&gt;
+&lt;h1 id=&#34;光圈和景深的关系&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#光圈和景深的关系&#34;&gt;#&lt;/a&gt; 光圈和景深的关系？&lt;/h1&gt;
+&lt;p&gt;先看一个不同光圈大小的景深对比图。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;F-compare.png&#34; alt=&#34;F-compare&#34;&gt;&lt;/p&gt;
+&lt;p&gt;从上图的对比，我们可以很明显看到不同的光圈值会带来不同的景深，小光圈 F7.1 的景深更深，这又是为什么呢？&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;focus.jpeg&#34; alt=&#34;focus&#34;&gt;&lt;/p&gt;
+&lt;p&gt;从弥散圆的介绍我们可知，对于我们人眼而言，允许弥散圆的直径是确定的。如果我们想改变景深，能做的只有改变透镜，而光圈恰恰扮演了这样的角色。由上图可知，小光圈可以带来更深的景深，而大光圈的景深则更浅。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tips： 拍人像而言，我们希望画面的主体都是美美的自己，其他远处的无关景物都应被屏蔽，那么自然应该用大光圈来拍摄。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="photograph" />
+        <updated>2023-07-01T09:06:25.000Z</updated>
+    </entry>
+</feed>

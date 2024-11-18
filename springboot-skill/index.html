@@ -1,0 +1,662 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="java" />
+
+
+<link rel="canonical" href="https://snowroll.github.io/springboot-skill/">
+
+
+
+  <title>
+springboot 零敲碎打 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">springboot 零敲碎打
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2020-11-26 14:46:08">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2020-11-26T14:46:08+08:00">2020-11-26</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>6.4k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>6 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/springboot-skill/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h3 id="内容摘要"><a class="markdownIt-Anchor" href="#内容摘要">#</a> 内容摘要</h3>
+<ul>
+<li>常用的开发结构</li>
+<li>星星点点的小技巧</li>
+</ul>
+<a id="more"></a>
+<h3 id="1-常用开发结构"><a class="markdownIt-Anchor" href="#1-常用开发结构">#</a> 1. 常用开发结构</h3>
+<p>最简单的 Springboot 集成 Spring Data JPA 教程： <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1YW5vbmd5aW5nMTIzL2FydGljbGUvZGV0YWlscy8xMDQyNzkyMzE=">https://blog.csdn.net/huanongying123/article/details/104279231</span></p>
+<ul>
+<li>
+<p>新建 springboot 项目，命名为 demo，springboot 版本为 2.2.9.RELEASE</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.2.9.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在 pom 文件中，导入依赖的 jar 包</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">  	&lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">  	&lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">        &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">        &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在 <code>resources</code>  目录下新建一个配置文件 <code>application.yml</code> ，也可以直接在原有的配置文件 <code>application.properties</code>  中添加相关配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/test</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span>  <span class="comment"># 替换为你本地mysql的用户名和密码</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">show-sql:</span> <span class="literal">true</span>  <span class="comment"># 执行数据库操作时，在控制台打印sql语句</span></span><br><span class="line">    <span class="attr">database-platform:</span> <span class="string">org.hibernate.dialect.MySQL5InnoDBDialect</span>  <span class="comment"># 数据库方言配置</span></span><br><span class="line">    <span class="attr">hibernate:</span></span><br><span class="line">      <span class="attr">ddl-auto:</span> <span class="string">update</span>  <span class="comment"># 第一次加载自动建立表，服务重启会进行表的更新</span></span><br></pre></td></tr></table></figure>
+<p>设置服务器端口号为 8080，这样我们可以通过 http://127.0.0.1:8080 访问我们的程序</p>
+<p>设置数据库 mysql，这里我们需要在本地的 mysql 中创建一个 test 数据库，命令行中操作如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host]<span class="comment"># mysql -u root -p   </span></span><br><span class="line">Enter password:******  <span class="comment"># 登录后进入终端</span></span><br><span class="line"></span><br><span class="line">mysql&gt; create DATABASE <span class="built_in">test</span>;</span><br></pre></td></tr></table></figure>
+<p>设置 jpa 相关参数，jpa 全称 Java Persistence API，定义了一系列标准，让实体类和数据库中的表建立一个对应关系，使我们在 java 中操作实体类就能达到操作数据库中表的效果。 jpa 介绍博客 <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMTAwMjQxNDY=">https://zhuanlan.zhihu.com/p/110024146</span></p>
+</li>
+<li>
+<p>代码分层</p>
+<p>spring boot 框架一般分为 dao、model、controller、service 四层。具体代码结构如下图所示：</p>
+<p><img data-src="/images/java/code-struct.png" alt="image-20201126201354029"></p>
+<p>图中我将 controller 用 rest 代替，仅是个人习惯</p>
+<ul>
+<li>
+<p><strong>dao 层</strong></p>
+<p>负责访问数据库，无需写复杂的 sql 语言，可以根据命名规则定义相应的查询方法。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.demo.model.TestBean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestDao</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">TestBean</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">Optional&lt;TestBean&gt; <span class="title">findById</span><span class="params">(String id)</span></span>;  </span><br><span class="line">    <span class="function">TestBean <span class="title">findByName</span><span class="params">(String Name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TestDao 继承了 <code>JpaRepository</code> ， <code>JpaRepository</code>  可以查找所有实体，执行缓存和数据库同步。 <code>JpaRepository</code>  接口有 2 个泛型参数，第一个为实际存储的类型，第二个参数为主键。</p>
+<p>上例中存储的类型为 <code>TestBean</code> ，而 <code>TestBean</code>  的主键类型为 String。</p>
+<p>根据命名规则我们定义了 <code>findById</code>  方法来查询指定 id 的 <code>TestBean</code> 。</p>
+<p><code>Optional</code>  用来处理可能出现的空指针问题，具体用法见 https://www.jianshu.com/p/c1480145a961</p>
+</li>
+<li>
+<p><strong>model 层</strong></p>
+<p>也称 Entity（实体）层或 pojo（plain old java object）层，一般数据库中一张表对应一个实体类，类属性同表字段一一对应。简单示例如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name = &quot;test_table&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBean</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>@Data</code>  可以提高代码的简介度，省去了代码中大量的 get ()、set ()、toString () 等方法。介绍： <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9jMWVlN2U0MjQ3YmY=">https://www.jianshu.com/p/c1ee7e4247bf</span></p>
+<p><code>@Entity</code>  声明该类为实体类</p>
+<p><code>@Id</code>  标注用于声明一个实体类的属性映射为数据库的主键列</p>
+<p><code>@Id</code>  详解 <span class="exturl" data-url="aHR0cHM6Ly94aWFveGlhbWkuZ2l0Ym9vay5pby9zcHJpbmctYm9vdC9ndWFuLXhpLXhpbmctc2h1LWp1LWt1L3NwcmluZy1kYXRhLWpwYS9pZC1oZS1nZW5lcmF0ZWR2YWx1ZS14aWFuZy1qaWU=">https://xiaoxiami.gitbook.io/spring-boot/guan-xi-xing-shu-ju-ku/spring-data-jpa/id-he-generatedvalue-xiang-jie</span></p>
+<p><code>@Table</code>  将实体类与数据表  <code>test_table</code>  绑定，第一次操作实体类会生成相应的数据表</p>
+</li>
+<li>
+<p><strong>rest 层</strong></p>
+<p>负责前后端交互，接收前端 GET/POST 请求，调用 service 层中的处理函数，接收 service 层的返回数据，并将其返回给前端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.rest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.demo.model.TestBean;</span><br><span class="line"><span class="keyword">import</span> com.example.demo.service.TestServiceImp;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;demo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TestServiceImp testServiceImp;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/add&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">add</span><span class="params">(<span class="meta">@RequestBody</span> TestBean testBean)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> testServiceImp.add(testBean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>声明了一个接口 “demo/add”，实现了添加 testBean 的功能。成功返回 “success”，失败返回 “fail”。可以通过访问 http://127.0.0.1:8080/demo/add 来调用这个接口</p>
+<p><code>@RequestBody</code>  会自动将 post 中的数据包装为 <code>TestBean</code>  形式</p>
+</li>
+<li>
+<p>service 层</p>
+<p>业务逻辑层，调用 dao 层接口，完成基本功能设计</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.demo.dao.TestDao;</span><br><span class="line"><span class="keyword">import</span> com.example.demo.model.TestBean;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServiceImp</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TestDao testDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">add</span><span class="params">(TestBean testBean)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            testDao.save(testBean);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;add testBean error!&quot;</span>, e);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;fail&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>TestDao</code>  操作实体类 <code>TestBean</code> ，进行保存。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>程序使用效果</p>
+<p>运行程序，使用 <code>postman</code>  进行测试，结果如下：</p>
+<p><img data-src="/images/java/postman.png" alt="image-20201126203059798"></p>
+<p>打开 <code>DataGrip</code>  查看数据库中的表，结果如下图：</p>
+<p><img data-src="/images/java/database.png" alt="image-20201126203405965"></p>
+<p>至此，一个极简 springboot 项目就完成了<sup> o</sup>。</p>
+</li>
+</ul>
+<h3 id="2-星星点点的小技巧"><a class="markdownIt-Anchor" href="#2-星星点点的小技巧">#</a> 2. 星星点点的小技巧</h3>
+<ul>
+<li>
+<p>List 和 String 互相转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List =&gt; String</span></span><br><span class="line">List&lt;Integer&gt; intList = Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">System.out.println(intList.toString());</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>使用 List.toString () 功能即可得到 List 的 String 表示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//String =&gt; List</span></span><br><span class="line">String listStr = <span class="string">&quot;[1,2,3]&quot;</span></span><br><span class="line">ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">List&lt;Integer&gt; resList = Arrays.asList(mapper.readValue(listStr, Integer[].class));</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>restful 接口简单获取 POST/GET 请求参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设post 请求  &#123;&quot;id&quot;: &quot;0&quot;&#125;</span></span><br><span class="line"><span class="meta">@PostMapping(value=&quot;/test&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">get</span><span class="params">(<span class="meta">@RequestParam</span> String id)</span></span>&#123;</span><br><span class="line">		System.out.println(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>@RequestParam</code>  注解，当没有指定 value 时，将会接受与变量名相同的请求参数</p>
+<p>接收参数的方式： <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODQ0OTAzODY2NDIxNDc3Mzg0">https://juejin.cn/post/6844903866421477384</span></p>
+</li>
+<li>
+<p>java1.8 Stream 机制</p>
+<p>可以用简单的语句完成一系列操作</p>
+<p>参考博客：  <span class="exturl" data-url="aHR0cHM6Ly9jb2xvYnUuY29tLzIwMTYvMDMvMDIvSmF2YS1TdHJlYW0v">https://colobu.com/2016/03/02/Java-Stream/</span></p>
+<p>使用 Stream 进行数组过滤：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; l = Arrays.asList(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>);</span><br><span class="line">List&lt;Integer&gt; t = l.stream()  <span class="comment">// 生成一个stream对象</span></span><br><span class="line">  	.filter( i -&gt; i % <span class="number">2</span> == <span class="number">0</span>)  <span class="comment">// 返回满足断言(predicate)的数据。</span></span><br><span class="line">  	.collect(Collectors.toList());</span><br><span class="line">System.out.println(t); <span class="comment">//[2, 4, 6, 8]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>依赖全部爆红的解决</p>
+<p>博客： <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ2NzI0NjYvYXJ0aWNsZS9kZXRhaWxzLzgwMjExMzQw">https://blog.csdn.net/u014672466/article/details/80211340</span></p>
+<p>把依赖全部注释，Maven 刷新一下，解开注释，再重新刷新一遍，解决。</p>
+</li>
+</ul>
+<center><b>寻李白</b></center><center>——痛饮狂歌空度日 飞扬跋扈为谁雄</center>
+<center>余光中
+<center>那一双傲慢的靴子至今还落在</center><center>高力士羞愤的手里，人却不见了</center><center>把满地的难民和伤兵</center><center>把胡马和羌笛交践的节奏</center><center>留给杜二去细细的苦吟</center><center>自从那年贺知章眼花了</center><center>认你做谪仙，便更加佯狂</center><center>用一只中了魔咒的小酒壶</center><center>把自己藏起来，连太太也寻不到你</center><center>怨长安城小而壶中天长</center><center>在所有的诗里你都预言</center><center>会突然水遁，或许就在明天</center><center>只扁舟破浪，乱发当风</center><center>——而今，果然你失了踪</center><br>
+<center></center><center>树敌如林，世人皆欲杀</center><center>肝硬化怎杀得死你</center><center>酒入豪肠，七分酿成了月光</center><center>余下的三分啸成剑气</center><center>绣口一吐，就半个盛唐</center><center>从开元到天宝，从洛阳到咸阳</center><center>冠盖满途车骑的嚣闹</center><center>不及千年后你的一首</center><center>水晶绝句轻叩我额头</center><center>当地一弹挑起的回音</center><br>
+<center></center><center>一贬世上已经够落魄</center><center>再放夜郎毋乃太难堪</center><center>至今成谜是你的籍贯</center><center>陇西或山东，青莲乡或碎叶城</center><center>不如归去归哪个故乡</center><center>凡你醉处，你说过，皆非他乡</center><center>失踪，是天才唯一的下场</center><center>身后事，究竟你遁向何处</center><center>猿啼不住，杜二也苦劝你不住</center><center>一回头囚窗下竟已白头</center><center>七仙、五友，都救不了你了</center><center>匡山给雾锁了，无路可入</center><center>仍炉火未纯青，就半粒丹砂</center><center>怎追蹑葛洪袖里的流霞</center><br>
+<center></center><center>樽中月影，或许那才是你故乡</center><center>常得你一生痴痴地仰望</center><center>而无论出门向东哭，向西哭</center><center>长安却早已陷落</center><center>这二十四万里的归程</center><center>也不必惊动大鹏了，也无须招鹤</center><center>只消把酒杯向半空一扔</center><center>便旋成一只霍霍的飞碟</center><center>诡绿的闪光愈转愈快</center><center>接你回传说里去</center><br>
+<center>1980.4.27 </center>
+
+      <div class="tags">
+          <a href="/tags/java/" rel="tag"><i class="ic i-tag"></i> java</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="springboot-skill/" class="item leancloud_visitors" data-flag-title="springboot 零敲碎打" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/springboot-skill/" title="springboot 零敲碎打">https://snowroll.github.io/springboot-skill/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/deobfuscator-crawler/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="Github爬虫">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>Github爬虫</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/powershell-1/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="powershell技巧连载（一） —— 文件相关操作">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>powershell技巧连载（一） —— 文件相关操作</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text"> 内容摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text"> 1. 常用开发结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%9F%E6%98%9F%E7%82%B9%E7%82%B9%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text"> 2. 星星点点的小技巧</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li class="active"><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/deobfuscator-crawler/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/powershell-1/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Basketball/" title="分类于 Basketball">Basketball</a>
+</div>
+
+    <span><a href="/basketball-coach/" title="篮球赛前热身动作">篮球赛前热身动作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/email/" title="邮件发送脚本">邮件发送脚本</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/lambda/" title="lambda">lambda</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/java-heartbeat/" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Light-Magic/" title="分类于 Light Magic">Light Magic</a>
+</div>
+
+    <span><a href="/photo-basic-skill/" title="摄影基础知识 - 光圈">摄影基础知识 - 光圈</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/docker/" title="docker实用操作">docker实用操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/Line-By-Line-5/" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/linux-commands/" title="linux常用命令汇总">linux常用命令汇总</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/git-githubpage/" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/proxychain-mitm/" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'springboot-skill/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

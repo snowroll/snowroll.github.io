@@ -1,0 +1,627 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="https://snowroll.github.io/docker/">
+
+
+
+  <title>
+docker实用操作 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">docker实用操作
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2022-01-03 17:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2022-01-03T17:00:00+08:00">2022-01-03</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>1.4k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>1 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/docker/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="docker简介"><a class="markdownIt-Anchor" href="#docker简介">#</a> docker 简介</h1>
+<p>  为了避免项目移植到其他机器上时，出现环境配置不全，各种安装包缺失的问题。人们提出了 docker 这个工具，顾名思义 docker 的中文含义是码头工人，如下图 docker 的图标所示，我们可以理解为 docker 同时承载了项目源码和其对应的配置环境，利用它我们可以轻松地迁移我们的工程项目，不用重复为项目配置相应的环境。</p>
+<div style="margin:auto"><img data-src="/docker/logo.png" class=""></div>
+<p>  相较于庞大，内存占用率高的虚拟机而言，docker 更加轻量级。docker 是 linux 容器的一种封装，提供了简单易用的容器使用接口。Linux 容器是对进程的一种封装，容器内的进程接触到的所有资源都是虚拟的，实现了与底层系统的隔离。</p>
+<h1 id="镜像和容器的区别"><a class="markdownIt-Anchor" href="#镜像和容器的区别">#</a> 镜像和容器的区别</h1>
+<p>  我在刚开始接触 docker 时，经常会搞混镜像（<strong>image</strong>）和容器（<strong>container</strong>）。简单而言，可以将镜像理解为容器的模版，我们通过复制镜像生成 n 个完全相同的容器，然后在容器中进行操作。每一个容器通过定制化的配置后都可以将其自身保存为一个新的镜像，上传发布到网上的仓库。</p>
+<h1 id="docker实用操作"><a class="markdownIt-Anchor" href="#docker实用操作">#</a> docker 实用操作</h1>
+<ul>
+<li>
+<p>拉取镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [image_name]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>交互式运行，通过镜像启动一个容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name=[container_name] [image_name] </span><br></pre></td></tr></table></figure>
+<p>参数：</p>
+<p><code>-i</code> ： 交互式操作</p>
+<p><code>-t</code> ：终端</p>
+<p><code>--name</code> ：指定容器名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name=[container_name] [image_name]</span><br></pre></td></tr></table></figure>
+<p><code>-d</code> ：默认不进入容器</p>
+</li>
+<li>
+<p>查看 docker 信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<p>其中 <code>Docker Root Dir</code>  是 docker 的根目录，所有容器都在该目录下的 <code>containers</code>  下</p>
+</li>
+<li>
+<p>查看容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看活跃状态的容器</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有状态的容器</span></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器信息</span></span><br><span class="line">docker inspect [docker-name]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器日志</span></span><br><span class="line">docker logs [docker-name]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>停止容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop [containerID]</span><br></pre></td></tr></table></figure>
+<p>停止的容器可以通过 restart 重启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart [containerID]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>进入容器</p>
+<p>使用 <code>-d</code>  参数后，容器启动后自动进入后台，此时想进入容器有两种办法</p>
+<ul>
+<li><code>docker attach</code></li>
+<li><code>docker exec</code> ： 这种方法退出时，只会退出容器终端，不会导致容器停止</li>
+</ul>
+</li>
+<li>
+<p>退出容器但不关闭</p>
+<ul>
+<li><code>ctrl + p + q</code></li>
+</ul>
+</li>
+<li>
+<p>手动终止容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill [containerID]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>删除容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm [containerID]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从宿主机向容器传输文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp /host/file [container_name]:/home/dir</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>容器将本机目录 <code>/test</code>  挂载在容器的 <code>/home</code>  下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /test:/home [image_name] </span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>容器改名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rename origin_name new_name</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在容器内对宿主机上目录进行操作时，出现 &quot;Permission denied&quot; 的解决办法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --privileged=true -v /test:/home [image_name] /bin/bash</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p align="center">If Winter comes, can Spring be far behind?</p>
+<p align="right">——Percy Bysshe Shelley 《Ode to the West wind》 </p>
+</blockquote>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="docker/" class="item leancloud_visitors" data-flag-title="docker实用操作" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/docker/" title="docker实用操作">https://snowroll.github.io/docker/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/powershell-1/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="powershell技巧连载（一） —— 文件相关操作">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>powershell技巧连载（一） —— 文件相关操作</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/powershell-2/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="powershell多线程超时">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>powershell多线程超时</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text"> docker 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text"> 镜像和容器的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E5%AE%9E%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text"> docker 实用操作</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li class="active"><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/powershell-1/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/powershell-2/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-1/" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/CodeQL-synatx/" title="CodeQL 语法">CodeQL 语法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/proxychain-mitm/" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/DES/" title="DES加密算法">DES加密算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/java-heartbeat/" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Light-Magic/" title="分类于 Light Magic">Light Magic</a>
+</div>
+
+    <span><a href="/photo-basic-skill/" title="摄影基础知识 - 光圈">摄影基础知识 - 光圈</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Basketball/" title="分类于 Basketball">Basketball</a>
+</div>
+
+    <span><a href="/basketball-warmup/" title="篮球训练之热身篇">篮球训练之热身篇</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/codeql-query/" title="CodeQL 查询">CodeQL 查询</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-2/" title="powershell多线程超时">powershell多线程超时</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/python_ast/" title="Python代码AST解析">Python代码AST解析</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'docker/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://snowroll.github.io</id>
+    <title>SnowRoll Blog • Posts by &#34;except&#34; tag</title>
+    <link href="https://snowroll.github.io" />
+    <updated>2020-10-21T14:57:55.000Z</updated>
+    <category term="python" />
+    <category term="codeql" />
+    <category term="crypto" />
+    <category term="Line By Line" />
+    <category term="paper" />
+    <category term="basketball" />
+    <category term="read" />
+    <category term="chatgpt" />
+    <category term="crawler" />
+    <category term="dockerß" />
+    <category term="email" />
+    <category term="github page" />
+    <category term="gitlab" />
+    <category term="linux" />
+    <category term="heartbeat, java" />
+    <category term="latex" />
+    <category term="shell" />
+    <category term="markdown" />
+    <category term="mongodb" />
+    <category term="photograph" />
+    <category term="powershell" />
+    <category term="reverse-shell" />
+    <category term="mail" />
+    <category term="except" />
+    <category term="java" />
+    <category term="travel" />
+    <entry>
+        <id>https://snowroll.github.io/shell-except/</id>
+        <title>shell-except</title>
+        <link rel="alternate" href="https://snowroll.github.io/shell-except/"/>
+        <content type="html">&lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;except 简介&lt;/li&gt;
+&lt;li&gt;利用 except，向服务器传输文件 &amp;amp; ssh 登录服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h4 id=&#34;1-except简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-except简介&#34;&gt;#&lt;/a&gt; 1. except 简介&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 的安装&lt;/p&gt;
+&lt;p&gt;Mac:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;brew install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Linux:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;apt install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;压缩包安装&lt;/p&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85NDJiODAxNzU3ZGU=&#34;&gt;https://www.jianshu.com/p/942b801757de&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简介&lt;/p&gt;
+&lt;p&gt;shell 脚本功能非常强大，可以帮助我们自动完成很多繁琐的工作。但是对于登录服务器这种需要自动交互的过程，shell 就有些力不从心，except 可以完美解决这一需求。&lt;/p&gt;
+&lt;p&gt;参考博客： Linux expect 用法 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMHhjYWZlZGFkZHkvcC83MTQ3MDUxLmh0bWw=&#34;&gt;https://www.cnblogs.com/0xcafedaddy/p/7147051.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect 脚本使用 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2VpbnZlcm5lLmdpdGh1Yi5pby9wb3N0LzIwMTkvMDEvZXhwZWN0LWNvbW1hbmQuaHRtbCMlRTUlODUlQjMlRTklOTQlQUUlRTUlOTElQkQlRTQlQkIlQTQ=&#34;&gt;http://einverne.github.io/post/2019/01/expect-command.html# 关键命令&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect - 自动交互脚本 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3hzdGFyY2QuZ2l0aHViLmlvL3dpa2kvc2hlbGwvZXhwZWN0Lmh0bWw=&#34;&gt;http://xstarcd.github.io/wiki/shell/expect.html&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;四个重要的命令&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;spawn&lt;/td&gt;
+&lt;td&gt;启动新的进程，输出可以被 expect 所捕获&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;expect&lt;/td&gt;
+&lt;td&gt;从进程接收字符串，期望获得字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;send&lt;/td&gt;
+&lt;td&gt;向进程发送字符串，模拟用户输入，注意添加 &lt;code&gt;\r&lt;/code&gt;  回车&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;interact&lt;/td&gt;
+&lt;td&gt;允许用户与进程交互&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简单示例  &lt;code&gt;demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/except&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; timeout 10;  &lt;span class=&#34;comment&#34;&gt;# 设置程序超时时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spawn ssh root@10.10.10.11  &lt;span class=&#34;comment&#34;&gt;# ssh连接服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;expect &lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 判断进程输出中是否有&amp;quot;password&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;send &lt;span class=&#34;string&#34;&gt;&amp;quot;your_password\r&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 将密码输入 \r是回车 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;interact  &lt;span class=&#34;comment&#34;&gt;# 保持与服务器端的连接&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行方法:  &lt;code&gt;except demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;\r \n 的区别： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8yMzgwNGIwYjAzYzg=&#34;&gt;https://www.jianshu.com/p/23804b0b03c8&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;#&lt;/a&gt; 2. 向服务器传输文件 &amp;amp; ssh 登录服务器自动化脚本&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 与 shell 脚本结合&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/expect&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 自动上传文件到服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_scp&lt;/span&gt;&lt;/span&gt;()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;# -c: 执行脚本前先执行的命令&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn scp yourfile root@10.10.10.10:/target_dir/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;yes/no\&amp;quot; &amp;#123; send \&amp;quot;yes\n\&amp;quot;; exp_continue&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;password\&amp;quot; &amp;#123; send \&amp;quot;yourpasswd\n\&amp;quot; &amp;#125;  # \n 和 \r 均可以&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# ssh登录服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;/span&gt;() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn ssh root@10.10.10.10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;password\&amp;quot; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            send \&amp;quot;yourpassword\r\&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;]#\&amp;quot; &amp;#123; send \&amp;quot;pwd\n\&amp;quot; &amp;#125; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_scp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;点绛唇·途中逢管倅
+&lt;center&gt; 憔悴天涯，故人相遇情如故。别离何遽，忍唱阳关句！&lt;/center&gt;
+&lt;center&gt;我是行人，更送行人去。愁无据。寒蝉鸣处，回首斜阳暮。&lt;/center&gt;
+</content>
+        <category term="linux" />
+        <category term="shell" />
+        <category term="except" />
+        <updated>2020-10-21T14:57:55.000Z</updated>
+    </entry>
+</feed>

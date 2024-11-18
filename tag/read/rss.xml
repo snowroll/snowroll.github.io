@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;read&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 25 Sep 2020 12:30:38 +0000</pubDate>
+        <lastBuildDate>Fri, 25 Sep 2020 12:30:38 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/book-longdark/</guid>
+            <title>长夜难明</title>
+            <link>https://snowroll.github.io/book-longdark/</link>
+            <category>read</category>
+            <pubDate>Fri, 25 Sep 2020 12:30:38 +0000</pubDate>
+            <description><![CDATA[ &lt;p&gt;不定期分享个人的读书书评和一张图书海报。&lt;/p&gt;
+&lt;p&gt;第一期书评： 紫金陈 - 《长夜难明》&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/longdark.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;漫长的等待，以为能等来破晓，却是更深的黑暗。和《黑洞》有些相似，直击社会制度存在的问题，权力集中制虽然办大事上调度更加容易，但不受约束监督的权力总会让部分人走上歧途，带给这个社会深深的伤害。&lt;/p&gt;
+&lt;p&gt;人们总在为未来可能的收益进行投资，巨大的空中楼阁让人们不惜跨越雷池，可笑地在人前谄谀献媚，但最终可能一无所获，甚至身败名裂。&lt;/p&gt;
+&lt;p&gt;黑暗不会自己过去，微弱烛光的不断传递才能让光明逐渐撕开黑暗的大幕。致敬黑暗中不断坚持的人。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

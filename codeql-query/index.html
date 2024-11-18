@@ -1,0 +1,963 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="SnowRoll Blog" href="https://snowroll.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="SnowRoll Blog" href="https://snowroll.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="SnowRoll Blog" href="https://snowroll.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.sourcegcdn.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="codeql" />
+
+
+<link rel="canonical" href="https://snowroll.github.io/codeql-query/">
+
+
+
+  <title>
+CodeQL 查询 - Computer Science |
+SnowRoll = SnowRoll Blog = 人生若只如初见，何事秋风悲画扇</title>
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">CodeQL 查询
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-07-31 08:00:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-07-31T08:00:00+08:00">2023-07-31</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>9k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>8 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <!-- 引入 KaTeX 样式表 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+<!-- 引入 KaTeX 脚本 -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">SnowRoll</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+          <li class="item" data-background-image="https://s1.ax1x.com/2023/07/01/pCBRf5F.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Computer-Science/" itemprop="item" rel="index" title="分类于 Computer Science"><span itemprop="name">Computer Science</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://snowroll.github.io/codeql-query/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.png">
+    <meta itemprop="name" content="chaihj15">
+    <meta itemprop="description" content="人生若只如初见，何事秋风悲画扇, 分享经验，记录生活">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="SnowRoll Blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>codeql 查询 sink-source</p>
+<p>快照包含源文件和数据库，  ql 代码查询的是数据库中的数据，然后将符合要求的结果映射到对应的源代码中</p>
+<p>核心思想 —— 将代码作为数据处理</p>
+<p>QL 谓词 —— 微型查询，表征数据之间的关系。已有的谓词保存在 QL 库中 .qll，可以通过 <code>import tutorial</code>  方式导入 tutorial 库</p>
+<h1 id="谓词定义"><a class="markdownIt-Anchor" href="#谓词定义">#</a> 谓词定义</h1>
+<p>谓词描述 —— 给定参数和元组集合的关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">predicate isCountry(string country)&#123;</span><br><span class="line">  country &#x3D; &quot;Germany&quot;</span><br><span class="line">  or</span><br><span class="line">  country &#x3D; &quot;Belgium&quot;</span><br><span class="line">  or</span><br><span class="line">  country &#x3D; &quot;France&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>谓词定义解析</p>
+<ul>
+<li>predicate 关键字，适用于没有返回结果的谓词  或者返回结果类型，例如 int</li>
+<li>isCountry 谓词名称，以小写字母开头</li>
+<li>string country  谓词参数，多个以逗号间隔</li>
+<li>{…}  谓词主体，逻辑表达式</li>
+</ul>
+<p><strong>带有返回结果的谓词</strong></p>
+<p>引入一个特殊变量 result</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int getSucessor(int i)&#123;</span><br><span class="line">  <span class="keyword">result</span> <span class="operator">=</span> i<span class="operator">+</span><span class="number">1</span> <span class="keyword">and</span> i <span class="keyword">in</span> [<span class="number">1.</span><span class="number">.9</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个参数都带一个返回值（或者一个也不带）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string getANeighbor(string country) &#123;</span><br><span class="line">  country = <span class="string">&quot;France&quot;</span> <span class="keyword">and</span> result = <span class="string">&quot;Belgium&quot;</span></span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country = <span class="string">&quot;France&quot;</span> <span class="keyword">and</span> result = <span class="string">&quot;Germany&quot;</span></span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country = <span class="string">&quot;Germany&quot;</span> <span class="keyword">and</span> result = <span class="string">&quot;Austria&quot;</span></span><br><span class="line">  <span class="keyword">or</span> </span><br><span class="line">  country = <span class="string">&quot;Germany&quot;</span> <span class="keyword">and</span> result = <span class="string">&quot;Belgium&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>getANeighbor (“Germany”) 返回结果 “Austria&quot;和&quot;Belgium”</li>
+<li>getANeighbor (“Belgium”) 无返回结果</li>
+</ul>
+<p><strong>递归谓词</strong></p>
+<p>谓词的返回结果直接或间接依赖于自身</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">string getANeighbor(string country) &#123;</span><br><span class="line">  country <span class="operator">=</span> &quot;France&quot; <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> &quot;Belgium&quot;</span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country <span class="operator">=</span> &quot;France&quot; <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> &quot;Germany&quot;</span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country <span class="operator">=</span> &quot;Germany&quot; <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> &quot;Austria&quot;</span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country <span class="operator">=</span> &quot;Germany&quot; <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> &quot;Belgium&quot;</span><br><span class="line">  <span class="keyword">or</span></span><br><span class="line">  country <span class="operator">=</span> getANeighbor(<span class="keyword">result</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>getANeighbor (“Belgium”)  返回 “France&quot;和&quot;Germany”</p>
+<p>简单解析，当前 4 个逻辑表达式都不正确时，判断 country = getANeighbor (result)，给定的参数时 &quot;Belgium&quot;，所以这里逻辑表达式成立的条件是 country=“Belgium”=getANeighbor (result)。</p>
+<p>getANeighbor () 返回值是 &quot;Belgium&quot;, 其成立条件是传入的参数为 &quot;France&quot; 或者 &quot;Germany&quot;，这里用 result 来作为 getANeighbor () 的参数，所以最终的返回结果为 &quot;France&quot; 和 &quot;Germany&quot;</p>
+</li>
+</ul>
+<p>将线索转换为查询语句</p>
+<p>查询某个不秃头的人</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Person t</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">exists</span>(string c <span class="operator">|</span> t.getHairColor()<span class="operator">=</span>c)</span><br><span class="line"><span class="keyword">select</span> t</span><br></pre></td></tr></table></figure>
+<ul>
+<li>exists 关键字，是否存在</li>
+<li>string c 临时变量</li>
+<li>t.getHairColor () = c 逻辑表达式</li>
+</ul>
+<h1 id="类定义"><a class="markdownIt-Anchor" href="#类定义">#</a> 类定义</h1>
+<p>自定义类，来找出考察对象，即住在村南的居民</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">perdicate southern(Person p) &#123;</span><br><span class="line">  p.getLocation() <span class="operator">=</span> &quot;south&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Southerner extends Person &#123;</span><br><span class="line">  Southerner() &#123;southern(this)&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>QL 中类用来表示一个逻辑属性 —— 当一个值满足该属性时，它是类的成员。这意味一个值可以属于多个类，例如 3 既属于 &quot;整数&quot; 类，也属于 &quot;奇数&quot; 类</p>
+<p>上述类定义中， <code>southern(this)</code>  定义了该类的逻辑属性。表达式中使用了特殊变量 this，表示一个 Person 类型的值。如果一个 Person 满足 southern (this)，那他属于 Southerner 类，即住在村南的居民。</p>
+<p>当列举村南的居民，代码如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Southerner s</span><br><span class="line"><span class="keyword">select</span> s</span><br></pre></td></tr></table></figure>
+<p>部分谓词以参数传递变量，例如 southern§，部分谓词跟着某些变量后面，例如 p.getAge ()。这是因为 getAge () 是定义在类 Person 中的一个成员谓词</p>
+<p>例如，王冠丢失后，村落实施了交通管制，孩子不允许离开居住地。即意味着谓词 isAllowedIn (string region) 不适用所有村名和所有区域，所以需要对孩子重载原来的谓词 isAllowedIn (string region)。</p>
+<p>重新定义一个类 Child，表示所有 10 岁以下的村民，重新定义谓词 isAllowdIn (string region)，表示孩子只能在自己的地盘走动，表达式为 region = this.getLocation ()</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Child extends Person &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 特征谓词 */</span></span><br><span class="line">  Child() &#123;this.getAge() &lt; 10&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* 成员谓词 */</span></span><br><span class="line">  override predicate isAllowedIn(string region) &#123;</span><br><span class="line">    region <span class="operator">=</span> this.getLocation()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>操作的传递闭包</strong></p>
+<p>同一个操作被应用多次，被称为操作的传递闭包。在处理传递闭包时，有两个特殊的符号极其有用，即 + 和 *</p>
+<ul>
+<li><code>parentOf+(p)</code> ，对变量 p 应用一次或多次谓词</li>
+<li><code>parentOf*(p)</code> ，对变量 p 应用零次或者多次谓词 parentOf ()</li>
+</ul>
+<h1 id="深入了解递归"><a class="markdownIt-Anchor" href="#深入了解递归">#</a> 深入了解递归</h1>
+<p>QL 语言中，如果谓词直接或者间接地调用了自身，称其为递归型谓词</p>
+<p>为了求解递归谓词的返回值的集合，QL 编译器需要寻找递归的不动点，从空集开始，重复应用谓词，直到集合不发生变化，此时集合称为最小不动点。</p>
+<p>求 0-100 之间的整数递归型谓词</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int getANumber() &#123;</span><br><span class="line">  <span class="keyword">result</span> <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">or</span> </span><br><span class="line">  <span class="keyword">result</span> <span class="operator">&lt;=</span> <span class="number">100</span> <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> getANumber() <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> getANumber()</span><br></pre></td></tr></table></figure>
+<p>求解该谓词，会得到 0-100 的集合</p>
+<p><strong>相互递归</strong></p>
+<p>递归型谓词除了调用自身外，也可以互相调用，形成一个循环</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int getAEven() &#123;</span><br><span class="line">  <span class="keyword">result</span> <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">or</span> </span><br><span class="line">  <span class="keyword">result</span> <span class="operator">&lt;=</span> <span class="number">100</span> <span class="keyword">and</span> <span class="keyword">result</span> <span class="operator">=</span> getAnOdd() <span class="operator">+</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int getAnOdd() &#123;</span><br><span class="line">  <span class="keyword">result</span> <span class="operator">=</span> getAEven</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> getAnEven()</span><br></pre></td></tr></table></figure>
+<h1 id="python"><a class="markdownIt-Anchor" href="#python">#</a> Python</h1>
+<p><strong>变量</strong></p>
+<p>Python 源代码中的变量可用 CodeQL 库中的 Variable 类来表示，该类有两个子类，LocalVariable 表示函数和类级别的变量，子类 GlobalVariable 用于表示模块级别的变量</p>
+<p><strong>控制流分析</strong></p>
+<p>每个作用域类（Class，Function，Module）都包含了一个由 ControlFlowNode 构成的图，每个作用域都有一个入口点和至少一个的出口点。为了提高分析控制流和数据流的速度，控制流节点会被分组为基本构造块。一个基本块就是一个没有任何分支的代码序列。</p>
+<p>AST 节点和控制流节点存在一对多的关系。</p>
+<p><strong>查找针对特定函数的调用</strong></p>
+<p>通过 Call 和 Name 两个类，查找对函数 eval 的调用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> <span class="keyword">Call</span> <span class="keyword">call</span>, Name name</span><br><span class="line"><span class="keyword">where</span> call.getFunc() <span class="operator">=</span> name <span class="keyword">and</span> name.getId() <span class="operator">=</span> &quot;eval&quot;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">call</span>, &quot;call to &#x27;eval&#x27;&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="语句和表达式分析"><a class="markdownIt-Anchor" href="#语句和表达式分析">#</a> 语句和表达式分析</h2>
+<p><strong>语句</strong></p>
+<p>对于 Python 中各种类型的语句，CodeQL 都提供了相应的类加以表示</p>
+<p>Stmt 类 —— 语句</p>
+<ul>
+<li>
+<p>Assert 类 —— assert 语句</p>
+</li>
+<li>
+<p>Assign 类</p>
+</li>
+<li>
+<p>AssignStmt 类 —— 赋值语句，如 x = y</p>
+</li>
+<li>
+<p>ClassDef —— 类定义语句</p>
+</li>
+<li>
+<p>FunctionDef —— 函数定义语句</p>
+</li>
+<li>
+<p>AugAssign —— 增量赋值 (augmented assignment) 语句，如 x += y</p>
+</li>
+<li>
+<p>Break 类 —— break 语句</p>
+</li>
+<li>
+<p>Continue 类 —— continue 语句</p>
+</li>
+<li>
+<p>Delete 类 —— del 语句</p>
+</li>
+<li>
+<p>ExceptStmt 类 —— try 语句的 except 部分</p>
+</li>
+<li>
+<p>Exec 类 —— exec 语句</p>
+</li>
+<li>
+<p>For 类 —— for 语句</p>
+</li>
+<li>
+<p>Global 类 —— global 语句</p>
+</li>
+<li>
+<p>If 类 —— if 语句</p>
+</li>
+<li>
+<p>ImportStar 类 —— from xxx import * 语句</p>
+</li>
+<li>
+<p>Import 类 —— 其他类型的 import 语句</p>
+</li>
+<li>
+<p>Nonlocal 类 —— nonlocal 语句</p>
+</li>
+<li>
+<p>Pass 类 —— pass 语句</p>
+</li>
+<li>
+<p>Print 类 —— print 语句 (仅限于 python 2 版本)</p>
+</li>
+<li>
+<p>Raise 类 —— raise 语句</p>
+</li>
+<li>
+<p>Return 类 —— return 语句</p>
+</li>
+<li>
+<p>Try 类 —— try 语句</p>
+</li>
+<li>
+<p>While 类 —— while 语句</p>
+</li>
+<li>
+<p>With 类 —— with 语句</p>
+</li>
+</ul>
+<p><strong>表达式</strong></p>
+<p>对于 Python 中各种类型的表达式，CodeQL 都提供了相应的类来加以表示。</p>
+<p>Expr 类 —— 表达式</p>
+<ul>
+<li>
+<p>Attribute —— 属性，例如 obj.attr</p>
+</li>
+<li>
+<p>BinaryExpr —— 二进制运算，例如 x+y</p>
+</li>
+<li>
+<p>BoolExpr —— Short circuit logical operations， 例如 x and y, x or y</p>
+</li>
+<li>
+<p>Bytes —— 字节，例如 b&quot;x&quot;</p>
+</li>
+<li>
+<p>Call —— 函数调用，例如 f (arg)</p>
+</li>
+<li>
+<p>Compare —— 比较运算，0&lt;x&lt;10</p>
+</li>
+<li A:="" 2="">
+<p>Dict —— 字典，例如</p>
+</li>
+<li k:="" v="" for="" css-module=".">
+<p>DictComp 类 —— 字典推导式，如</p>
+</li>
+<li>
+<p>Ellipsis 类 —— 省略号表达式，如…</p>
+</li>
+<li>
+<p>GeneratorExp 类 —— 生成器表达式</p>
+</li>
+<li>
+<p>IfExp 类 —— 条件表达式，如 x if cond else y</p>
+</li>
+<li>
+<p>ImportExpr 类 —— 表示导入模块的表达式</p>
+</li>
+<li>
+<p>ImportMember 类 —— 表示从模块导入某些成员的表达式（from xxx import * 语句的一部分）</p>
+</li>
+<li>
+<p>Lambda 类 —— Lambda 表达式</p>
+</li>
+<li>
+<p>List 类 —— 列表，如 [‘a’, ‘b’]</p>
+</li>
+<li>
+<p>ListComp 类 —— 列表推导式，如 [x for …]</p>
+</li>
+<li>
+<p>Name 类 —— 对变量 var 的引用</p>
+</li>
+<li>
+<p>Num 类 —— 数字，如 3 或 4.2</p>
+</li>
+<li>
+<p>Floatliteral</p>
+</li>
+<li>
+<p>ImaginaryLiteral 类</p>
+</li>
+<li>
+<p>IntegerLiteral 类</p>
+</li>
+<li>
+<p>Repr 类 —— 反引号表达</p>
+</li>
+<li a,="" b="">
+<p>Set 类 —— 集合，如</p>
+</li>
+<li x="" for="" css-module=".">
+<p>SetComp 类 —— 集合推导式，如</p>
+</li>
+<li>
+<p>Slice 类 —— 切片；如表达式 seq [0:1] 中的 0:1</p>
+</li>
+<li>
+<p>Starred 类 —— 星号表达式，如 y, *x = 1,2,3（仅限于 Python 3）</p>
+</li>
+<li>
+<p>StrConst 类 —— 字符串。 在 Python2 中，可以是字节或 Unicode 字符。 在 Python3 中，只能是 Unicode 字符。</p>
+</li>
+<li>
+<p>Subscript 类 —— 下标运算，如 seq [index]</p>
+</li>
+<li>
+<p>UnaryExpr 类 —— 一元运算，如 - x</p>
+</li>
+<li>
+<p>Unicode 类 —— Unicode 字符，如 u&quot;x&quot; 或（Python 3 中的）“x”</p>
+</li>
+<li>
+<p>Yield 类 —— yield 表达式</p>
+</li>
+<li>
+<p>YieldFrom 类 —— yield from 表达式（Python 3.3+)</p>
+</li>
+</ul>
+<h2 id="控制流分析"><a class="markdownIt-Anchor" href="#控制流分析">#</a> 控制流分析</h2>
+<p><strong>ControlFlowNode 类</strong></p>
+<p>抽象语法树节点和控制流节点存在一对多的关系，每个语法元素，即 AstNode 类，可以映射到零个、一个或多个 ControlFlowNode 类，每个 ControlFlowNode 类只映射到一个 AstNode</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    might_raise()</span><br><span class="line">    <span class="keyword">if</span> cond:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    close_resource()</span><br></pre></td></tr></table></figure>
+<p>访问 close_resource () 的路径有三条，一正常执行，二引发 might_raise，三 break</p>
+<p>查找不可达语句，每条通过 AstNode 的路径都有一个 ControlFlowNode，所以所有不可达的 AstNode 都没有通过 ControlFlowNode 的路径，因此没有 ControlFlowNode 的 AstNode 是不可达的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> AstNode node</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">not</span> <span class="keyword">exists</span>(node.getAFlowNode())</span><br><span class="line"><span class="keyword">select</span> node</span><br></pre></td></tr></table></figure>
+<p>执行上述代码可能会得到大量返回结果，因为 Module 类是 AstNode 的子类，所以查询结果中包含用 C 语言实现的模块以及不包含源代码的模块。所以，最好还是由查找不可达 AstNode 转换为查找不可达语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Stmt s</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">not</span> <span class="keyword">exists</span>(s.getAFlowNode())</span><br><span class="line"><span class="keyword">select</span> s</span><br></pre></td></tr></table></figure>
+<h3 id="污点跟踪和数据流分析"><a class="markdownIt-Anchor" href="#污点跟踪和数据流分析">#</a> 污点跟踪和数据流分析</h3>
+<p>污点跟踪库位于 TaintTracking 模块中，另外，用于污点跟踪和数据流分析的所有查询都有三个显式组件（其中一个是可选的），以及一个隐式组件。显式组件包括</p>
+<ol>
+<li>一个或多个可能存在不安全数据的源点，它们由 TaintTracking::Source 类表示。</li>
+<li>由 TaintTracking::Sink 类表示的一个或多个数据或污点可能流向的接收点。</li>
+<li>零个或多个清洗器，由 Sanitizer 类表示。</li>
+</ol>
+<p>在数据从源点流向接收点的过程中，如果没有遭到清洗器的拦截的话，用于污点跟踪或数据流分析的查询就会返回相应的分析结果。</p>
+<p>这三个组件是通过 TaintTracking::Configuration 绑定在一起的，以便明确特定查询与哪些源点和接收点相关。</p>
+<p>最后一个隐式组件是污点的 “kind”，由 TaintKind 类表示。污点的类型决定了，除了执行内置的、针对 “保留值” 的处理之外，还执行哪些针对 “非保留值” 的分析步骤。例如，对于上面讲过的 dir = path + “/”，当污点表示字符串的时候，则污点数据会从 path 流向 dir，但如果污点为 None 的话，则不会出现这种情况。</p>
+<p><strong>查询所有对于 eval 函数的调用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line">from Call call, Name name</span><br><span class="line">where call.getFunc() &#x3D; name and name.getId() &#x3D; &quot;eval&quot;</span><br><span class="line">select call, &quot;call to &#39;eval&#39;&quot;</span><br></pre></td></tr></table></figure>
+<p>上面查询存在两个问题</p>
+<ol>
+<li>对于所有名为’eval’的调用都会被视为内置函数 eval 的调用，导致假阳性</li>
+<li>其假设 eval 不能被其他名称引用，导致假阴性</li>
+</ol>
+<p>改进 —— 通过谓词 Value::named 来准确识别 eval 函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Name name</span><br><span class="line"><span class="keyword">where</span> name <span class="operator">=</span> <span class="keyword">Value</span>::named(<span class="string">&#x27;eval&#x27;</span>)</span><br><span class="line"><span class="keyword">select</span> name</span><br></pre></td></tr></table></figure>
+<p>准确识别 eval 函数后，通过 Value.getACall () 来识别对 eval 函数的调用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import python</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> ControlFlowNode <span class="keyword">call</span>, <span class="keyword">Value</span> val</span><br><span class="line"><span class="keyword">where</span> eval <span class="operator">=</span> <span class="keyword">Value</span>::named(<span class="string">&#x27;eval&#x27;</span>) <span class="keyword">and</span> </span><br><span class="line">    <span class="keyword">call</span> <span class="operator">=</span> eval.getACall()</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">call</span>, &quot;call to &#x27;eval&#x27;&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="使用vscode-配置codeql工作区"><a class="markdownIt-Anchor" href="#使用vscode-配置codeql工作区">#</a> 使用 VSCode 配置 CodeQL 工作区</h1>
+<h2 id="使用starter工作区"><a class="markdownIt-Anchor" href="#使用starter工作区">#</a> 使用 &quot;starter&quot; 工作区</h2>
+<p>&quot;starter&quot; 工作区实际上是一个 Git 存储库，包含如下内容</p>
+<ul>
+<li>用于存放分析 Python 代码的 CodeQL 库和查询的存储库</li>
+</ul>
+<h2 id="编写路径查询"><a class="markdownIt-Anchor" href="#编写路径查询">#</a> 编写路径查询</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*...</span></span><br><span class="line"><span class="comment">*@kind path-problem</span></span><br><span class="line"><span class="comment">*...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">import python</span><br><span class="line">import semmle.python.security.Paths</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> TaintedPathSource source, TaintedPathSink sink</span><br><span class="line"><span class="keyword">where</span> source.flowsTo(sink)</span><br><span class="line"><span class="keyword">select</span> sink.getNode(), source, sink, <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Paths 从标准 CodeQL 库中导入的路径图模块</li>
+<li>source，sink 为路径图中的节点</li>
+</ul>
+<p><strong>路径查询元数据</strong></p>
+<p>其必须包含属性 @kind path-problem，以确保查询结果可以正确解释和显示</p>
+<p><strong>生成路径解释</strong></p>
+<p>为了生成路径解释，我们的查询需要计算路径图。因此，我们需要定一个谓词 edges，用于计算与查询生成结果相关的谓词。从标准库导入预定义的 edges 谓词</p>
+<p>Python</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import semmle.python.security.Paths</span><br></pre></td></tr></table></figure>
+<p>自定义谓词</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">query predicate edges(PathNode a, PathNode b)&#123;</span><br><span class="line"><span class="comment">/** Logical conditions which hold if `(a,b)` is an edge in the data flow graph */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>定义流动条件</strong></p>
+<p>在编写路径查询时，通常包含一个谓词，该谓词仅在数据从源点流向接收点时成立</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">where</span> source.flowsTo(sink)</span><br></pre></td></tr></table></figure>
+<h1 id="codeql-cli"><a class="markdownIt-Anchor" href="#codeql-cli">#</a> CodeQL CLI</h1>
+<h2 id="创建codeql数据库"><a class="markdownIt-Anchor" href="#创建codeql数据库">#</a> 创建 CodeQL 数据库</h2>
+<p><strong>执行 codeql database create</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database <span class="keyword">create</span> [database<span class="operator">-</span>path] <span class="comment">--language python --source-root ./demo-root</span></span><br></pre></td></tr></table></figure>
+<p>其中，必须指定</p>
+<ul>
+<li>
+<p>–language: 为其创建数据库的语言的标识符。CodeQL 支持为以下语言创建数据库</p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>标识符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C/C++</td>
+<td>cpp</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>csharp</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>go</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>java</td>
+</tr>
+<tr>
+<td>JavaScript/TypeScript</td>
+<td>javascript</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>python</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>–source-root： 用于创建数据库的源文件的根目录。默认情况会将当前目录认为是源文件的根目录</p>
+</li>
+</ul>
+<h2 id="使用codeql-cli分析数据库"><a class="markdownIt-Anchor" href="#使用codeql-cli分析数据库">#</a> 使用 CodeQL CLI 分析数据库</h2>
+<p>实际利用 CodeQL 分析代码的过程，就是在从代码中提取的数据库上运行查询的过程。</p>
+<p><strong>运行查询</strong></p>
+<ul>
+<li>
+<p>database analyze</p>
+</li>
+<li>
+<p>database run-queries  —— 该命令将以中间二进制格式（通常为 BQRS 格式）输出非解释型结果</p>
+</li>
+<li>
+<p>query run —— 该命令既可以输出 BQRS 格式的文件，也可以将结果直接输出至命令行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql query run ./query.ql --databse=./demo-query --output=./result.bqrs </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>解码 bqrs</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql bqrs decode [--output=&lt;file&gt;] [--result-set=&lt;name&gt;] [--sort-key=&lt;col&gt;[,&lt;col&gt;...]] &lt;options&gt;... -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>codeql database analyze</strong></p>
+<p>运行 database analyze 命令时，其完成下述工作</p>
+<ol>
+<li>运行一个或多个查询文件，在 CodeQL 数据库上运行相应的查询代码</li>
+<li>根据某些查询元数据来解释结果，以便在源代码中相应位置显示警示信息</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database analyze --format=csv --output=./path</span><br></pre></td></tr></table></figure>
+<ul>
+<li>–format —— 分析过程中生成的结果文件的格式</li>
+<li>–output —— 分析过程中生成的结果文件输出路径</li>
+</ul>
+<p><strong>使用自定义查询</strong></p>
+<ol>
+<li>
+<p>编写有效查询，并将其保存到扩展名为.ql 的文件中</p>
+</li>
+<li>
+<p>提供查询元数据</p>
+<p>查询元数据通常位于每个查询文件的顶部，其作用时向用户提供有关该查询的说明信息，并告诉 CodeQL 如何处理查询结果</p>
+<p>必须提供的两个属性</p>
+<ul>
+<li>查询标识符 （@id）： 由小写字母和数字组成的单词序列，用 “/” 或 &quot;-&quot; 作为分隔符，用于对查询进行标识和分类</li>
+<li>查询类型（@kind）：用以表示查询结果时警报（@kind problem）还是路径（@kind path-problem）</li>
+</ul>
+</li>
+</ol>
+<p><strong>创建自定义 QL 包</strong></p>
+<p>编写自定义的查询代码时，应将其保存在自定义的 QL 包目录中。QL 包提供了一种组织 CodeQL 分析过程中所用文件的方法。自定义 QL 包目录下必须提供一个名为 <code>qlback.yml</code>  文件。</p>
+<p><code>qlback.yml</code>  文件用于告诉 CodeQL 如下信息：如何编译相应的查询代码，这个包依赖哪些库，在哪里找到查询套件信息。<span class="exturl" data-url="aHR0cHM6Ly9oZWxwLnNlbW1sZS5jb20vY29kZXFsL2NvZGVxbC1jbGkvcmVmZXJlbmNlL3FscGFjay1vdmVydmlldy5odG1sI3FscGFjay15bWw=">https://help.semmle.com/codeql/codeql-cli/reference/qlpack-overview.html#qlpack-yml</span></p>
+<ul>
+<li>
+<p><strong>Q1:</strong> VSCode 中可以执行得到结果，命令行中执行 codeql query run 无法得到结果？</p>
+<p><strong>A:</strong> 在 VSCode 使用了工作区，所以执行查询时会自动在工作区目录下检索 ql 文件中导入的第三方库。而命令行执行时，ql 文件所在位置则无法检索到相应的第三方库。目前做法，把 ql 文件放在 VSCode-CodeQL-starter (工作区) 的 codeql-custom-queries-python/ 目录下</p>
+<p>后续改进可以打包相关第三方库，这个方式还需要学习</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdpdGh1Yi5jb20vemgvY29kZS1zZWN1cml0eS9jb2RlcWwtY2xpL2NvZGVxbC1jbGktbWFudWFsL3BhY2stcGFja2xpc3Q=">https://docs.github.com/zh/code-security/codeql-cli/codeql-cli-manual/pack-packlist</span></p>
+</li>
+</ul>
+<h2 id="更新codeql数据库"><a class="markdownIt-Anchor" href="#更新codeql数据库">#</a> 更新 CodeQL 数据库</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database upgrade</span><br></pre></td></tr></table></figure>
+
+      <div class="tags">
+          <a href="/tags/codeql/" rel="tag"><i class="ic i-tag"></i> codeql</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-11-18 11:24:34" itemprop="dateModified" datetime="2024-11-18T11:24:34+08:00">2024-11-18</time>
+  </span>
+  <span id="codeql-query/" class="item leancloud_visitors" data-flag-title="CodeQL 查询" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="chaihj15 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.jpg" alt="chaihj15 支付宝">
+        <p>支付宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>chaihj15 <i class="ic i-at"><em>@</em></i>SnowRoll Blog
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://snowroll.github.io/codeql-query/" title="CodeQL 查询">https://snowroll.github.io/codeql-query/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/email/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="邮件发送脚本">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Computer Science</span>
+  <h3>邮件发送脚本</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/basketball-warmup/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;s1.ax1x.com&#x2F;2023&#x2F;07&#x2F;01&#x2F;pCBRf5F.jpg" title="篮球训练之热身篇">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Basketball</span>
+  <h3>篮球训练之热身篇</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%93%E8%AF%8D%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text"> 谓词定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text"> 类定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E9%80%92%E5%BD%92"><span class="toc-number">3.</span> <span class="toc-text"> 深入了解递归</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python"><span class="toc-number">4.</span> <span class="toc-text"> Python</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%86%E6%9E%90"><span class="toc-number">4.1.</span> <span class="toc-text"> 语句和表达式分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E5%88%86%E6%9E%90"><span class="toc-number">4.2.</span> <span class="toc-text"> 控制流分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%A1%E7%82%B9%E8%B7%9F%E8%B8%AA%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90"><span class="toc-number">4.2.1.</span> <span class="toc-text"> 污点跟踪和数据流分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8vscode-%E9%85%8D%E7%BD%AEcodeql%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="toc-number">5.</span> <span class="toc-text"> 使用 VSCode 配置 CodeQL 工作区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8starter%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="toc-number">5.1.</span> <span class="toc-text"> 使用 &quot;starter&quot; 工作区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E8%B7%AF%E5%BE%84%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.2.</span> <span class="toc-text"> 编写路径查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#codeql-cli"><span class="toc-number">6.</span> <span class="toc-text"> CodeQL CLI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAcodeql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.1.</span> <span class="toc-text"> 创建 CodeQL 数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8codeql-cli%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.2.</span> <span class="toc-text"> 使用 CodeQL CLI 分析数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0codeql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.3.</span> <span class="toc-text"> 更新 CodeQL 数据库</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/git-githubpage/" rel="bookmark" title="GitHub Page 个人博客配置记录">GitHub Page 个人博客配置记录</a></li><li><a href="/java-heartbeat/" rel="bookmark" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></li><li><a href="/markdown-skills/" rel="bookmark" title="markdown-skills">markdown-skills</a></li><li><a href="/iptables/" rel="bookmark" title="iptables 简介">iptables 简介</a></li><li><a href="/security-mail/" rel="bookmark" title="邮件安全之spf协议">邮件安全之spf协议</a></li><li><a href="/shell-except/" rel="bookmark" title="shell-except">shell-except</a></li><li><a href="/deobfuscator-crawler/" rel="bookmark" title="Github爬虫">Github爬虫</a></li><li><a href="/springboot-skill/" rel="bookmark" title="springboot 零敲碎打">springboot 零敲碎打</a></li><li><a href="/powershell-1/" rel="bookmark" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></li><li><a href="/docker/" rel="bookmark" title="docker实用操作">docker实用操作</a></li><li><a href="/powershell-2/" rel="bookmark" title="powershell多线程超时">powershell多线程超时</a></li><li><a href="/lambda/" rel="bookmark" title="lambda">lambda</a></li><li><a href="/gitlab/" rel="bookmark" title="gitlab服务器搭建">gitlab服务器搭建</a></li><li><a href="/linux-commands/" rel="bookmark" title="linux常用命令汇总">linux常用命令汇总</a></li><li><a href="/reverse-shell/" rel="bookmark" title="反向shell">反向shell</a></li><li><a href="/powershell-amsi-trace/" rel="bookmark" title="利用事件写入捕获AMSI实际检测内容">利用事件写入捕获AMSI实际检测内容</a></li><li><a href="/Line-By-Line-1/" rel="bookmark" title="Line By Line-1 松散冗余的句子">Line By Line-1 松散冗余的句子</a></li><li><a href="/CodeQL-synatx/" rel="bookmark" title="CodeQL 语法">CodeQL 语法</a></li><li><a href="/codeql/" rel="bookmark" title="codeql">codeql</a></li><li><a href="/Line-By-Line-5/" rel="bookmark" title="Line By Line-5 标点符号">Line By Line-5 标点符号</a></li><li><a href="/Line-By-Line-2-md/" rel="bookmark" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></li><li><a href="/mongodb/" rel="bookmark" title="mongodb 常用语句">mongodb 常用语句</a></li><li><a href="/email/" rel="bookmark" title="邮件发送脚本">邮件发送脚本</a></li><li class="active"><a href="/codeql-query/" rel="bookmark" title="CodeQL 查询">CodeQL 查询</a></li><li><a href="/python_ast/" rel="bookmark" title="Python代码AST解析">Python代码AST解析</a></li><li><a href="/chatgpt_plus/" rel="bookmark" title="申请chatgpt-plus会员">申请chatgpt-plus会员</a></li><li><a href="/latex_skill/" rel="bookmark" title="Latex技巧 —— 图表操作">Latex技巧 —— 图表操作</a></li><li><a href="/visa/" rel="bookmark" title="赴美签证">赴美签证</a></li><li><a href="/proxychain-mitm/" rel="bookmark" title="proxychain流量转发+mitm流量监控">proxychain流量转发+mitm流量监控</a></li><li><a href="/docker-timeout/" rel="bookmark" title="dockerhub连接超时怎么办？">dockerhub连接超时怎么办？</a></li><li><a href="/DES/" rel="bookmark" title="DES加密算法">DES加密算法</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="chaihj15"
+      data-src="/images/avatar.png">
+  <p class="name" itemprop="name">chaihj15</p>
+  <div class="description" itemprop="description">分享经验，记录生活</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">37</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">4</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">26</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3dyb2xs" title="https:&#x2F;&#x2F;github.com&#x2F;snowroll"><i class="ic i-github"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS9zbm93cm9sbA==" title="https:&#x2F;&#x2F;about.me&#x2F;snowroll"><i class="ic i-address-card"></i></span>
+      <span class="exturl item email" data-url="bWFpbHRvOmNoYWloajE1QDE2My5jb20=" title="mailto:chaihj15@163.com"><i class="ic i-envelope"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/email/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/basketball-warmup/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/markdown-skills/" title="markdown-skills">markdown-skills</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/CodeQL-synatx/" title="CodeQL 语法">CodeQL 语法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/mongodb/" title="mongodb 常用语句">mongodb 常用语句</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/linux-commands/" title="linux常用命令汇总">linux常用命令汇总</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Basketball/" title="分类于 Basketball">Basketball</a>
+</div>
+
+    <span><a href="/pick-and-roll/" title="篮球常见配合">篮球常见配合</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/email/" title="邮件发送脚本">邮件发送脚本</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/java-heartbeat/" title="Spring Boot中心跳机制的实现">Spring Boot中心跳机制的实现</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/powershell-1/" title="powershell技巧连载（一） —— 文件相关操作">powershell技巧连载（一） —— 文件相关操作</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/Line-By-Line-2-md/" title="Line By Line-2 错误的连接">Line By Line-2 错误的连接</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Computer-Science/" title="分类于 Computer Science">Computer Science</a>
+</div>
+
+    <span><a href="/visa/" title="赴美签证">赴美签证</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">chaihj15 @ SnowRoll</span>
+  </div>
+  <script async src="js/busuanzi.pure.mini.js"></script>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">98k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:29</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'codeql-query/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

