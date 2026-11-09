@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;github page&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Thu, 24 Sep 2020 09:06:25 +0000</pubDate>
+        <lastBuildDate>Thu, 24 Sep 2020 09:06:25 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/git-githubpage/</guid>
+            <title>GitHub Page 个人博客配置记录</title>
+            <link>https://snowroll.github.io/git-githubpage/</link>
+            <category>github page</category>
+            <pubDate>Thu, 24 Sep 2020 09:06:25 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容目录&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容目录&#34;&gt;#&lt;/a&gt; 内容目录&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 hexo 搭建自己的 Github Page 博客&lt;/li&gt;
+&lt;li&gt;设置自定义域名，并添加 https 保护&lt;/li&gt;
+&lt;li&gt;国内外分流访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h3 id=&#34;1-使用hexo搭建github-page-博客&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-使用hexo搭建github-page-博客&#34;&gt;#&lt;/a&gt; 1. 使用 hexo 搭建 Github Page 博客&lt;/h3&gt;
+&lt;p&gt;这部分工作主要参考的是 zjufangzh 的博客，链接地址为 https://blog.csdn.net/sinat_37781304/article/details/82729029&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;首先下载 hexo&lt;/p&gt;
+&lt;p&gt;hexo 官方网站 https://hexo.io/zh-cn/&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install hexo-cli -g&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# Linux npm 安装（如果没有）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install nodejs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install npm&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在合适的目录开始创建自己的博客&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hexo init blog  &lt;span class=&#34;comment&#34;&gt;# 初始化名字为blog的博客&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; blog&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;npm install  &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;下载完成之后的目录&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;node_modules&amp;#x2F;  依赖包&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;scaffolds&amp;#x2F;  生成文章的模板&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;source&amp;#x2F;  博客内容，主要为md文件&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;themes&amp;#x2F;  博客主题&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;public&amp;#x2F;  博客的发布页面&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;_config.yml  博客网站的配置文件&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hexo clean  &lt;span class=&#34;comment&#34;&gt;# 清理之前的发布内容&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hexo generate  &lt;span class=&#34;comment&#34;&gt;# 生成新的发布页面，命令可简写为hexo g&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hexo server  &lt;span class=&#34;comment&#34;&gt;# 部署到本地localhost:4000，命令可简写为hexo s &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;浏览器打开 http://localhost:4000 即可看到效果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;博客部署到 Github Page 上&lt;/p&gt;
+&lt;p&gt;登录 github，创建一个新的 repository，名字为  &lt;code&gt;username.github.io&lt;/code&gt; ，例如我的 github 账户名为 snowroll，所以 repository 的名字为 &lt;code&gt;snowroll.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;img data-src=&#34;/git-githubpage/repository_name.jpg&#34; class=&#34;&#34;&gt;
+&lt;p&gt;生成 ssh，添加到 github 中&lt;/p&gt;
+&lt;p&gt;打开 git bash（如没有，请自行查询下载）&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.name &lt;span class=&#34;string&#34;&gt;&amp;quot;yourname&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# yourname为你的github用户名&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global user.email &lt;span class=&#34;string&#34;&gt;&amp;quot;youremail&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# youremail为你的github对应的邮箱&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ssh-keygen -t rsa -C &lt;span class=&#34;string&#34;&gt;&amp;quot;youremail&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# -t 指定密钥类型，-C 公钥备注，一般写自己的邮箱 生成ssh，一路回车即可&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;找到生成的 &lt;code&gt;.ssh&lt;/code&gt;  文件夹，打开&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;id_rsa  # 私钥&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;id_rsa.pub  # 公钥&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;known_hosts  # 记录服务器端的Host，IP及rsa文件，作缓存用&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;复制 &lt;code&gt;id_rsa&lt;/code&gt;  内的内容到剪切板，直接打开复制也可以&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pbcopy &amp;lt; ./id_rsa.pub  &lt;span class=&#34;comment&#34;&gt;# mac 系统下的命令行操作&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;打开 github 的个人设置中的 SSH and GPG keys，点击 New SSH key，将复制的内容粘贴进去即可&lt;/p&gt;
+&lt;p&gt;测试是否成功&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh -T git@github.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;出现 You’ve successfully authenticated, but GitHub does not provide shell access. 提示即意味成功&lt;/p&gt;
+&lt;p&gt;生成 ssh key 的参考博客，&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2NzYxODMxL2FydGljbGUvZGV0YWlscy84ODcyNTY3MA==&#34;&gt;https://blog.csdn.net/qq_36761831/article/details/88725670&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;将 hexo 与 GitHub 关联，修改 &lt;code&gt;blog/&lt;/code&gt;  下的 &lt;code&gt;_config.yml&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;deploy:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;attr&#34;&gt;type:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;git&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;attr&#34;&gt;repo:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;https://github.com/yourgithubname/yourgithubname.github.io.git&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;attr&#34;&gt;branch:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;master&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意在 &lt;code&gt;:&lt;/code&gt;  后要添加空格，github 貌似要改 master 分支为 main，到时候可能需要更改配置&lt;/p&gt;
+&lt;p&gt;安装 deploy-git，以便将博客部署到 GitHub&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;npm install hexo-deployer-git --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;开始部署，更多命令请参考 https://hexo.io/zh-cn/docs/commands&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hexo clean&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;hexo d -g  &lt;span class=&#34;comment&#34;&gt;# d 部署 -g 部署之前预先生成静态文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;成功之后，过一会就可以在 https://yourname.github.io 看到你的博客&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改主题，撰写文章&lt;/p&gt;
+&lt;p&gt;可以在 https://hexo.io/themes/ 下选择自己喜欢的主题，下载到 &lt;code&gt;themes/&lt;/code&gt;  目录下&lt;/p&gt;
+&lt;img data-src=&#34;/git-githubpage/themes-folder.jpg&#34; class=&#34;&#34;&gt;
+&lt;p&gt;&lt;code&gt;landscape&lt;/code&gt;  是默认主题， &lt;code&gt;yilia-plus&lt;/code&gt;  是我下载添加的主题，项目地址 https://github.com/JoeyBling/hexo-theme-yilia-plus&lt;/p&gt;
+&lt;p&gt;更改 &lt;code&gt;blog/&lt;/code&gt;  下的 &lt;code&gt;_config.yml&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;theme:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;yilia-plus&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;重新部署即可生效，具体关于主题的各项设置，请参考各个主题的 github 项目说明文档&lt;/p&gt;
+&lt;p&gt;开始写文章&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;source/post&lt;/code&gt;  下的添加.md 文件即可，或者&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;hexo new paper&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;更多详细操作参考 https://hexo.io/zh-cn/docs/writing 和 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzM3NzgxMzA0L2FydGljbGUvZGV0YWlscy84MjcyOTAyOQ==&#34;&gt;https://blog.csdn.net/sinat_37781304/article/details/82729029&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Tips:  yilia-plus 配置 search 功能，在博客根目录下执行  &lt;code&gt;npm i hexo-generator-json-content --save&lt;/code&gt; ， 在 &lt;code&gt;_config.yml&lt;/code&gt;  中添加相关配置&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-设置自定义域名添加https保护&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-设置自定义域名添加https保护&#34;&gt;#&lt;/a&gt; 2.  设置自定义域名，添加 https 保护&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置自定义域名&lt;/p&gt;
+&lt;p&gt;在阿里云上购买一个域名，看个人需求，我购买了 snowroll.top 域名 (目前已失效)，主要是便宜 hhhhh。阿里云域名购买及解析教程链接 https://developer.aliyun.com/article/767435&lt;/p&gt;
+&lt;p&gt;上面链接的域名操作的 “解析设置” 里，添加一条记录&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;记录类型： CNAME  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;主机记录： @  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;解析线路：默认&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;记录值： yourname.github.io&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3huLS15b3VybmFtZS1pbTJtajVvbzlicjlpaW5vZjluamtqaDZjODg3Ymt6ZXN6YWhhMjI0NGUzYmc0bTdkdTY4YmthMDkwajdsYnNvcDM0Zy5naXRodWIuaW8=&#34;&gt;这条解析记录应该是将你申请的域名解析关联到 yourname.github.io&lt;/span&gt;，再通过 github 自己的 dns 服务器进行解析（个人理解，没有实际抓包看过）&lt;/p&gt;
+&lt;p&gt;为了让域名生效，还得在 &lt;code&gt;yourname.github.io&lt;/code&gt;  仓库的 setting 中，设置自定义的 Custom domain，示例如下&lt;/p&gt;
+&lt;img data-src=&#34;/git-githubpage/custom-domain.jpg&#34; class=&#34;&#34;&gt;
+&lt;p&gt;未添加 https 保护时，图中的 Enforce HTTPS 无法选中，也只能通过 http 访问自定义域名&lt;/p&gt;
+&lt;p&gt;为了防止自定义域名失效，在 &lt;code&gt;blog&lt;/code&gt;  的 &lt;code&gt;source/&lt;/code&gt;  下新建 &lt;code&gt;CNAME&lt;/code&gt;  文件，里面填上你的自定义域名即可&lt;/p&gt;
+&lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;snowroll.top&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以重新部署，查看一下自己的域名是否生效（重新部署后，可能需要 1-2 分钟页面才能更新）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加 https 保护&lt;/p&gt;
+&lt;p&gt;为了给自定义的域名，也添加 https 保护。我们在阿里云上申请一个免费的证书，教程链接 https://developer.aliyun.com/article/715576&lt;/p&gt;
+&lt;p&gt;签发完成并进行完相关的设置后，可能需要 1-2 小时 https 保护才能生效，所以不用过于着急。&lt;/p&gt;
+&lt;p&gt;至此，就可以开始愉快的写博客了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-国内外分流访问&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-国内外分流访问&#34;&gt;#&lt;/a&gt; 3. 国内外分流访问&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9EZXBsb3ktSGV4b2Jsb2ctVG8tQ29kaW5nbmV0LUFuZC1HaXRIdWIv&#34;&gt;https://asurada.zone/post/Deploy-Hexoblog-To-Codingnet-And-GitHub/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;这篇博客讲解的很全面，按步骤走就可以。其中有些坑，我罗列在下面供大家参考&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用 coding 部署静态网站一直无法认证成功？&lt;/p&gt;
+&lt;p&gt;A： 认证的腾讯云必须和 coding 是绑定的关系，实名认证之后才可以&lt;/p&gt;
+&lt;img data-src=&#34;/git-githubpage/static-blog.jpeg&#34; class=&#34;&#34;&gt;
+&lt;p&gt;在「个人设置」-「登录密码：前往腾讯云查看并更改」中进行绑定认证&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上述博客最后有一个 coding 开启 https 的功能，新版申请自定义域名后，证书认证通过后自动为 https，无需强制开启&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-问题汇总及解决&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4-问题汇总及解决&#34;&gt;#&lt;/a&gt; 4. 问题汇总及解决&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;撰写文章，上传到 github 会导致图片丢失，不可见&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方案 1: 进行文件资源引用，官方文档 https://hexo.io/zh-cn/docs/asset-folders&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方案 2: 在 &lt;code&gt;source/&lt;/code&gt;  下建一个 &lt;code&gt;images&lt;/code&gt;  目录，将图片放入其中，文档中图片的引用统一为 &lt;code&gt;![img_alias](/images/test.jpg)&lt;/code&gt;  格式&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何新建文件夹，不止是在 &lt;code&gt;source/_post/&lt;/code&gt;  下&lt;/p&gt;
+&lt;p&gt;解决： &lt;code&gt;hexo new page test&lt;/code&gt;  会生成 &lt;code&gt;source/test/&lt;/code&gt;  文件夹，但这个无法再 &lt;code&gt;test&lt;/code&gt;  下加其他 md 文件，无法识别&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何让点击完之后的网页直接在当前网页跳转，而不是打开多个网页？&lt;/p&gt;
+&lt;p&gt;更改主题中_config.yml 中的 open_in_new: 均改为 false 即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加代码块复制功能&lt;/p&gt;
+&lt;p&gt;参考文章 https://codeantenna.com/a/pvakwyOYZ0&lt;/p&gt;
+&lt;p&gt;上述文章针对的是 &lt;code&gt;yilia&lt;/code&gt;  主题，所以迁移到 &lt;code&gt;yilia-plus&lt;/code&gt;  需要做少许改动&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;利用 js 实现代码拷贝功能&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;hexo&lt;/code&gt;  的根目录 &lt;code&gt;themes\yilia-plus\source\lib&lt;/code&gt;  中新建 &lt;code&gt;clipboard_use.js&lt;/code&gt; ，如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight js&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$(&lt;span class=&#34;string&#34;&gt;&amp;quot;.highlight&amp;quot;&lt;/span&gt;).wrap(&lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;div class=&amp;#x27;code-wrapper&amp;#x27; style=&amp;#x27;position:relative&amp;#x27;&amp;gt;&amp;lt;/div&amp;gt;&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;/*页面载入完成后，创建复制按钮*/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;!&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;e, t, a&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;/* code */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;var&lt;/span&gt; initCopyCode = &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;var&lt;/span&gt; copyHtml = &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#x27;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        copyHtml += &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;lt;button class=&amp;quot;btn-copy&amp;quot; data-clipboard-snippet=&amp;quot;&amp;quot;&amp;gt;&amp;#x27;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        copyHtml += &lt;span class=&#34;string&#34;&gt;&amp;#x27;  &amp;lt;i class=&amp;quot;fa fa-clipboard&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;span&amp;gt;复制&amp;lt;/span&amp;gt;&amp;#x27;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        copyHtml += &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;lt;/button&amp;gt;&amp;#x27;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        $(&lt;span class=&#34;string&#34;&gt;&amp;quot;.highlight .code&amp;quot;&lt;/span&gt;).before(copyHtml);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;var&lt;/span&gt; clipboard = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; ClipboardJS(&lt;span class=&#34;string&#34;&gt;&amp;#x27;.btn-copy&amp;#x27;&lt;/span&gt;, &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            target: &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;trigger&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; trigger.nextElementSibling;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        clipboard.on(&lt;span class=&#34;string&#34;&gt;&amp;#x27;success&amp;#x27;&lt;/span&gt;, &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            e.trigger.innerHTML = &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;i class=&amp;#x27;fa fa-clipboard&amp;#x27;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;span&amp;gt;复制成功&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;built_in&#34;&gt;setTimeout&lt;/span&gt;(&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                e.trigger.innerHTML = &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;i class=&amp;#x27;fa fa-clipboard&amp;#x27;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;span&amp;gt;复制&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &amp;#125;, &lt;span class=&#34;number&#34;&gt;1000&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;           &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            e.clearSelection();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        clipboard.on(&lt;span class=&#34;string&#34;&gt;&amp;#x27;error&amp;#x27;&lt;/span&gt;, &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            e.trigger.innerHTML = &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;i class=&amp;#x27;fa fa-clipboard&amp;#x27;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;span&amp;gt;复制失败&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &lt;span class=&#34;built_in&#34;&gt;setTimeout&lt;/span&gt;(&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;function&lt;/span&gt; (&lt;span class=&#34;params&#34;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;                e.trigger.innerHTML = &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;i class=&amp;#x27;fa fa-clipboard&amp;#x27;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;span&amp;gt;复制&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            &amp;#125;, &lt;span class=&#34;number&#34;&gt;1000&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            e.clearSelection();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    initCopyCode();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;(&lt;span class=&#34;built_in&#34;&gt;window&lt;/span&gt;, &lt;span class=&#34;built_in&#34;&gt;document&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;引入相关 js 文件&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;hexo&lt;/code&gt;  的根目录下的 &lt;code&gt;themes\yilia-plus\layout\layout.ejs&lt;/code&gt;  文件的 &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;  前引入（不是 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; ，自己弄的时候犯蠢，结果调试了好久）&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;!-- 代码块复制功能, 引入jQuery和clipboard --&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;script type&amp;#x3D;&amp;quot;text&amp;#x2F;javascript&amp;quot; src&amp;#x3D;&amp;quot;https:&amp;#x2F;&amp;#x2F;cdn.jsdelivr.net&amp;#x2F;npm&amp;#x2F;clipboard@2.0.4&amp;#x2F;dist&amp;#x2F;clipboard.js&amp;quot;&amp;gt;&amp;lt;&amp;#x2F;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;script type&amp;#x3D;&amp;quot;text&amp;#x2F;javascript&amp;quot; src&amp;#x3D;&amp;quot;https:&amp;#x2F;&amp;#x2F;apps.bdimg.com&amp;#x2F;libs&amp;#x2F;jquery&amp;#x2F;2.1.4&amp;#x2F;jquery.min.js&amp;quot;&amp;gt;&amp;lt;&amp;#x2F;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;lt;script type&amp;#x3D;&amp;quot;text&amp;#x2F;javascript&amp;quot; src&amp;#x3D;&amp;quot;&amp;lt;%- url_for(&amp;#39;lib&amp;#x2F;clipboard_use.js&amp;#39;) %&amp;gt;&amp;quot;&amp;gt;&amp;lt;&amp;#x2F;script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加样式&lt;/p&gt;
+&lt;p&gt;修改 &lt;code&gt;hexo&lt;/code&gt;  的根目录下的 &lt;code&gt;themes\yilia-plus\source\main.a5fda8.css&lt;/code&gt; ，在末尾添加以下样式&lt;/p&gt;
+&lt;figure class=&#34;highlight css&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;selector-class&#34;&gt;.btn-copy&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;display&lt;/span&gt;: inline-block;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;cursor&lt;/span&gt;: pointer;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;background-color&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;#eee&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;background-image&lt;/span&gt;: &lt;span class=&#34;built_in&#34;&gt;linear-gradient&lt;/span&gt;(&lt;span class=&#34;number&#34;&gt;#fcfcfc&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;#eee&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;border&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;1px&lt;/span&gt; solid &lt;span class=&#34;number&#34;&gt;#d5d5d5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;border-radius&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;3px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -webkit-user-select: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -moz-user-select: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -ms-user-select: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    user-select: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -webkit-appearance: none;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;font-size&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;13px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;font-weight&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;700&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;line-height&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;20px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;color&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;#333&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -webkit-&lt;span class=&#34;attribute&#34;&gt;transition&lt;/span&gt;: opacity .&lt;span class=&#34;number&#34;&gt;3s&lt;/span&gt; ease-in-out;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -o-&lt;span class=&#34;attribute&#34;&gt;transition&lt;/span&gt;: opacity .&lt;span class=&#34;number&#34;&gt;3s&lt;/span&gt; ease-in-out;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;transition&lt;/span&gt;: opacity .&lt;span class=&#34;number&#34;&gt;3s&lt;/span&gt; ease-in-out;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;padding&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;2px&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;6px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;position&lt;/span&gt;: absolute;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;right&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;5px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;top&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;5px&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;opacity&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;selector-class&#34;&gt;.btn-copy&lt;/span&gt; &lt;span class=&#34;selector-tag&#34;&gt;span&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;margin-left&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;5px&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;selector-class&#34;&gt;.code-wrapper&lt;/span&gt;&lt;span class=&#34;selector-pseudo&#34;&gt;:hover&lt;/span&gt; &lt;span class=&#34;selector-class&#34;&gt;.btn-copy&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;opacity&lt;/span&gt;: &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;鹊桥仙·纤云弄巧
+&lt;/center&gt;
+&lt;center&gt;宋·秦观
+&lt;center&gt;纤云弄巧，飞星传恨，银汉迢迢暗度。金风玉露一相逢，便胜却人间无数。
+&lt;center&gt;柔情似水，佳期如梦，忍顾鹊桥归路。两情若是久长时，又岂在朝朝暮暮。 ]]></description>
+        </item>
+    </channel>
+</rss>

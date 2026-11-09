@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://snowroll.github.io</id>
+    <title>SnowRoll Blog • Posts by &#34;basketball&#34; tag</title>
+    <link href="https://snowroll.github.io" />
+    <updated>2023-08-28T12:00:00.000Z</updated>
+    <category term="python" />
+    <category term="codeql" />
+    <category term="crypto" />
+    <category term="Line By Line" />
+    <category term="paper" />
+    <category term="basketball" />
+    <category term="read" />
+    <category term="chatgpt" />
+    <category term="crawler" />
+    <category term="dockerß" />
+    <category term="email" />
+    <category term="github page" />
+    <category term="gitlab" />
+    <category term="linux" />
+    <category term="heartbeat, java" />
+    <category term="latex" />
+    <category term="shell" />
+    <category term="markdown" />
+    <category term="mongodb" />
+    <category term="photograph" />
+    <category term="powershell" />
+    <category term="reverse-shell" />
+    <category term="mail" />
+    <category term="except" />
+    <category term="java" />
+    <category term="travel" />
+    <entry>
+        <id>https://snowroll.github.io/pick-and-roll/</id>
+        <title>篮球常见配合</title>
+        <link rel="alternate" href="https://snowroll.github.io/pick-and-roll/"/>
+        <content type="html">&lt;p&gt;本篇文章，我们以动图的形式介绍一些常见的 2 人和 3 人的篮球战术配合。&lt;/p&gt;
+&lt;p&gt;本文使用的战术画图软件为 thehoopsgeek，网址: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hcHAudGhlaG9vcHNnZWVrLmNvbS9wbGF5ZWRpdG9y&#34;&gt;https://app.thehoopsgeek.com/playeditor&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;首先讲解一下本文中用到的一些常见符号及其含义，以便大家能更好地理解战术配合。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/symbols.png&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;掩护&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#掩护&#34;&gt;#&lt;/a&gt; 掩护&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;侧挡掩护&lt;img data-src=&#34;/images/basketball/pick-roll/side-screen.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;背掩护&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/back-screen.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无球掩护&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/screen-hand.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;挡拆&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#挡拆&#34;&gt;#&lt;/a&gt; 挡拆&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;挡拆后投篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/pick-roll-1.png&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挡拆后上篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/pick-roll-2.png&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挡拆后顺下，击地传球上篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/pick-roll-3.png&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挡拆后外弹，接球投篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/pick-roll-4.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;假挡反跑，接球上篮&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;三人配合&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#三人配合&#34;&gt;#&lt;/a&gt; 三人配合&lt;/h1&gt;
+&lt;h2 id=&#34;强侧配合&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#强侧配合&#34;&gt;#&lt;/a&gt; 强侧配合&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫借掩护跳投&lt;/p&gt;
+&lt;img data-src=&#34;/images/basketball/pick-roll/three-1.gif&#34; alt=&#34;pick-roll-one&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫借掩护突破上篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-3.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫击地传球上篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-2.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫肩上传球给 45 度角前锋投篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-4.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫传球给 45 度角前锋，前锋传球顺下中锋单打&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-5.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫传球给 45 度角前锋，前锋上线突破，后卫拉到异侧 45 度角，前锋传球给内线&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-7.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫传球给 45 度角前锋，前锋下线突破，分给内线&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-6.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前锋拉边，中锋挡拆顺下，后卫传球给 45 度角前锋，前锋下线突破，后卫拉到异侧 45 度角，前锋传球给后卫&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three-8.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;弱侧配合&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#弱侧配合&#34;&gt;#&lt;/a&gt; 弱侧配合&lt;/h2&gt;
+&lt;p&gt;强弱侧的三人配合大同小异，下面只举两个例子，其余可参考强侧配合。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;后卫借中锋掩护，中距离投篮&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three2-1.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后卫借中锋掩护，运球到罚球线，击地传给切入的中锋&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three2-2.gif&#34; alt=&#34;pick-roll-one&#34; :height=&#34;35%&#34; width=&#34;35%&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;无球掩护&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#无球掩护&#34;&gt;#&lt;/a&gt; 无球掩护&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;中锋持球在弧顶，传球给右侧 45 度角的前锋，然后给左侧 45 度角后卫做掩护。后卫借掩护摆脱，接球中投&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three3-1.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;假掩护，真切入&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three3-2.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无球配合 =&amp;gt; 强侧配合&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three3-3.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无球配合 =&amp;gt; 弱侧配合&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/basketball/pick-roll/three3-4.gif&#34; alt=&#34;pick-roll-one&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="basketball" />
+        <updated>2023-08-28T12:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://snowroll.github.io/basketball-warmup/</id>
+        <title>篮球训练之热身篇</title>
+        <link rel="alternate" href="https://snowroll.github.io/basketball-warmup/"/>
+        <content type="html">&lt;h3 id=&#34;前言&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h3&gt;
+&lt;p&gt;任何运动在正式开始之前，热身都是必不可少的环节。有效的热身训练可以唤醒身体，激活肌肉，提升运动时的表现。而且，最重要的是，热身可以帮助我们减少运动过程中受伤的风险。本篇文章内容来自北京体育大学王安利老师的《运动损伤预防的功能训练》，有兴趣的同学可以详细翻阅此书中的内容。&lt;/p&gt;
+&lt;p&gt;首先，队员应该慢跑几圈，这样可以增加肌群的温度和血流量，之后再做相应的拉伸练习，效果会更好，而且也可以避免一些损伤。&lt;/p&gt;
+&lt;h3 id=&#34;动态拉伸&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#动态拉伸&#34;&gt;#&lt;/a&gt; 动态拉伸&lt;/h3&gt;
+&lt;p&gt;运动前，推荐使用动态拉伸，其可以继续提高组织温度，降低组织粘滞性，让身体更快进入工作状态。&lt;/p&gt;
+&lt;h4 id=&#34;上肩动作&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#上肩动作&#34;&gt;#&lt;/a&gt; 上肩动作&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;直臂转肩&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;两臂打开，双肢做绕环运动，幅度由小到大。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双臂交叉绕环&lt;/p&gt;
+&lt;p&gt;双臂环绕运动&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;爬绳动作模仿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;仰卧四点支撑挺腹&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;俯卧支撑转体&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;俯卧撑姿势，单手支撑，另一侧手臂向支撑手侧旋转，而后向上打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;双人小推车&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;躯干动作&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#躯干动作&#34;&gt;#&lt;/a&gt; 躯干动作&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;直背转腰&lt;/p&gt;
+&lt;p&gt;双脚自然开立，与肩同宽。双手叉腰，躯干挺直旋转。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;前弓步转腰&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前弓步旋转胸腰段&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;侧跨步转体&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;双脚自然站立，左脚向左侧跨一步，双手伸直举过头顶，左脚跟着地，身体转向右侧，双手在右腿两侧着地，返回时左脚用力，推动全身回到初始位置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;下肢动作&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#下肢动作&#34;&gt;#&lt;/a&gt; 下肢动作&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;足跟走&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;翘起脚尖，足跟着地，直腿向前行进&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;足外侧走&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;足外侧着地，直腿向前走，集中注意力，避免发生扭伤。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;玩具士兵&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;练习者取站立位，双手前平举，左腿缓慢抬起，抬到最大高度，保持 3-5 秒，落下。另一条腿如此重复。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多方向跨步&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可行进间进行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;马步牵伸髋内收肌群&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;前弓步蹲起&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先做前跨步动作，然后双手扶地蹬起，手与地面接触，双腿伸直&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;胸前抱膝&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;侧跨步重心转移&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;盘腿半蹲&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单手支撑后掰腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;行进间旋转髋关节&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;全身动作&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#全身动作&#34;&gt;#&lt;/a&gt; 全身动作&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;全身伸展&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;双脚开立，略比肩宽。双手伸直过顶，背向后伸；然后迅速弯腰，双手接触两腿间地面，如此往复，&lt;strong&gt;达到上下两端时不要停顿&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;小爬虫&lt;/p&gt;
+&lt;p&gt;爬行过程中，膝关节始终伸直&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;仙人指路&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;立卧撑收腹跳&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;静态拉伸&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#静态拉伸&#34;&gt;#&lt;/a&gt; 静态拉伸&lt;/h3&gt;
+&lt;p&gt;运动结束后，推荐使用静态拉伸，其可以改善柔韧性，降低肌肉张力，改善局部循环，&lt;strong&gt;有效预防延迟性肌肉酸痛&lt;/strong&gt;。长时间静态拉伸会导致神经系统的兴奋度下降，组织温度下降，肌肉放松，所以不建议运动前做。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;俯卧后撑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;躯干旋转牵伸练习&lt;/p&gt;
+&lt;p&gt;练习者呈坐姿，两腿分开，上背部开始前倾，继续弯曲腰部。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;坐姿躯干侧屈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;单腿坐姿前倾&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;坐姿，右腿前伸，屈左膝，左脚掌贴于右大腿内侧，脚跟尽量贴近骨盆。双手撑地，躯干尽量向前伸展&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;仰卧盘膝&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;侧向跨步&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内收肌自我牵伸&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;立体触脚尖&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;坐姿直体前伸&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;站姿大腿前群牵伸&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;推墙动作牵伸&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;伸踝、伸趾肌牵伸&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跪姿前跨步&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;坐姿 v 字牵伸&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="basketball" />
+        <updated>2023-08-01T12:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://snowroll.github.io/basketball-coach/</id>
+        <title>篮球赛前热身动作</title>
+        <link rel="alternate" href="https://snowroll.github.io/basketball-coach/"/>
+        <content type="html">&lt;h1 id=&#34;1-动静态拉伸&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-动静态拉伸&#34;&gt;#&lt;/a&gt; 1. 动静态拉伸&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;小步跑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;高抬腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;扭胯跑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;直腿下拉&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;正踢腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;外摆，内摆&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后踢腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最伟大拉伸&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;侧压腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开胯&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;正压腿&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;2-专项脚步&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-专项脚步&#34;&gt;#&lt;/a&gt; 2. 专项脚步&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;防守滑步&lt;/li&gt;
+&lt;li&gt;防守碎步&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;3-运球练习&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-运球练习&#34;&gt;#&lt;/a&gt; 3. 运球练习&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;刺探步&lt;/li&gt;
+&lt;li&gt;体前变向&lt;/li&gt;
+&lt;li&gt;胯下变向&lt;/li&gt;
+&lt;li&gt;背后变向&lt;/li&gt;
+&lt;li&gt;转身&lt;/li&gt;
+&lt;li&gt;组合&lt;/li&gt;
+&lt;li&gt;双球&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4-传球练习&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#4-传球练习&#34;&gt;#&lt;/a&gt; 4. 传球练习&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;四角传球&lt;/li&gt;
+&lt;li&gt;两人传球&lt;/li&gt;
+&lt;li&gt;三人绕 8 字传球&lt;/li&gt;
+&lt;li&gt;四角传球&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;5-团队进攻&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#5-团队进攻&#34;&gt;#&lt;/a&gt; 5. 团队进攻&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;2v1， 3v2， 4v3&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;固定战术练习&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="basketball" />
+        <updated>2023-06-23T12:00:00.000Z</updated>
+    </entry>
+</feed>

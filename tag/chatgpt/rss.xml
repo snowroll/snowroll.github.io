@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;chatgpt&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 01 Jan 2024 12:00:00 +0000</pubDate>
+        <lastBuildDate>Mon, 01 Jan 2024 12:00:00 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/chatgpt_plus/</guid>
+            <title>申请chatgpt-plus会员</title>
+            <link>https://snowroll.github.io/chatgpt_plus/</link>
+            <category>chatgpt</category>
+            <pubDate>Mon, 01 Jan 2024 12:00:00 +0000</pubDate>
+            <description><![CDATA[ &lt;p&gt;chatgpt plus 申请流程&lt;/p&gt;
+&lt;p&gt;通过苹果 APP Store 里面的礼品卡充值，避免要使用国外货币&lt;/p&gt;
+&lt;p&gt;前提：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有一台 iphone 或者 ipad&lt;/li&gt;
+&lt;li&gt;已经拥有 chatgpt 的普通账号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-申请美区苹果账号&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-申请美区苹果账号&#34;&gt;#&lt;/a&gt; 1. 申请美区苹果账号&lt;/h2&gt;
+&lt;p&gt;通过&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hcHBsZWRpLmNvbS8=&#34;&gt;苹果帝&lt;/span&gt;来购买一个美区的 ios 账号，按照里面的教程操作即可。&lt;/p&gt;
+&lt;h2 id=&#34;2-获取科学工具&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-获取科学工具&#34;&gt;#&lt;/a&gt; 2. 获取科学工具&lt;/h2&gt;
+&lt;p&gt;我找到的一个网站&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA=&#34;&gt; v2sx&lt;/span&gt;，可以正常使用。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/Users/chaihj15/Desktop/Master/Study/Two-Autumn/white/blog/hexo-blog/source/_posts/chatgpt_plus/vpn.png&#34; alt=&#34;image-20231216175123361&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在产品购买里，购买一个基本款就可以。具体的使用可以查看他们的帮助文档，例如 windows 下的&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA/cnA9L2tub3dsZWRnZWJhc2UvNC8tV2luZG93cy0tVjJSYXktLmh0bWw=&#34;&gt;帮助文档&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;IPad 和 IPhone 的所有应用都只能通过应用商店获取，而国内的应用商店无法下载这些科学工具。就需要我们上一步拿到的美区苹果账号。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 App Store，点击右上角的头像，退出当前用户登陆&lt;/li&gt;
+&lt;li&gt;用美区账号的用户名和密码登录&lt;/li&gt;
+&lt;li&gt;下载 Shadowrocks&lt;/li&gt;
+&lt;li&gt;按照&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly92MnN4LmNvbS9pbmRleC5waHA/cnA9L2tub3dsZWRnZWJhc2UvNS8taU9TLS1WMlJheS0uaHRtbA==&#34;&gt;教程&lt;/span&gt;，实现科学上网&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;3-购买礼品卡充值&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-购买礼品卡充值&#34;&gt;#&lt;/a&gt; 3. 购买礼品卡充值&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;打开支付宝，搜索 PockyShop，点击进入对应小程序&lt;/li&gt;
+&lt;li&gt;找到礼品卡列表里的， APP Store &amp;amp; iTunes USA&lt;/li&gt;
+&lt;li&gt;充值购买，得到一个兑换码&lt;/li&gt;
+&lt;li&gt;返回 IPad 或 IPhone，点击 App Store 右上角头像，选择兑换充值卡&lt;/li&gt;
+&lt;li&gt;APP Store 中下载 ChatGPT，然后在应用中升级 Chat GPT plus 即可&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

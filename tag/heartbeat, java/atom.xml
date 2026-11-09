@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://snowroll.github.io</id>
+    <title>SnowRoll Blog • Posts by &#34;heartbeat, java&#34; tag</title>
+    <link href="https://snowroll.github.io" />
+    <updated>2020-09-28T12:09:11.000Z</updated>
+    <category term="python" />
+    <category term="codeql" />
+    <category term="crypto" />
+    <category term="Line By Line" />
+    <category term="paper" />
+    <category term="basketball" />
+    <category term="read" />
+    <category term="chatgpt" />
+    <category term="crawler" />
+    <category term="dockerß" />
+    <category term="email" />
+    <category term="github page" />
+    <category term="gitlab" />
+    <category term="linux" />
+    <category term="heartbeat, java" />
+    <category term="latex" />
+    <category term="shell" />
+    <category term="markdown" />
+    <category term="mongodb" />
+    <category term="photograph" />
+    <category term="powershell" />
+    <category term="reverse-shell" />
+    <category term="mail" />
+    <category term="except" />
+    <category term="java" />
+    <category term="travel" />
+    <entry>
+        <id>https://snowroll.github.io/java-heartbeat/</id>
+        <title>Spring Boot中心跳机制的实现</title>
+        <link rel="alternate" href="https://snowroll.github.io/java-heartbeat/"/>
+        <content type="html">&lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;基于 netty 的心跳机制实现&lt;/li&gt;
+&lt;li&gt;基于定时器的心跳机制 demo 实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h3 id=&#34;1-基于netty心跳机制的实现&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-基于netty心跳机制的实现&#34;&gt;#&lt;/a&gt; 1. 基于 netty 心跳机制的实现&lt;/h3&gt;
+&lt;p&gt;这部分的主要工作是参考 crossoverjie 的博客，博客地址为 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jcm9zc292ZXJqaWUudG9wLzIwMTgvMDUvMjQvbmV0dHkvTmV0dHkoMSlUQ1AtSGVhcnRiZWF0Lw==&#34;&gt;https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;有兴趣的同学可以移步他的博客进行阅读，我在这里只总结一些我在复现过程中遇到的一些问题及解决方案&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在 &lt;code&gt;EchoClienthandle&lt;/code&gt;  函数中的 &lt;code&gt;SpringBeanFactory&lt;/code&gt;  找不到相关包，下面的语句执行出错&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 第一行语句出错&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;CustomProtocol heartBeat = SpringBeanFactory.getBean(&lt;span class=&#34;string&#34;&gt;&amp;quot;heartBeat&amp;quot;&lt;/span&gt;, CustomProtocol.class);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ctx.writeAndFlush(heartBeat).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;p&gt;查找关于 &lt;code&gt;ChannelHandlerContext.writeAndFlush()&lt;/code&gt;  定义，如下&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; ChannelFuture &lt;span class=&#34;title&#34;&gt;writeAndFlush&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(Object msg)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;this&lt;/span&gt;.writeAndFlush(msg, &lt;span class=&#34;keyword&#34;&gt;this&lt;/span&gt;.newPromise());&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;知 &lt;code&gt;heartBeat&lt;/code&gt;  应为一个对象，所以考虑直接 &lt;code&gt;new&lt;/code&gt; ，修改如下&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;CustomProtocol customProtocol = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; CustomProtocol(&lt;span class=&#34;number&#34;&gt;1234L&lt;/span&gt;, &lt;span class=&#34;string&#34;&gt;&amp;quot;test&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ctx.writeAndFlush(customProtocol);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;测试可以使用，具体内容可以自行修改&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关于编解码的使用&lt;/p&gt;
+&lt;p&gt;crossoverjie 的博客提供自定义的编解码器，这个可以根据个人需求进行修改&lt;/p&gt;
+&lt;p&gt;无论是客户端的 &lt;code&gt;EchoClientHandle&lt;/code&gt;  还是服务器端的 &lt;code&gt;HeartBeatSimpleHandle&lt;/code&gt;  都继承自 &lt;code&gt;SimpleChannelInboundHandler&amp;lt;I&amp;gt;&lt;/code&gt;  抽象类，可以对不同的数据类型做处理，官方文档 https://netty.io/4.0/api/io/netty/channel/SimpleChannelInboundHandler.html&lt;/p&gt;
+&lt;p&gt;对比博客中的定义及对应的编解码方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;HeartBeatSimpleHandle&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;SimpleChannelInboundHandler&lt;/span&gt;&amp;lt;&lt;span class=&#34;title&#34;&gt;CustomProtocol&lt;/span&gt;&amp;gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;//...  略去不重要的内容&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;// 服务器端使用ByteBuf进行内容发送&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;keyword&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; ByteBuf HEART_BEAT =  Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(&lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; CustomProtocol(&lt;span class=&#34;number&#34;&gt;123456L&lt;/span&gt;,&lt;span class=&#34;string&#34;&gt;&amp;quot;pong&amp;quot;&lt;/span&gt;).toString(),CharsetUtil.UTF_8));  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  	&lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;userEventTriggered&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(ChannelHandlerContext ctx, Object evt)&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;//...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;// 这里向客户端发送ByteBuf类型的数据，所以客户端必须解析ByteBuf&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;       	ctx.writeAndFlush(HEART_BEAT).addListener(ChannelFutureListener.CLOSE_ON_FAILURE) ;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;super&lt;/span&gt;.userEventTriggered(ctx, evt);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;channelRead0&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(ChannelHandlerContext ctx, CustomProtocol customProtocol)&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      	&lt;span class=&#34;comment&#34;&gt;// 定义了处理CustomProtocol，复现channelRead0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        LOGGER.info(&lt;span class=&#34;string&#34;&gt;&amp;quot;收到customProtocol=&amp;#123;&amp;#125;&amp;quot;&lt;/span&gt;, customProtocol);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;// ... &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 这段代码应该是在客户端，因为客户端收到的是ByteBuf的内容，所以需要解码为CustomProtocol&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;HeartbeatDecoder&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;ByteToMessageDecoder&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(ChannelHandlerContext ctx, ByteBuf in, List&amp;lt;Object&amp;gt; out)&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; Exception &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;comment&#34;&gt;// ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;同理不再赘述客户端的内容&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;netty 心跳机制的问题&lt;/p&gt;
+&lt;p&gt;netty 底层相当于是基于 socket 连接实现的，所以需要服务器和客户端进行长连接，耦合严重。倘若，甲方不想心跳机制两端的机器保持 socket 的连接，只是简单的定时传送数据该如何实现？这就要用到我接下来提到的方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-基于定时器的心跳机制demo实现&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-基于定时器的心跳机制demo实现&#34;&gt;#&lt;/a&gt; 2.  基于定时器的心跳机制 demo 实现&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;代码逻辑&lt;/p&gt;
+&lt;p&gt;A 定时请求数据  ==&amp;gt; 发送请求给 B 的接口 ==&amp;gt; B 的接口接收信息，返回对应的信息 ==&amp;gt; A 处理返回的信息&lt;/p&gt;
+&lt;p&gt;这个过程不需要 A、B 两者用 socket 连接，实现了解耦&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定时&lt;/p&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA5NjM5NDgvYXJ0aWNsZS9kZXRhaWxzLzUyOTQ2MjY4&#34;&gt;https://blog.csdn.net/u010963948/article/details/52946268&lt;/span&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;HeartBeat&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * description: 定时器的回调函数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    Runnable runnable = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; Runnable() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;meta&#34;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;          System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;hello world!&amp;quot;&lt;/span&gt;);  &lt;span class=&#34;comment&#34;&gt;// 自定义你需要的操作&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;/**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     *&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * description: 定时发送心跳， scheduleAtFixedRate param1： 回调函数 param1： 首次执行滞后时间 param1： 间隔时间 param1： 单位时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     * &lt;span class=&#34;doctag&#34;&gt;@throws&lt;/span&gt; InterruptedException&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;     */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;meta&#34;&gt;@PostConstruct&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;// 依赖注入完成之后，方法就要被执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;start&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;throws&lt;/span&gt; InterruptedException &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        service.scheduleAtFixedRate(runnable, &lt;span class=&#34;number&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;number&#34;&gt;10&lt;/span&gt;, TimeUnit.SECONDS);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;PostConstruct&lt;/code&gt;  这个注释非常重要，注释对应的方法会在程序的依赖加载完成之后执行，这样就可以不用直接写在 &lt;code&gt;main&lt;/code&gt;  函数中&lt;/p&gt;
+&lt;p&gt;回调函数中的可能需要对 JSON 数据进行分析，可以直接使用 Gson 处理，参考博客 https://blog.csdn.net/xingfei_work/article/details/76572550&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;侠客行
+&lt;/center&gt;
+&lt;center&gt;唐·李白
+&lt;center&gt;赵客缦胡缨，吴钩霜雪明。
+银鞍照白马，飒沓如流星。
+&lt;center&gt;十步杀一人，千里不留行。
+事了拂衣去，深藏身与名。
+&lt;center&gt;闲过信陵饮，脱剑膝前横。将炙啖朱亥，持觞劝侯嬴。
+&lt;center&gt;三杯吐然诺，五岳倒为轻。
+眼花耳热后，意气素霓生。
+&lt;center&gt;救赵挥金槌，邯郸先震惊。
+千秋二壮士，烜赫大梁城。
+&lt;center&gt;纵死侠骨香，不惭世上英。
+谁能书阁下，白首太玄经。
+</content>
+        <category term="heartbeat, java" />
+        <updated>2020-09-28T12:09:11.000Z</updated>
+    </entry>
+</feed>

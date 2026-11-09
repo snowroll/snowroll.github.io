@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;gitlab&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 26 Jul 2022 09:27:08 +0000</pubDate>
+        <lastBuildDate>Tue, 26 Jul 2022 09:27:08 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/gitlab/</guid>
+            <title>gitlab服务器搭建</title>
+            <link>https://snowroll.github.io/gitlab/</link>
+            <category>gitlab</category>
+            <pubDate>Tue, 26 Jul 2022 09:27:08 +0000</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;环境配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#环境配置&#34;&gt;#&lt;/a&gt; 环境配置&lt;/h1&gt;
+&lt;p&gt;两台 linux 服务器（Ubuntu 系统），一台搭建 Gitlab 服务端，另一台配置 Gitlab runner&lt;/p&gt;
+&lt;h1 id=&#34;gitlab下载安装&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#gitlab下载安装&#34;&gt;#&lt;/a&gt; Gitlab 下载安装&lt;/h1&gt;
+&lt;p&gt;采用 Docker 的形式进行安装，官方文档 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kb2NzLmdpdGxhYi5jb20vZWUvaW5zdGFsbC9kb2NrZXIuaHRtbA==&#34;&gt;https://docs.gitlab.com/ee/install/docker.html&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ubuntu安装docker&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#ubuntu安装docker&#34;&gt;#&lt;/a&gt; Ubuntu 安装 Docker&lt;/h2&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;下载配置gitlab镜像&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#下载配置gitlab镜像&#34;&gt;#&lt;/a&gt; 下载配置 Gitlab 镜像&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置环境变量&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;export GITLAB_HOME=/srv/gitlab&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下载安装 Docker&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo docker run --detach \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --hostname gitlab.example.com \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --publish 8443:443 --publish 8080:80 --publish 8022:22 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --name gitlab \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --restart always \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --volume $GITLAB_HOME/config:/etc/gitlab \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --volume $GITLAB_HOME/logs:/var/log/gitlab \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --volume $GITLAB_HOME/data:/var/opt/gitlab \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --shm-size 256m \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  gitlab/gitlab-ee:latest&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;hostname&lt;/code&gt;  主机名，随便设置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;publish&lt;/code&gt;  Docker 和宿主机之间的端口映射， &lt;code&gt;8080:80&lt;/code&gt;  表示宿主机的 8080 端口映射到容器的 80 端口，此时访问宿主机的 8080 端口即可访问 nginx 的默认页面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;name&lt;/code&gt;  容器名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;restart always&lt;/code&gt;  Docker 重启时，容器自动重启&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;shm-size&lt;/code&gt;  共享内存大小&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;扩展： Nginx 是什么？ 参考文章 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNDk0MzMzMg==&#34;&gt;https://zhuanlan.zhihu.com/p/34943332&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Nginx 是一个轻量级的反向代理服务器。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;用户&lt;/code&gt;  =&amp;gt; vpn (正向代理) =&amp;gt;  &lt;code&gt;服务器&lt;/code&gt;        &lt;code&gt;服务器&lt;/code&gt;  =&amp;gt; nginx (反向代理) =&amp;gt;  &lt;code&gt;用户&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;启动 Nginx 服务后，就相当于在 80 端口启动了 Socket 服务进行监听，如下图所示&lt;/p&gt;
+&lt;img data-src=&#34;/gitlab/nginx.jpg&#34; class=&#34;&#34;&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修改镜像gitlab的配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#修改镜像gitlab的配置&#34;&gt;#&lt;/a&gt; 修改镜像 &lt;code&gt;gitlab&lt;/code&gt;  的配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;进入容器&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker exec -it gitlab /bin/bash&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置文件&lt;/strong&gt;  &lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt;   和  &lt;code&gt;/var/opt/gitlab/gitlab-rails/etc/gitlab.yml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;code&gt;gitlab.yml&lt;/code&gt;  由 &lt;code&gt;gitlab-ctl&lt;/code&gt;  管理，通过编辑 &lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt; ，然后运行 &lt;code&gt;gitlab-ctl reconfigure&lt;/code&gt;  会自动更新 &lt;code&gt;gitlab.yml&lt;/code&gt; 。因此，一般不修改 &lt;code&gt;gitlab.yml&lt;/code&gt;  文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改配置&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;vi /etc/gitlab/gitlab.rb&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在公网 IP 访问 GitLab&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;tips:&lt;/em&gt; 在 &lt;code&gt;vi&lt;/code&gt;  下通过  &lt;code&gt;/external_url&lt;/code&gt;  快速查找&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;external_url &amp;quot;http://your_ip_or_domain:8080&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果 &lt;code&gt;nginx[&#39;listen_port&#39;]&lt;/code&gt;  没有特殊指定，其会从 &lt;code&gt;external_url&lt;/code&gt;  拉取&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置 shell 端口&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;gitlab_rails[&amp;#x27;gitlab_shell_ssh_port&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;8022&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新配置 GitLab&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;gitlab-ctl&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;reconfigure&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;实测结果&lt;/p&gt;
+&lt;center&gt;&lt;img data-src=&#34;/gitlab/gitlab.png&#34; class=&#34;&#34;&gt;
+&lt;p&gt;这里的密码在  &lt;code&gt;/etc/gitlab/initial_root_password&lt;/code&gt;  中，这个文件初次配置后 24h 会自动删除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改密码 （忘记密码的情况下）&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 进入gitlab 容器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;docker exec -it gitlab /bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 修改密码，这里可能会等很久，耐心一点&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gitlab-rake &amp;quot;gitlab:password:reset[root]”&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;配置优化&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置优化&#34;&gt;#&lt;/a&gt; 配置优化&lt;/h1&gt;
+&lt;p&gt;GitLab 非常吃内存，我刚开始搭建，服务器疯狂卡死，网页 502。建议配置的服务器内存在 4G 以上&lt;/p&gt;
+&lt;h2 id=&#34;修改gitlabrb中的配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#修改gitlabrb中的配置&#34;&gt;#&lt;/a&gt; 修改 &lt;code&gt;gitlab.rb&lt;/code&gt;  中的配置&lt;/h2&gt;
+&lt;p&gt;参考 https://www.dongchuanmin.com/operate/3240.html&lt;/p&gt;
+&lt;figure class=&#34;highlight yml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;puma[&amp;#x27;worker_timeout&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;30&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;gitlab_rails[&amp;#x27;time_zone&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;#x27;Asia/Shanghai&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;puma[&amp;#x27;worker_processes&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;postgresql[&amp;#x27;shared_buffers&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;256MB&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;sidekiq[&amp;#x27;max_concurrency&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;8&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;postgresql[&amp;#x27;max_worker_processes&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;4&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;puma[&amp;#x27;per_worker_max_memory_mb&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;600&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;prometheus_monitoring[&amp;#x27;enable&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;false&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;sidekiq[&amp;#x27;min_concurrency&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;8&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;官方推荐的优化配置 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kb2NzLmdpdGxhYi5jbi9vbW5pYnVzL3NldHRpbmdzL21lbW9yeV9jb25zdHJhaW5lZF9lbnZzLmh0bWw=&#34;&gt;https://docs.gitlab.cn/omnibus/settings/memory_constrained_envs.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;修改完成之后，重启配置&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;gitlab-ctl reconfigure&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;启动 swap 分区&lt;/p&gt;
+&lt;p&gt;物理内存 + swap（交换空间） = 虚拟内存&lt;/p&gt;
+&lt;p&gt;swap 分区，即交换空间，可以是磁盘的一个分区，也可以是一个文件。作用就是将一部分内存空间复制到硬盘空间中，释放这部分内存。某种程度而言，扩大了可用的内存空间，但与硬盘的交换必然带来性能的下降。&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 查看swap分区是否启动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /proc/swaps&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 创建swap，dd device driver，用于读取文件中内容，并复制到指定位置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;dd if=/dev/zero of=/data/swap bs=512 count=8388616&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; &lt;span class=&#34;keyword&#34;&gt;if&lt;/span&gt; 输入文件 of 输出文件 /dev/zero 输出恒为0的设备文件 bs bytes count 块数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; swap文件大小为 bs * counnt = 4294971392(4G)；&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 通过mkswap命令将上面新建出的文件做成swap分区&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mkswap /data/swap&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4.查看内核参数vm.swappiness中的数值是否为0，如果为0则根据实际需要调整成60。这个参数为换出运行时内存的相对权重，内存超过 40% 开始使用swap&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 查看内核参数vm.swappiness 数值，代表换出运行时内存的相对权重&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /proc/sys/vm/swappiness&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 设置为60，即当内存超过 100-60 = 40%，开始使用swap&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 永久修改需编辑/etc/sysctl.conf文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sysctl -w vm.swappiness=60&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 启用分区&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;swapon /data/swap&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 在/etc/fstab文件中记录文件的名字，使系统重启后，swap依然有效&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;echo “/data/swap swap swap defaults 0 0” &amp;gt;&amp;gt; /etc/fstab&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 查看确认&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /proc/swaps&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 重启gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;释放 buffer/cache&lt;/p&gt;
+&lt;p&gt;参考文章 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81Mzk1NTMyMTc=&#34;&gt;https://zhuanlan.zhihu.com/p/539553217&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;程序运行一段时间后，linux 会将暂时不用的内存转换为 buffer/cache，通过 &lt;code&gt;free&lt;/code&gt;  命令可以查看系统内存使用情况&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;free -m -h&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;输出结果&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;              total        used        free      shared  buff/cache   available&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Mem:          7.8Gi       3.2Gi       3.5Gi        50Mi       1.1Gi       4.3Gi&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Swap:            0B          0B          0B&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;我们可以手动释放 buff/cache&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 将在内存中的数据写入磁盘，防止丢失&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sync&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 释放内存&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;echo 3 &amp;gt; /proc/sys/vm/drop_caches&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;内存的管理方式在 &lt;code&gt;/proc/sys/vm/ drop_chches&lt;/code&gt;  文件中，其只包含一个数字，不同代号的含义如下所示&lt;/p&gt;
+&lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;0：0 是系统默认值，默认情况下表示不释放内存，由操作系统自动管理&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;1：释放页缓存&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2：释放dentries和inodes&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3：释放所有缓存&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Page Cache 的解释 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS91XzExMzg5NDMwLzI1MzUwOTg=&#34;&gt;https://blog.51cto.com/u_11389430/2535098&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;gitlab-runner配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#gitlab-runner配置&#34;&gt;#&lt;/a&gt; GitLab runner 配置&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;官方文档： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kb2NzLmdpdGxhYi5jb20vcnVubmVyL2luc3RhbGwv&#34;&gt;https://docs.gitlab.com/runner/install/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;建议使用 &lt;code&gt;deb&lt;/code&gt;  或 &lt;code&gt;rpm&lt;/code&gt;  文件安装，简单快速&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;另一处详细教学位置 GitLab 中打开一个项目&lt;/p&gt;
+&lt;p&gt;Settings =&amp;gt; CI/CD =&amp;gt; Runners =&amp;gt; Expand =&amp;gt; Specific runners =&amp;gt; Show runner installation instructions&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装完成后，点击编辑小图标，✅ &lt;code&gt;Run untagged jobs&lt;/code&gt;  以运行没有设置 tag 的任务&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;qa&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#qa&#34;&gt;#&lt;/a&gt; Q&amp;amp;A&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;启动之后 502
+&lt;ul&gt;
+&lt;li&gt;原因一： GitLab 反应慢，等待几分钟&lt;/li&gt;
+&lt;li&gt;原因二： 服务器端口占用，例如 80 端口，用  &lt;code&gt;lsof -i tcp:80&lt;/code&gt;  查看是否有其他服务。杀掉对应进程，或在 &lt;code&gt;gitlab.rb&lt;/code&gt;  中修改端口号&lt;/li&gt;
+&lt;li&gt;原因三： 内存不足，优化配置或换用配置更高的服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你将看到大悲苦，并将在悲苦中领悟幸福。这就是我给你的赠言：到悲苦中去寻找幸福。努力干，不断地努力！&lt;/p&gt;
+&lt;p&gt;——《卡拉马佐夫兄弟》&lt;/p&gt;
+&lt;/blockquote&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

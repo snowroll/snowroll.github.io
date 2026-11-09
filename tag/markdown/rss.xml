@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;markdown&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 30 Sep 2020 02:29:04 +0000</pubDate>
+        <lastBuildDate>Wed, 30 Sep 2020 02:29:04 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>linux</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>shell</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/markdown-skills/</guid>
+            <title>markdown-skills</title>
+            <link>https://snowroll.github.io/markdown-skills/</link>
+            <category>markdown</category>
+            <pubDate>Wed, 30 Sep 2020 02:29:04 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;绘制伪时间轴&lt;/li&gt;
+&lt;li&gt;任务列表的正确使用姿势&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;绘制时间轴&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用 Typora 中的 mermaid 的旅程图，官网链接 https://mermaid-js.github.io/mermaid/&lt;/p&gt;
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;~~~mermaid&lt;/code&gt;  建立一个代码块&lt;/p&gt;
+&lt;p&gt;简单 demo 如下：&lt;/p&gt;
+&lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;journey&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    title 简单时间轴&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 一月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      test1: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 二月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	test2: 5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 三月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	test3: 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;实际效果：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;journey&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    title 简单时间轴&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 一月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      test1: 2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 二月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	test2: 5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    section 三月&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    	test3: 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;任务列表&lt;/p&gt;
+&lt;p&gt;格式  &lt;code&gt;- [ ] &lt;/code&gt; ，非常简单，之前用的时候有一个疑问， &lt;code&gt;-&lt;/code&gt;  加空格会自动变为无序列表的点，后来发现只需要在 &lt;code&gt;[ ]&lt;/code&gt;  之后再添加一个空格，就可以变为待选框了&lt;/p&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;
+&lt;p&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34;&gt;&lt;label for=&#34;cbx_0&#34;&gt;  成功示例，不要忘记加空格&lt;/label&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[ ] 未加空格，失败案例&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
